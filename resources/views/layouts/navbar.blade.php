@@ -14,7 +14,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('mujer') }}">Mujer</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('hombre') }}">Hombre</a></li>
+                <li clasas="nav-item"><a class="nav-link" href="{{ route('hombre') }}">Hombre</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('ninos') }}">Niños</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
             </ul>

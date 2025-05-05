@@ -18,7 +18,10 @@ class AuthController extends Controller
     //Procesar inicio de sesión 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
 
         if(auth::attempt($credentials)){
             // Autenticación exitosa, ambos roles van al mismo lugar

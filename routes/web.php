@@ -6,19 +6,19 @@ use App\Http\Controllers\ProductoController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 //Autenticacion
 // Mostrar formulario de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 // Procesar inicio de sesión
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Cerrar sesión
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 // Mostrar formulario de registro
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 // Procesar registro de nuevo usuario
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+// Cerrar sesión
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 //Rutas de admin para CRUD
@@ -46,11 +46,6 @@ Route::get('/mujer', function () {
 Route::get('/ninos', function () {
     return view('niños');
 })->name('niños');
-
-//Ofertas
-Route::get('/ofertas', function () {
-    return view('ofertas');
-})->name('ofertas');
 
 //Nosotros
 Route::get('/nosotros', function () {
