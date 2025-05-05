@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Producto extends Model
 {
@@ -14,11 +15,17 @@ class Producto extends Model
         'descripcion',
         'precio',
         'idcategoria', //llave foranea
+        'imagen',
     ];
 
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class, 'idcategoria');
+    }
+
+    public function tallas(): BelongsToMany
+    {
+    return $this->belongsToMany(Talla::class, 'producto_tallas', 'idproducto', 'idtalla');
     }
 
         /**

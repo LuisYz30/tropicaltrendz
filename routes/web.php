@@ -3,10 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\CarritoController;
 
-Route::get('/', function () {
+
+Route::get('/index', function () {
     return view('index');
-});
+})->name('index');
 
 //Autenticacion
 // Mostrar formulario de login
@@ -22,37 +25,36 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 
 //Rutas de admin para CRUD
-Route::get('/admin/productos', [ProductoController::class, 'index'])->name('productos.index');
-Route::get('/admin/productos/create', [ProductoController::class, 'create'])->name('productos.create');
-Route::post('/admin/productos', [ProductoController::class, 'store'])->name('productos.store');
-Route::get('/admin/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
-Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
-Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+    Route::get('/admin/productos', [ProductoController::class, 'index'])->name('productos.index');
+    Route::get('/admin/productos/create', [ProductoController::class, 'create'])->name('productos.create');
+    Route::post('/admin/productos', [ProductoController::class, 'store'])->name('productos.store');
+    Route::get('/admin/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
+    Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
+    Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
+    // Rutas Para los modulos
 
-// Rutas Para los modulos
+// Hombre
+Route::get('/hombre', [PublicController::class, 'hombre'])->name('hombre');
 
-//Hombre
-Route::get('/hombre', function () {
-    return view('hombre');
-})->name('hombre');
+// Mujer
+Route::get('/mujer', [PublicController::class, 'mujer'])->name('mujer');
 
-//Mujer
-Route::get('/mujer', function () {
-    return view('mujer');
-})->name('mujer');
+// Niños
+Route::get('/niños', [PublicController::class, 'niños'])->name('niños');
 
-//Niños
-Route::get('/ninos', function () {
-    return view('niños');
-})->name('niños');
+// Ofertas
+Route::get('/ofertas', [PublicController::class, 'ofertas'])->name('ofertas');
 
-//Ofertas
-Route::get('/ofertas', function () {
-    return view('ofertas');
-})->name('ofertas');
+// Detalle del producto
+Route::get('/producto/{id}', [PublicController::class, 'detalleProducto'])->name('producto.detalle');
 
 //Nosotros
 Route::get('/nosotros', function () {
-    return view('nosotros');
+    return view('categorias.nosotros');
 })->name('nosotros');
+
+Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
+Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
+Route::delete('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
