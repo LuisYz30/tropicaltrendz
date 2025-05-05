@@ -13,10 +13,11 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
     ];
+
     public $timestamps = false;
 
     public function productos()
     {
-        return $this->hasMany(Producto::class, 'idcategoria');
+        return $this->hasMany(Producto::class, 'idcategoria');  // Clave foránea correctamente definida
     }
 }

@@ -7,15 +7,15 @@
         </button>
 
         <!-- Logo de la tienda -->
-        <a class="navbar-brand d-flex d-lg-block mx-auto fw-bold" href="{{ route('home') }}">TROPICAL TRENDZ</a>
+        <a class="navbar-brand d-flex d-lg-block mx-auto fw-bold" href="{{ route('index') }}">TROPICAL TRENDZ</a>
 
         <!-- Menú colapsable -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('mujer') }}">Mujer</a></li>
-                <li clasas="nav-item"><a class="nav-link" href="{{ route('hombre') }}">Hombre</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('ninos') }}">Niños</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('hombre') }}">Hombre</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('niños') }}">Niños</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
             </ul>
             
@@ -74,8 +74,18 @@
         
         <!-- Carrito (sin cambios) -->
         <div class="d-flex">
-            <button class="carro" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
+            <button class="carro position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
                 <img src="{{ asset('Imagenes/car1.svg') }}" alt="Carrito">
+                
+                @php
+                    $cantidadCarrito = is_array(session('carrito')) ? count(session('carrito')) : 0;
+                @endphp
+        
+                @if($cantidadCarrito > 0)
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $cantidadCarrito }}
+                    </span>
+                @endif
             </button>
         </div>
     </div>

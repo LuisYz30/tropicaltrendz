@@ -9,10 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->id();
+            $table->id('idproducto');
+            $table->string('nombre');
+            $table->text('descripcion');
+            $table->decimal('precio', 8, 2);
+            $table->foreignId('idcategoria')->constrained('categorias')->onDelete('cascade');  // Clave foránea
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }
