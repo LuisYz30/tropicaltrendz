@@ -32,7 +32,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
-    // Rutas Para los modulos
+
+
+// Rutas Para los modulos
 
 // Hombre
 Route::get('/hombre', [PublicController::class, 'hombre'])->name('hombre');
