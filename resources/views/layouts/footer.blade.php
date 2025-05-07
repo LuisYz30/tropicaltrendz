@@ -4,9 +4,9 @@
             <div class="col-md-3">
                 <h5 class="text-foot">Comprar</h5>
                 <ul class="list-unstyled">
-                    <li><a href="mujer.html" class="text-light text-decoration-none">Mujer</a></li>
-                    <li><a href="hombre.html" class="text-light text-decoration-none">Hombre</a></li>
-                    <li><a href="niños.html" class="text-light text-decoration-none">Niños</a></li>
+                    <li><a href="{{ route('mujer') }}" class="text-light text-decoration-none">Mujer</a></li>
+                    <li><a href="{{ route('hombre') }}" class="text-light text-decoration-none">Hombre</a></li>
+                    <li><a  href="{{ route('niños') }}" class="text-light text-decoration-none">Niños</a></li>
                 </ul>
             </div>
             <div class="col-md-3">

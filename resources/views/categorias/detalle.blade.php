@@ -16,7 +16,8 @@
     <h1>{{ $producto->nombre }}</h1>
     <div class="contenedor">
         <div class="imagen">
-            <img src="{{ asset('images/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
+            <img src="{{ asset('images/' . $producto->categoria->nombre . '/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
+
         </div>
         <div class="info">
             <p>{{ $producto->descripcion }}</p>

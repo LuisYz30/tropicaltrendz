@@ -20,6 +20,17 @@ class CarritoController extends Controller
         // Crear una clave única combinando el ID del producto y el ID de la talla
         $clave = $producto->idproducto . '-' . $talla->idtalla;
 
+        // Asignar la subcarpeta según la categoría del producto (por ejemplo, hombre, mujer, etc.)
+        $subcarpeta = strtolower($producto->categoria->nombre); // Asumiendo que hay una relación 'categoria' con nombre
+
+        // Si la categoría no tiene nombre o no está definida, asignamos 'otros'
+        if (empty($subcarpeta)) {
+            $subcarpeta = 'otros';
+        }
+
+        // Construir la ruta de la imagen
+        $imagePath = 'images/' . $subcarpeta . '/' . $producto->imagen;
+
         // Si el producto no está en el carrito, agregarlo
         if (!isset($carrito[$clave])) {
             $carrito[$clave] = [
@@ -27,7 +38,7 @@ class CarritoController extends Controller
                 'precio' => $producto->precio,
                 'talla' => $talla->nombre,
                 'cantidad' => 1,
-                'imagen' => 'images/' . $producto->idproducto . '.jpg' // Asumimos que la imagen está así
+                'imagen' => $imagePath // La ruta dinámica de la imagen
             ];
         } else {
             // Si el producto ya está en el carrito, incrementar la cantidad
@@ -73,4 +84,3 @@ class CarritoController extends Controller
         return redirect()->route('carrito.ver')->with('success', 'Producto eliminado del carrito.');
     }
 }
-

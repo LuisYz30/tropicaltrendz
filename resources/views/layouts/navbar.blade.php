@@ -74,9 +74,9 @@
         
         <!-- Carrito (sin cambios) -->
         <div class="d-flex">
-            <button class="carro position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
-                <img src="{{ asset('Imagenes/car1.svg') }}" alt="Carrito">
-                
+            <a href="{{ route('carrito.ver') }}" class="carro position-relative">
+                <img src="{{ asset('images/car1.svg') }}" alt="Carrito">
+        
                 @php
                     $cantidadCarrito = is_array(session('carrito')) ? count(session('carrito')) : 0;
                 @endphp
@@ -86,7 +86,7 @@
                         {{ $cantidadCarrito }}
                     </span>
                 @endif
-            </button>
+            </a>
         </div>
     </div>
 </nav>
