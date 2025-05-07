@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5 pt-5">
+<div class="container {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-5' : 'my-5 py-5 text-center' }}">
     <h2 class="mb-4">Carrito de Compras</h2>
 
     @if(session('carrito') && count(session('carrito')) > 0)
@@ -9,8 +9,10 @@
             <table class="table table-striped align-middle">
                 <thead>
                     <tr>
-                        <th>Producto</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
                         <th>Precio</th>
+                        <th>Talla</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
                         <th></th>
@@ -21,21 +23,25 @@
                         $total = 0;
                     @endphp
 
-                    @foreach(session('carrito') as $id => $item)
+                    @foreach(session('carrito') as $clave => $item)
                         @php
                             $subtotal = $item['precio'] * $item['cantidad'];
                             $total += $subtotal;
                         @endphp
                         <tr>
+                            <td>
+                                <img src="{{ asset($item['imagen']) }}" alt="Imagen del producto" width="70">
+                            </td>
                             <td>{{ $item['producto'] }}</td>
                             <td>${{ number_format($item['precio'], 0, ',', '.') }}</td>
+                            <td>{{ $item['talla'] }}</td>
                             <td>{{ $item['cantidad'] }}</td>
                             <td>${{ number_format($subtotal, 0, ',', '.') }}</td>
                             <td>
                                 <form action="{{ route('carrito.eliminar') }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="hidden" name="clave" value="{{ $id }}">
+                                    <input type="hidden" name="clave" value="{{ $clave }}">
                                     <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
                                 </form>
                             </td>
@@ -43,7 +49,7 @@
                     @endforeach
 
                     <tr>
-                        <td colspan="3" class="text-end fw-bold">Total:</td>
+                        <td colspan="5" class="text-end fw-bold">Total:</td>
                         <td class="fw-bold">${{ number_format($total, 0, ',', '.') }}</td>
                         <td></td>
                     </tr>
@@ -57,7 +63,7 @@
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm" type="submit">Vaciar carrito</button>
             </form>
-            <a href="{{ url('/') }}" class="btn btn-primary">Seguir comprando</a>
+            <a href="{{ route('index') }}" class="btn btn-primary">Seguir comprando</a>
         </div>
     @else
         <p>Tu carrito está vacío.</p>
