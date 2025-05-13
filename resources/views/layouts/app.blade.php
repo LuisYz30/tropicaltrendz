@@ -21,7 +21,7 @@
 <body>
 
     {{-- Navbar --}}
-    @include('layouts.navbar')
+    @include('partials.navbar')
 
     {{-- Contenido principal --}}
     <main class="pt-5 mt-5">
@@ -29,9 +29,11 @@
     </main>
 
     {{-- Footer --}}
-    @include('layouts.footer')
+    @include('partials.footer')
 
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+
 </body>
 </html>
