@@ -13,11 +13,11 @@ Route::get('/', function () {
 
 //Autenticacion
 // Mostrar formulario de login
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Procesar inicio de sesión
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 // Mostrar formulario de registro
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 // Procesar registro de nuevo usuario
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 // Cerrar sesión

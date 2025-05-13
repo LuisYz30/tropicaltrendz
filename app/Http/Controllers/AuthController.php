@@ -9,8 +9,19 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    // Mostrar formulario de login
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
 
-    //Procesar inicio de sesión 
+    // Mostrar formulario de registro
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    // Procesar inicio de sesión 
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -18,8 +29,8 @@ class AuthController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
-        if(auth::attempt($credentials)){
-            // Autenticación exitosa, ambos roles van al mismo lugar
+        if (Auth::attempt($credentials)) {
+            // Autenticación exitosa
             return redirect()->route('index');
         }
 
@@ -27,35 +38,34 @@ class AuthController extends Controller
     }
 
     // Procesar registro
-public function register(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:50',
-        'telefono' => 'required|string|max:20',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|string|min:6'
-    ]);
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'telefono' => 'required|string|max:20',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6'
+        ]);
 
-    $user = User::create([
-        'name' => $request->name,
-        'telefono' => $request->telefono,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
+        $user = User::create([
+            'name' => $request->name,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-    Auth::login($user); // Inicia sesión automáticamente después de registrarse
+        Auth::login($user); // Inicia sesión automáticamente
 
-    return redirect()->route('index');
-}
+        return redirect()->route('index');
+    }
 
-public function logout(Request $request)
-{
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+    // Cerrar sesión
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    return redirect()->route('index');
-}
-
-
+        return redirect()->route('index');
+    }
 }
