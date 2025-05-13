@@ -1,0 +1,86 @@
+:root {
+    --celeste: #cadcfc;
+    --azulmedio: #8ab6f9;
+    --azuloscuro: #00126b;
+    --fondo: #f9f9f9;
+    --blanco: #ffffff;
+}
+.carrito-contenedor {
+    background-color: var(--fondo);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 18, 107, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+.table {
+    background-color: var(--blanco);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--azuloscuro);
+    color: var(--celeste);
+    text-align: center;
+    font-weight: bold;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table img {
+    border-radius: 8px;
+}
+.boton-volver{
+    background-color: var(--azuloscuro);
+    color: var(--celeste);
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.boton-volver:hover{
+    background-color: var(--azulmedio);
+    color: var(--azuloscuro);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.boton-vaciar{
+    background-color: var(--azulmedio);
+    color: var(--azuloscuro);
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.boton-vaciar:hover{
+    background-color: var(--azuloscuro);
+    color: var(--celeste);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.boton-seguir{
+    background-color: var(--azuloscuro);
+    color: var(--celeste);
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.boton-seguir:hover{
+    background-color: var(--azulmedio);
+    color: var(--azuloscuro);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

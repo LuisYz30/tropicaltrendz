@@ -14,6 +14,8 @@ class CarritoController extends Controller
         $producto = Producto::findOrFail($request->idproducto);
         $talla = Talla::findOrFail($request->talla);
 
+        $cantidad = $request->input('cantidad', 1);
+
         // Obtener el carrito desde la sesión
         $carrito = session()->get('carrito', []);
 
@@ -37,12 +39,12 @@ class CarritoController extends Controller
                 'producto' => $producto->nombre,
                 'precio' => $producto->precio,
                 'talla' => $talla->nombre,
-                'cantidad' => 1,
+                'cantidad' => $cantidad,
                 'imagen' => $imagePath // La ruta dinámica de la imagen
             ];
         } else {
             // Si el producto ya está en el carrito, incrementar la cantidad
-            $carrito[$clave]['cantidad']++;
+            $carrito[$clave]['cantidad'] += $cantidad;
         }
 
         // Guardar el carrito en la sesión
