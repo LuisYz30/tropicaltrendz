@@ -7,21 +7,21 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 
 
-Route::get('/index', function () {
-    return view('index');
+Route::get('/', function () {
+    return view('welcome');
 })->name('index');
 
 //Autenticacion
 // Mostrar formulario de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 // Procesar inicio de sesión
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Cerrar sesión
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 // Mostrar formulario de registro
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 // Procesar registro de nuevo usuario
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+// Cerrar sesión
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 //Rutas de admin para CRUD
@@ -32,7 +32,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
-    // Rutas Para los modulos
+
+
+// Rutas Para los modulos
 
 // Hombre
 Route::get('/hombre', [PublicController::class, 'hombre'])->name('hombre');

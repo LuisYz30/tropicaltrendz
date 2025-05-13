@@ -16,8 +16,11 @@ class ProductoController extends Controller
             'descripcion' => 'required',
             'precio' => 'required|numeric',
             'idcategoria' => 'required|exists:categorias,id',
-            'imagen' => 'required|string',  // Cambié para aceptar el nombre de la imagen
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,web|max:2048',  
         ]);
+
+         // Subir la imagen
+    $imagenPath = $request->file('imagen')->store('productos', 'public');
     
         // Crear el producto y guardar la ruta de la imagen
         Producto::create([
@@ -25,7 +28,7 @@ class ProductoController extends Controller
             'descripcion' => $request->descripcion,
             'precio' => $request->precio,
             'idcategoria' => $request->idcategoria,
-            'imagen' => $request->imagen,  // Guardar la ruta directamente
+            'imagen' => $imagenPath,  // Guardar la ruta directamente
         ]);
     
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente');

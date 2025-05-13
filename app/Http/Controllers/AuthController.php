@@ -9,23 +9,53 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //Mostrar formulario de login
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
 
     //Procesar inicio de sesión 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:6'
+        ]);
 
         if(auth::attempt($credentials)){
             // Autenticación exitosa, ambos roles van al mismo lugar
-            return redirect()->route('home');
+            return redirect()->route('index');
         }
 
         return back()->withErrors(['email' => 'Credenciales incorrectas'])->withInput();
     }
+
+    // Procesar registro
+public function register(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:50',
+        'telefono' => 'required|string|max:20',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:6'
+    ]);
+
+    $user = User::create([
+        'name' => $request->name,
+        'telefono' => $request->telefono,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    Auth::login($user); // Inicia sesión automáticamente después de registrarse
+
+    return redirect()->route('index');
+}
+
+public function logout(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('index');
+}
+
 
 }

@@ -7,8 +7,8 @@
         </button>
 
         <!-- Logo de la tienda -->
-        <a class="navbar-brand d-flex d-lg-block mx-auto fw-bold" href="{{ route('index') }}">TROPICAL TRENDZ</a>
-
+        <img src="Imagenes/logo/logoletrasnav.png" alt="" class="logo-nav" href="{{ route('index') }}"">
+        
         <!-- Menú colapsable -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
@@ -90,3 +90,81 @@
         </div>
     </div>
 </nav>
+
+<!-- MODAL LOGIN -->
+<div class="modal-fade" id="login-modal">
+    <div class="formulario">
+        <button class="close-modal" id="close-login">&times;</button>
+        <div class="form-container">
+            <div class="form-image">
+                <img src="Imagenes/fondo-login.png" alt="Imagen" style="width:100%; height:100%;">
+            </div>
+            <div class="form-content-login">
+                <div class="logo-login">
+                    <img src="Imagenes/logo/LogoTT.jpeg" alt="Logo" class="img-fluid" style="width: 110px; height: auto;">
+                </div>
+                <h1>Iniciar Sesión</h1>
+                <p class="form-subtitle">Accede a tu cuenta y vive el verano todo el año🩱</p>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="username">
+                        <input type="text" required>
+                        <label>Correo electrónico</label>
+                    </div>
+                    <div class="username">
+                        <input type="password" required>
+                        <label>Contraseña</label>
+                    </div>
+                    <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
+                    <button type="submit" class="btn-ingresar">Ingresar</button>
+                </form>
+                <div class="google-login">
+                    <img src="Imagenes/google.svg" alt="Google login">
+                </div>
+                <div class="registrarse">
+                    <a href="#" id="btn-registrar">¿No tienes cuenta? Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL REGISTRO -->
+<div class="modal-fade" id="register-modal">
+    <div class="formulario">
+        <button class="close-modal" id="close-register">&times;</button>
+        <div class="form-container">
+            <div class="form-content-registro">
+                <h2>Regístrate</h2>
+                <p class="form-subtitle">Crea tu cuenta para comenzar tu aventura tropical🌴</p>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="username">
+                        <input type="text" required>
+                        <label>Nombre completo</label>
+                    </div>
+                    <div class="username">
+                        <input type="tel" required>
+                        <label>Teléfono</label>
+                    </div>
+                    <div class="username">
+                        <input type="email" required>
+                        <label>Correo electrónico</label>
+                    </div>
+                    <div class="username">
+                        <input type="password" required>
+                        <label>Contraseña</label>
+                    </div>
+                    <button type="submit" class="btn-registrarse">Registrarse</button>
+                </form>
+                <div class="google-login">
+                    <img src="Imagenes/google.svg" alt="Google login">
+                </div>
+                <a href="#" id="btn-iniciar">¿Ya tienes cuenta? Inicia Sesión</a>
+            </div>
+            <div class="form-image">
+                <img src="Imagenes/Fondo-login2.png" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+        </div>
+    </div>
+</div>
