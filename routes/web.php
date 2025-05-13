@@ -7,8 +7,8 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 
 
-Route::get('/index', function () {
-    return view('index');
+Route::get('/', function () {
+    return view('welcome');
 })->name('index');
 
 //Autenticacion
