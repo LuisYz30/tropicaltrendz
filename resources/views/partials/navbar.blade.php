@@ -164,7 +164,9 @@
                 <div class="google-login">
                     <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
-                <a href="#">¿Ya tienes cuenta? Inicia Sesión</a>
+                <div class="loguearse">
+                    <a href="#">¿Ya tienes cuenta? Inicia Sesión</a>
+                </div>
             </div>
             <div class="form-image">
                 <img src="{{asset('images/img-login/Fondo-login2.png')}}" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">

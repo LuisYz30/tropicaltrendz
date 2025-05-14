@@ -659,7 +659,17 @@ font-size: 14px;
 .registrarse a:hover{
     text-decoration: underline;
 }
+/* Enlace loguearse en modal registro*/
+.loguearse a {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #00246B;
+    text-decoration: none;
+}
 
+.loguearse a:hover{
+    text-decoration: underline;
+}
 /* Botón de Google */
 .google-login img {
     margin-top: 14px;
