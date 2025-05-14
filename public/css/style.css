@@ -135,6 +135,7 @@ body{
     padding: 7px 13px;
     transition: ease-in-out.5s;
     border:none;
+    margin-top: 17px;
 }
 .btn-registrarse:hover {
         box-shadow: inset 0 -100px 0 0 var(--azulmedio);
@@ -656,18 +657,6 @@ font-size: 14px;
 }
 
 .registrarse a:hover{
-    text-decoration: underline;
-}
-
-/*Enlace de iniciar sesion en modal de registro*/
-#btn-iniciar {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #00246B;
-    text-decoration: none;
-}
-
-#btn-iniciar:hover{
     text-decoration: underline;
 }
 

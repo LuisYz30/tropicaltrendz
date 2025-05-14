@@ -7,7 +7,9 @@
         </button>
 
         <!-- Logo de la tienda -->
-        <img src="Imagenes/logo/logoletrasnav.png" alt="" class="logo-nav" href="{{ route('index') }}"">
+       <a href="{{ route('index') }}">
+         <img src="{{ asset('images/LogoEmpresa/logoletrasnav.png') }}" alt="Logo" class="logo-nav">
+       </a>
         
         <!-- Menú colapsable -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
@@ -66,8 +68,8 @@
                         </ul>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn-azul-oscuro text-decoration-none me-2">Iniciar Sesión</a>
-                    <a href="{{ route('register') }}" class="btn-azul-medio text-decoration-none me-2">Registrarse</a>
+                    <a href='#' id="btn-iniciar" class="btn-azul-oscuro text-decoration-none me-2">Iniciar Sesión</a>
+                    <a href='#' id="btn-registrar"class="btn-azul-medio text-decoration-none me-2">Registrarse</a>
                 @endauth
             </div>   
         </div>
@@ -97,15 +99,16 @@
         <button class="close-modal" id="close-login">&times;</button>
         <div class="form-container">
             <div class="form-image">
-                <img src="Imagenes/fondo-login.png" alt="Imagen" style="width:100%; height:100%;">
+               <img src="{{asset('images/img-login/fondo-login.png')}}" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">
             </div>
             <div class="form-content-login">
                 <div class="logo-login">
-                    <img src="Imagenes/logo/LogoTT.jpeg" alt="Logo" class="img-fluid" style="width: 110px; height: auto;">
+                    <img src="{{asset('images/LogoEmpresa/LogoTT.jpeg')}}" alt="Logo" class="img-fluid" style="width: 110px; height: auto;">
                 </div>
                 <h1>Iniciar Sesión</h1>
                 <p class="form-subtitle">Accede a tu cuenta y vive el verano todo el año🩱</p>
                 <form method="POST" action="{{ route('login') }}">
+
                     @csrf
                     <div class="username">
                         <input type="text" required>
@@ -119,10 +122,10 @@
                     <button type="submit" class="btn-ingresar">Ingresar</button>
                 </form>
                 <div class="google-login">
-                    <img src="Imagenes/google.svg" alt="Google login">
+                  <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
                 <div class="registrarse">
-                    <a href="#" id="btn-registrar">¿No tienes cuenta? Regístrate</a>
+                    <a href="#">¿No tienes cuenta? Regístrate</a>
                 </div>
             </div>
         </div>
@@ -138,10 +141,11 @@
                 <h2>Regístrate</h2>
                 <p class="form-subtitle">Crea tu cuenta para comenzar tu aventura tropical🌴</p>
                 <form method="POST" action="{{ route('register') }}">
+
                     @csrf
                     <div class="username">
                         <input type="text" required>
-                        <label>Nombre completo</label>
+                        <label>Nombre</label>
                     </div>
                     <div class="username">
                         <input type="tel" required>
@@ -158,12 +162,12 @@
                     <button type="submit" class="btn-registrarse">Registrarse</button>
                 </form>
                 <div class="google-login">
-                    <img src="Imagenes/google.svg" alt="Google login">
+                    <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
-                <a href="#" id="btn-iniciar">¿Ya tienes cuenta? Inicia Sesión</a>
+                <a href="#">¿Ya tienes cuenta? Inicia Sesión</a>
             </div>
             <div class="form-image">
-                <img src="Imagenes/Fondo-login2.png" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">
+                <img src="{{asset('images/img-login/Fondo-login2.png')}}" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">
             </div>
         </div>
     </div>

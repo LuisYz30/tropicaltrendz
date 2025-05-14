@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    //Mostrar formulario de login
+    public function showLoginForm()
+    {
+        return view('login');
+    }
 
     //Procesar inicio de sesión 
     public function login(Request $request)
@@ -24,6 +29,13 @@ class AuthController extends Controller
         }
 
         return back()->withErrors(['email' => 'Credenciales incorrectas'])->withInput();
+    }
+
+
+    // Mostrar formulario de registro
+    public function showRegisterForm()
+    {
+        return view('login');
     }
 
     // Procesar registro

@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const registerModal = document.getElementById("register-modal");
     const closeLogin = document.getElementById("close-login");
     const closeRegister = document.getElementById("close-register");
-    const loginForm = document.getElementById("login-form");
-    const registerForm = document.getElementById("register-form");
     const registerButton = document.getElementById("btn-registrar");
     const loginButton = document.getElementById("btn-iniciar");
 
@@ -114,101 +112,6 @@ window.addEventListener('scroll', function() {
     video.style.opacity = opacity;
 });
 
-    
-    // Validar y enviar login
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const email = loginForm.querySelector("[name='email']").value.trim();
-            const password = loginForm.querySelector("[name='password']").value.trim();
-
-            if (!email || !password) {
-                toastr.error("Todos los campos son obligatorios.");
-                return;
-            }
-
-            const formData = new FormData(loginForm);
-
-            fetch("login.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    toastr.success(data.message);
-                    if (loginModal) loginModal.style.display = "none";
-                    setTimeout(() => window.location.reload(), 2500);
-                } else {
-                    toastr.error(data.message);
-                }
-            })
-            .catch(error => {
-                toastr.error("Hubo un problema con la solicitud.");
-                console.error("Error:", error);
-            });
-        });
-    }
-
-        
-        if (registerForm) {
-            registerForm.addEventListener("submit", async function(e) {
-                e.preventDefault();
-                
-                // Deshabilitar botón para evitar múltiples envíos
-                const submitBtn = registerForm.querySelector("[type='submit']");
-                submitBtn.disabled = true;
-                
-                try {
-                    // Obtener valores de los campos
-                    const formData = new FormData(registerForm);
-                    const nombre = formData.get('nombre').trim();
-                    const telefono = formData.get('telefono').trim();
-                    const email = formData.get('email').trim();
-                    const password = formData.get('password').trim();
-                    
-                    // Validaciones básicas
-                    if (!nombre || !telefono || !email || !password) {
-                        throw new Error("Todos los campos son obligatorios");
-                    }
-    
-                    // Enviar datos al servidor
-                    const response = await fetch("registro.php", {
-                        method: "POST",
-                        body: formData
-                    });
-    
-                    // Verificar si la respuesta es JSON válido
-                    const text = await response.text();
-                    let data;
-                    try {
-                        data = JSON.parse(text);
-                    } catch {
-                        throw new Error("Respuesta no válida del servidor");
-                    }
-    
-                    // Manejar respuesta
-                    if (data.status === "success") {
-                        // Mostrar toastr y luego redirigir
-                        toastr.success(data.message, "", {
-                            timeOut: 2500,
-                            onHidden: function() {
-                                window.location.href = "index.php";
-                            }
-                        });
-                    } else {
-                        throw new Error(data.message || "Error en el registro");
-                    }
-                } catch (error) {
-                    toastr.error(error.message);
-                    console.error("Error en registro:", error);
-                } finally {
-                    submitBtn.disabled = false;
-                }
-        });
-        }
-
-        
 });    
 
 //CARRUSEL
