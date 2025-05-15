@@ -4,14 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Categoria;
+use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    public function hombre()
+    public function hombre(Request $request)
     {
         $categoria = Categoria::where('nombre', 'Hombre')->firstOrFail();
-        $productos = Producto::where('idcategoria', $categoria->idcategoria)->get();
-        return view('categorias.hombre', compact('productos'));
+    
+        $query = Producto::where('idcategoria', $categoria->idcategoria);
+    
+        if ($request->filled('precio_min')) {
+            $query->where('precio', '>=', $request->precio_min);
+        }
+    
+        if ($request->filled('precio_max')) {
+            $query->where('precio', '<=', $request->precio_max);
+        }
+    
+        $productos = $query->get();
+    
+        return view('categorias.hombre', compact('productos', 'request'));
     }
 
     public function mujer()

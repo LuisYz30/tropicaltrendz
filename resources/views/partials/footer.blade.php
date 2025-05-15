@@ -21,9 +21,7 @@
             <div class="col-md-3">
                 <h5 class="text-foot">Explorar</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-light text-decoration-none">Acerca de</a></li>
-                    <li><a href="#" class="text-light text-decoration-none">Contacto</a></li>
-                    <li><a href="#" class="text-light text-decoration-none">Distribuidores</a></li>
+                    <li><a href="{{route('nosotros')}}" class="text-light text-decoration-none">Acerca de</a></li>
                 </ul>
             </div>
             <div class="col-md-3">

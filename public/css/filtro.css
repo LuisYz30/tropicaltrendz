@@ -1,0 +1,72 @@
+:root {
+    --celeste: #cadcfc;
+    --azulmedio: #8ab6f9;
+    --azuloscuro: #00126b;
+    --fondo: #f9f9f9;
+    --blanco: #ffffff;
+}
+.filtro-card {
+    background: var(--azuloscuro);
+    border: 2px solid var(--azulmedio);
+    border-radius: 12px;
+    padding: 20px;
+    color: var(--blanco);
+    box-shadow: 0 0 10px rgba(138, 182, 249, 0.3); /* azulmedio */
+    transition: all 0.3s ease-in-out;
+}
+
+.filtro-card:hover {
+    box-shadow: 0 0 20px rgba(138, 182, 249, 0.5);
+}
+
+.filtro-titulo {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--azulmedio);
+    padding-bottom: 5px;
+}
+
+.filtro-subtitulo {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--celeste);
+}
+
+.filtro-range {
+    width: 100%;
+    appearance: none;
+    height: 6px;
+    border-radius: 4px;
+    background: var(--blanco);
+    outline: none;
+    margin-bottom: 5px;
+    transition: background 0.3s;
+}
+
+.filtro-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: var(--azulmedio);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.filtro-labels {
+    display: flex;
+    justify-content: space-between;
+    color: var(--celeste);
+    font-size: 0.85rem;
+}
+
+.btn-filtro {
+    background-color: transparent;
+    border: 1px solid var(--celeste);
+    color: var(--celeste);
+    transition: 0.3s;
+}
+
+.btn-filtro:hover {
+    background-color: var(--azulmedio);
+    color: var(--blanco);
+}

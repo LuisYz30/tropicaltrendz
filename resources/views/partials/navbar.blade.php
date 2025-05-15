@@ -165,7 +165,7 @@
                     <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
                 <div class="loguearse">
-                    <a href="#">¿Ya tienes cuenta? Inicia Sesión</a>
+                    <a href="javascript:void(0);t">¿Ya tienes cuenta? Inicia Sesión</a>
                 </div>
             </div>
             <div class="form-image">

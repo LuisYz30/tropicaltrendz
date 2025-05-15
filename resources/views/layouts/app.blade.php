@@ -14,6 +14,9 @@
     {{-- Estilos personalizados --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nosotros.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detalle.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/carrito.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/filtro.css')}}">
 
     {{-- Favicon opcional --}}
     <link rel="icon" href="{{ asset('Imagenes/logo.ico') }}" type="image/x-icon">

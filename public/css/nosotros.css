@@ -62,7 +62,6 @@
 .carrito-container {
     width: 50%;
     margin: auto;
-    background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -114,14 +113,6 @@
     margin-top: 20px;
 }
 
-/* Nuevos estilos para eliminar bordes azules y ocupar todo el ancho */
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background-color: #ffffff !important;
-}
 
 .main-container {
     width: 100% !important;
