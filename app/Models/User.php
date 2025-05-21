@@ -9,48 +9,37 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'telefono',
         'email',
         'password',
+        'is_admin',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
-
+            'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
-       
-    public function setPasswordAttribute($value): void
+       /**
+     * Verifica si el usuario es administrador
+     */
+    public function isAdmin(): bool
     {
-        $this->attributes['password'] = bcrypt($value);
+        return $this->is_admin;
     }
+
     /**
      * Relación con facturas (ejemplo - ajustar según tu DB)
      */
@@ -59,4 +48,3 @@ class User extends Authenticatable
         return $this->hasMany(Factura::class);
     }
 }
-

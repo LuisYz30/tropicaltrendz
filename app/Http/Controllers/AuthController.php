@@ -24,8 +24,10 @@ public function login(Request $request)
 
         $credentials = $request->only('email','password');
 
-        if(auth::attempt($credentials)){
-            $request->session()->regenerate(); // previene session fixation
+        if (Auth::attempt($credentials)) {
+            if (Auth::user()->rol == 'admin') {
+                return redirect()->route('productos.index');
+            }
             return redirect()->route('index');
         }
 
@@ -33,7 +35,33 @@ public function login(Request $request)
 }
 
 
+    // Mostrar formulario de registro
+    public function showRegisterForm()
+    {
+        return view('login');
+    }
 
+    // Procesar registro
+public function register(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:50',
+        'telefono' => 'required|string|max:20',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:6'
+    ]);
+
+    $user = User::create([
+        'name' => $request->name,
+        'telefono' => $request->telefono,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    Auth::login($user); // Inicia sesión automáticamente después de registrarse
+
+    return redirect()->route('index');
+}
 
 public function logout(Request $request)
 {

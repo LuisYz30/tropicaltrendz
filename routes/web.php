@@ -5,7 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResenaController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -16,7 +17,7 @@ Route::get('/', function () {
 // Procesar inicio de sesión
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 // Procesar registro de nuevo usuario
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 // Cerrar sesión
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -53,7 +54,14 @@ Route::get('/nosotros', function () {
     return view('categorias.nosotros');
 })->name('nosotros');
 
+
+Route::middleware(['auth'])->group(function () {
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
 Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
 Route::delete('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+});
+
+//reseñas
+Route::post('/resenas', [ResenaController::class, 'store'])->name('resenas.store');
+Route::get('/resenas/{seccion}', [ResenaController::class, 'index'])->name('resenas.index');

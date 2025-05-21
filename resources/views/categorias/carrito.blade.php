@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-5' : 'my-5 py-5 text-center' }}">
+<div class="container carrito-contenedor {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-5' : 'my-5 py-5 text-center' }}">
     <h2 class="mb-4">Carrito de Compras</h2>
 
     @if(session('carrito') && count(session('carrito')) > 0)
@@ -42,7 +42,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="clave" value="{{ $clave }}">
-                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                    <button class="btn-azul-oscuro" type="submit">X</button>
                                 </form>
                             </td>
                         </tr>
@@ -61,13 +61,13 @@
             <form action="{{ route('carrito.vaciar') }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger btn-sm" type="submit">Vaciar carrito</button>
+                <button class="btn btn-primary boton-vaciar" type="submit">Vaciar carrito</button>
             </form>
-            <a href="{{ route('index') }}" class="btn btn-primary">Seguir comprando</a>
+            <a href="{{ route('index') }}" class="btn btn-primary boton-seguir">Seguir comprando</a>
         </div>
     @else
         <p>Tu carrito está vacío.</p>
-        <a href="{{ url('/') }}" class="btn btn-primary mt-3">Volver a la tienda</a>
+        <a href="{{ url('/') }}" class="btn btn-primary mt-3 boton-volver">Volver a la tienda</a>
     @endif
-</div>
+</div><br>
 @endsection

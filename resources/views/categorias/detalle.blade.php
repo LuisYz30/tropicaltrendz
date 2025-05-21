@@ -1,42 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $producto->nombre }}</title>
-    <style>
-        body { font-family: Arial; margin: 20px; }
-        .contenedor { display: flex; gap: 40px; }
-        .imagen img { max-width: 300px; border-radius: 10px; }
-        .info { max-width: 400px; }
-        .precio { font-size: 24px; color: green; }
-        select, button { margin-top: 10px; padding: 8px; width: 100%; }
-    </style>
-</head>
-<body>
-    <h1>{{ $producto->nombre }}</h1>
-    <div class="contenedor">
-        <div class="imagen">
-            <img src="{{ asset('images/' . $producto->categoria->nombre . '/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
+@extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/detalle.css') }}">
+@endsection
+
+@section('content')
+<div class="detalle-body">
+    <h1 class="titulo-producto">{{ $producto->nombre }}</h1>
+    <div class="contenedor-detalle">
+        <div class="imagen-detalle">
+            <img src="{{ asset('images/' . $producto->categoria->nombre . '/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
         </div>
-        <div class="info">
-            <p>{{ $producto->descripcion }}</p>
+        <div class="info-detalle">
+            <p class="descripcion">{{ $producto->descripcion }}</p>
             <p class="precio">{{ $producto->precioFormateado }}</p>
 
-            <form method="POST" action="{{ route('carrito.agregar') }}">
+            <form method="POST" action="{{ route('carrito.agregar') }}" @guest onsubmit="event.preventDefault();" @endguest>
                 @csrf
                 <input type="hidden" name="idproducto" value="{{ $producto->idproducto }}">
-                
+            
                 <label for="talla">Selecciona una talla:</label>
                 <select name="talla" id="talla" required>
                     @foreach ($tallas as $talla)
                         <option value="{{ $talla->idtalla }}">{{ $talla->nombre }}</option>
                     @endforeach
                 </select>
-                
-                <button type="submit">Agregar al carrito</button>
+            
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" min="1" value="1" required>
+            
+                @if (!Auth::check())
+                <button type="button" class="abrir-login-modal">🛒 Agregar al carrito</button>
+                @else
+                <button type="submit">🛒 Agregar al carrito</button>
+                @endif
             </form>
+            
         </div>
     </div>
-</body>
-</html>
+</div>
+@endsection

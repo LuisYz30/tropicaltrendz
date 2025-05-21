@@ -6,6 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeRegister = document.getElementById("close-register");
     const registerButton = document.getElementById("btn-registrar");
     const loginButton = document.getElementById("btn-iniciar");
+    const botonesAgregarCarrito = document.querySelectorAll(".abrir-login-modal");
+    const enlaceLogin = document.getElementById("btn-iniciar-enlace");
+    const enlaceRegistro = document.getElementById("btn-registro-enlace")
+
+    botonesAgregarCarrito.forEach((boton) => {
+        boton.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (loginModal) loginModal.style.display = "flex";
+        });
+    });
 
     // Asegurar que los modales existen antes de manipularlos
     if (loginModal) loginModal.style.display = "none";
@@ -55,6 +65,23 @@ document.addEventListener("DOMContentLoaded", function () {
         closeRegister.addEventListener("click", function () {
             if (registerModal) registerModal.style.display = "none";
         });
+    }
+
+    if (enlaceRegistro) {
+        enlaceRegistro.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (loginModal) loginModal.style.display = "none";
+            if (registerModal) registerModal.style.display = "flex";
+        });
+    }
+
+
+    if(enlaceLogin) {
+        enlaceLogin.addEventListener("click", function(e){
+            e.preventDefault();
+            if (registerModal) registerModal.style.display = "none";
+            if (loginModal) loginModal.style.display = "flex";
+        })
     }
 
     // Configurar Toastr

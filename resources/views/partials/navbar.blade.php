@@ -57,7 +57,7 @@
                                 {{--<a class="dropdown-item" href="{{ route('profile.edit') }}">--}}
                                     <i class="fas fa-user-edit me-2"></i> Editar Perfil
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -77,7 +77,11 @@
         
         <!-- Carrito (sin cambios) -->
         <div class="d-flex">
+            @if (Auth::check())
             <a href="{{ route('carrito.ver') }}" class="carro position-relative">
+            @else
+            <a href="#" class="carro position-relative abrir-login-modal">
+            @endif
                 <img src="{{ asset('images/car1.svg') }}" alt="Carrito">
         
                 @php
@@ -117,6 +121,7 @@
                     </div>
                     <div class="username">
                         <input type="password" name="password" required>
+                        <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
                     <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
@@ -146,17 +151,21 @@
                     @csrf
                     <div class="username">
                         <input type="text" name="name" required>
+                        <input type="text" name="name" required>
                         <label>Nombre</label>
                     </div>
                     <div class="username">
+                        <input type="tel" name="telefono" required>
                         <input type="tel" name="telefono" required>
                         <label>Teléfono</label>
                     </div>
                     <div class="username">
                         <input type="email" name="email" required>
+                        <input type="email" name="email" required>
                         <label>Correo electrónico</label>
                     </div>
                     <div class="username">
+                        <input type="password" name="password" required>
                         <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
