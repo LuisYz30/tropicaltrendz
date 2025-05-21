@@ -23,8 +23,10 @@ class AuthController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
-        if(auth::attempt($credentials)){
-            // Autenticación exitosa, ambos roles van al mismo lugar
+        if (Auth::attempt($credentials)) {
+            if (Auth::user()->rol == 'admin') {
+                return redirect()->route('productos.index');
+            }
             return redirect()->route('index');
         }
 
@@ -53,9 +55,14 @@ public function register(Request $request)
         'telefono' => $request->telefono,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'rol' => 'cliente',
     ]);
+    
+    // if (!$user) {
+    //     dd('No se creó el usuario');
+    // }
 
-    Auth::login($user); // Inicia sesión automáticamente después de registrarse
+    // Auth::login($user); // Inicia sesión automáticamente después de registrarse
 
     return redirect()->route('index');
 }

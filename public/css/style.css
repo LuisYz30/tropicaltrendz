@@ -670,6 +670,17 @@ font-size: 14px;
     text-decoration: underline;
 }
 
+.loguearse a {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #00246B;
+    text-decoration: none;
+}
+
+.loguearse a:hover {
+    text-decoration: underline;
+}
+
 /*Enlace de iniciar sesion en modal de registro*/
 #btn-iniciar {
     margin-top: 5px;

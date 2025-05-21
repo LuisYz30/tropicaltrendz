@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@section('content')
 <!--Seccion del video-->
 <div class="container-fluid p-0 style-banner position-relative">
     <video autoplay muted loop playsinline class="banner-video scroll-fade">
@@ -12,4 +11,3 @@
         <a href="#" class="btn-azul-oscuro text-decoration-none mt-3 ">COMPRAR AHORA</a>
     </div>
 </div>
-@endsection

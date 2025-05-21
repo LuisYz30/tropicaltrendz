@@ -12,7 +12,7 @@ class ProductoSeeder extends Seeder
         Producto::create([
             'nombre' => 'Producto de ejemplo 1',
             'descripcion' => 'Descripción del producto 1',
-            'precio' => 100.00,
+            'precio' => 80000.00,
             'idcategoria' => 1,
             'imagen' => 'fh1.png',
         ]);
@@ -20,7 +20,7 @@ class ProductoSeeder extends Seeder
         Producto::create([
             'nombre' => 'Producto de ejemplo 2',
             'descripcion' => 'Descripción del producto 2',
-            'precio' => 120.00,
+            'precio' => 90000.00,
             'idcategoria' => 2,
             'imagen' => 'fm2.png',
         ]);
@@ -28,7 +28,7 @@ class ProductoSeeder extends Seeder
         Producto::create([
             'nombre' => 'Producto de ejemplo 3',
             'descripcion' => 'Descripción del producto 3',
-            'precio' => 80.00,
+            'precio' => 80000.00,
             'idcategoria' => 3,
             'imagen' => 'fh3.jpg',
         ]);

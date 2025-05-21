@@ -27,18 +27,42 @@ class PublicController extends Controller
         return view('categorias.hombre', compact('productos', 'request'));
     }
 
-    public function mujer()
+    public function mujer(Request $request)
     {
         $categoria = Categoria::where('nombre', 'Mujer')->firstOrFail();
-        $productos = Producto::where('idcategoria', $categoria->idcategoria)->get();
-        return view('categorias.mujer', compact('productos'));
+    
+        $query = Producto::where('idcategoria', $categoria->idcategoria);
+    
+        if ($request->filled('precio_min')) {
+            $query->where('precio', '>=', $request->precio_min);
+        }
+    
+        if ($request->filled('precio_max')) {
+            $query->where('precio', '<=', $request->precio_max);
+        }
+    
+        $productos = $query->get();
+    
+        return view('categorias.mujer', compact('productos', 'request'));
     }
 
-    public function niños()
+    public function niños(request $request)
     {
         $categoria = Categoria::where('nombre', 'Niños')->firstOrFail();
-        $productos = Producto::where('idcategoria', $categoria->idcategoria)->get();
-        return view('categorias.niños', compact('productos'));
+    
+        $query = Producto::where('idcategoria', $categoria->idcategoria);
+    
+        if ($request->filled('precio_min')) {
+            $query->where('precio', '>=', $request->precio_min);
+        }
+    
+        if ($request->filled('precio_max')) {
+            $query->where('precio', '<=', $request->precio_max);
+        }
+    
+        $productos = $query->get();
+    
+        return view('categorias.niños', compact('productos', 'request'));
     }
 
     public function detalleProducto($id)

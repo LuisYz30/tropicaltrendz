@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<br>
 <div class="container-fluid mt-4">
     <div class="text-center mt-9 mb-5">
         <h1 class="fw-bold text-uppercase display-3">TRAJES DE BAÑO PARA HOMBRE</h1>

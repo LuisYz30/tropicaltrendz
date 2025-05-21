@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<br><br><br><div class="container carrito-contenedor {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-5' : 'my-5 py-5 text-center' }}">
+<div class="container carrito-contenedor {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-5' : 'my-5 py-5 text-center' }}">
     <h2 class="mb-4">Carrito de Compras</h2>
 
     @if(session('carrito') && count(session('carrito')) > 0)

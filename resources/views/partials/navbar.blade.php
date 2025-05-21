@@ -39,7 +39,7 @@
                         
                         <!-- Menú desplegable -->
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
-                            @if(Auth::user()->role === 'admin')
+                            @if(Auth::user()->rol === 'admin')
                             <li>
                                 <a class="dropdown-item" href="{{ route('productos.create') }}">
                                     <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
@@ -52,11 +52,11 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                         @endif
-                            <li>
+                            {{-- <li>
                                 <a class="dropdown-item" href="{{ route('profile.edit') }}">
                                     <i class="fas fa-user-edit me-2"></i> Editar Perfil
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -76,7 +76,11 @@
         
         <!-- Carrito (sin cambios) -->
         <div class="d-flex">
+            @if (Auth::check())
             <a href="{{ route('carrito.ver') }}" class="carro position-relative">
+            @else
+            <a href="#" class="carro position-relative abrir-login-modal">
+            @endif
                 <img src="{{ asset('images/car1.svg') }}" alt="Carrito">
         
                 @php
@@ -111,11 +115,11 @@
 
                     @csrf
                     <div class="username">
-                        <input type="text" required>
+                        <input type="email" name="email" required>
                         <label>Correo electrónico</label>
                     </div>
                     <div class="username">
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
                     <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
@@ -125,7 +129,7 @@
                   <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
                 <div class="registrarse">
-                    <a href="#">¿No tienes cuenta? Regístrate</a>
+                    <a href="#" id="btn-registro-enlace">¿No tienes cuenta? Regístrate</a>
                 </div>
             </div>
         </div>
@@ -144,19 +148,19 @@
 
                     @csrf
                     <div class="username">
-                        <input type="text" required>
+                        <input type="text" name="name" required>
                         <label>Nombre</label>
                     </div>
                     <div class="username">
-                        <input type="tel" required>
+                        <input type="tel" name="telefono" required>
                         <label>Teléfono</label>
                     </div>
                     <div class="username">
-                        <input type="email" required>
+                        <input type="email" name="email" required>
                         <label>Correo electrónico</label>
                     </div>
                     <div class="username">
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
                     <button type="submit" class="btn-registrarse">Registrarse</button>
@@ -165,7 +169,7 @@
                     <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
                 <div class="loguearse">
-                    <a href="javascript:void(0);t">¿Ya tienes cuenta? Inicia Sesión</a>
+                    <a href="#" id="btn-iniciar-enlace">¿Ya tienes cuenta? Inicia Sesión</a>
                 </div>
             </div>
             <div class="form-image">
