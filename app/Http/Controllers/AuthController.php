@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -9,56 +10,30 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //Mostrar formulario de login
-    public function showLoginForm()
-    {
-        return view('login');
-    }
+
 
     //Procesar inicio de sesión 
-    public function login(Request $request)
+public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string|min:6'
-        ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        $remember = ($request->has('remember') ? true : false);
+
+        $credentials = $request->only('email','password');
 
         if(auth::attempt($credentials)){
-            // Autenticación exitosa, ambos roles van al mismo lugar
+            $request->session()->regenerate(); // previene session fixation
             return redirect()->route('index');
         }
 
         return back()->withErrors(['email' => 'Credenciales incorrectas'])->withInput();
-    }
-
-
-    // Mostrar formulario de registro
-    public function showRegisterForm()
-    {
-        return view('login');
-    }
-
-    // Procesar registro
-public function register(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:50',
-        'telefono' => 'required|string|max:20',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|string|min:6'
-    ]);
-
-    $user = User::create([
-        'name' => $request->name,
-        'telefono' => $request->telefono,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
-
-    Auth::login($user); // Inicia sesión automáticamente después de registrarse
-
-    return redirect()->route('index');
 }
+
+
+
 
 public function logout(Request $request)
 {

@@ -5,21 +5,18 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
-
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
 //Autenticacion
-// Mostrar formulario de login
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+
 // Procesar inicio de sesión
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Mostrar formulario de registro
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 // Procesar registro de nuevo usuario
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 // Cerrar sesión
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

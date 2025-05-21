@@ -21,10 +21,11 @@
 <body>
 
     {{-- Navbar --}}
+    <nav class="">
     @include('partials.navbar')
-
+    </nav>
     {{-- Contenido principal --}}
-    <main>
+    <main class="">
         @yield('content')
     </main>
 

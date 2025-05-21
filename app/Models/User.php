@@ -22,7 +22,6 @@ class User extends Authenticatable
         'telefono',
         'email',
         'password',
-        'is_admin',
     ];
 
     /**
@@ -44,18 +43,14 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'is_admin' => 'boolean',
+
         ];
     }
-       /**
-     * Verifica si el usuario es administrador
-     */
-    public function isAdmin(): bool
+       
+    public function setPasswordAttribute($value): void
     {
-        return $this->is_admin;
+        $this->attributes['password'] = bcrypt($value);
     }
-
     /**
      * Relación con facturas (ejemplo - ajustar según tu DB)
      */

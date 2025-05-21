@@ -39,21 +39,22 @@
                         
                         <!-- Menú desplegable -->
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
-                            @if(Auth::user()->role === 'admin')
+                          @if(Auth::user()->email === 'admin@tropicaltrendz.com')
+
                             <li>
-                                <a class="dropdown-item" href="{{ route('productos.create') }}">
+                                {{--<a class="dropdown-item" href="{{ route('productos.create') }}">--}}
                                     <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.informes') }}">
+                                {{--<a class="dropdown-item" href="{{ route('admin.informes') }}">--}}
                                     <i class="fas fa-chart-line me-2"></i> Informes
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                         @endif
                             <li>
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                {{--<a class="dropdown-item" href="{{ route('profile.edit') }}">--}}
                                     <i class="fas fa-user-edit me-2"></i> Editar Perfil
                                 </a>
                             </li>
@@ -111,11 +112,11 @@
 
                     @csrf
                     <div class="username">
-                        <input type="text" required>
+                        <input type="text" name="email" required>
                         <label>Correo electrónico</label>
                     </div>
                     <div class="username">
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
                     <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
@@ -125,7 +126,7 @@
                   <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
                 <div class="registrarse">
-                    <a href="#">¿No tienes cuenta? Regístrate</a>
+                    <a href="{{asset('register')}}">¿No tienes cuenta? Regístrate</a>
                 </div>
             </div>
         </div>
@@ -144,19 +145,19 @@
 
                     @csrf
                     <div class="username">
-                        <input type="text" required>
+                        <input type="text" name="name" required>
                         <label>Nombre</label>
                     </div>
                     <div class="username">
-                        <input type="tel" required>
+                        <input type="tel" name="telefono" required>
                         <label>Teléfono</label>
                     </div>
                     <div class="username">
-                        <input type="email" required>
+                        <input type="email" name="email" required>
                         <label>Correo electrónico</label>
                     </div>
                     <div class="username">
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
                     <button type="submit" class="btn-registrarse">Registrarse</button>
@@ -165,7 +166,7 @@
                     <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
                 <div class="loguearse">
-                    <a href="#">¿Ya tienes cuenta? Inicia Sesión</a>
+                    <a href="{{asset('login')}}">¿Ya tienes cuenta? Inicia Sesión</a>
                 </div>
             </div>
             <div class="form-image">
