@@ -1,0 +1,89 @@
+.reseñas-container {
+    background-color: #cfe2ff;
+}
+
+.reseña-form {
+    max-width: 600px;
+}
+
+.reseña-select,
+.reseña-textarea {
+    border-radius: 8px;
+}
+
+.reseña-btn {
+    background-color: #001f3f;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.reseña-btn:hover {
+    background-color: #003366;
+}
+
+.reseña-carousel-wrapper {
+    position: relative;
+    max-width: 100%;
+    padding: 0 60px; /* espacio para flechas */
+}
+
+.reseña-carousel-container {
+    overflow: hidden;
+}
+
+.reseña-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.reseña-page {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.reseña-card {
+    background-color: white;
+    border-radius: 20px;
+    padding: 15px;
+    width: 280px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.reseña-stars {
+    color: #ffc107;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #001f3f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: #003366;
+}
+
+.carousel-btn.left {
+    left: 10px;
+}
+
+.carousel-btn.right {
+    right: 10px;
+}

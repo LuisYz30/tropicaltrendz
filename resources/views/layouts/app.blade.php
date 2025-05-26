@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/detalle.css')}}">
     <link rel="stylesheet" href="{{ asset('css/carrito.css')}}">
     <link rel="stylesheet" href="{{ asset('css/filtro.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/avatar-usuario.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/reseñas.css')}}">
 
     {{-- Favicon opcional --}}
     <link rel="icon" href="{{ asset('Imagenes/logo.ico') }}" type="image/x-icon">
@@ -38,5 +40,6 @@
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
 </body>
 </html>

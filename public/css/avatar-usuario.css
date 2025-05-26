@@ -1,0 +1,29 @@
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.user-section .btn-outline-danger {
+    padding: -20px;
+    font-size: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.posicion-usuario {
+    margin-left: 20px;
+    margin-top: -4px;  
+}

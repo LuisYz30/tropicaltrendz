@@ -5,9 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
-use App\Http\Controllers\ResenaController;
-
-
+use App\Http\Controllers\ReseñaController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -33,8 +31,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
-
-
 // Rutas Para los modulos
 
 // Hombre
@@ -57,7 +53,6 @@ Route::get('/nosotros', function () {
     return view('categorias.nosotros');
 })->name('nosotros');
 
-
 Route::middleware(['auth'])->group(function () {
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
@@ -66,5 +61,5 @@ Route::delete('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name
 });
 
 //reseñas
-Route::post('/resenas', [ResenaController::class, 'store'])->name('resenas.store');
-Route::get('/resenas/{seccion}', [ResenaController::class, 'index'])->name('resenas.index');
+Route::post('/reseñas', [ReseñaController::class, 'store'])->name('reseñas.store');
+Route::get('/reseñas/{seccion}', [ReseñaController::class, 'index'])->name('reseñas.index');

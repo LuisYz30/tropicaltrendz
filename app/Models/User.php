@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Factura::class);
     }
+
+    public function reseñas()
+    {
+        return $this->hasMany(Reseña::class);
+    }
 }

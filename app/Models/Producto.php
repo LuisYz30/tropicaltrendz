@@ -36,4 +36,9 @@ class Producto extends Model
         return '$' . number_format($this->precio, 0, ',', '.');
     }
 
+    public function reseñas()
+    {
+        return $this->hasMany(Reseña::class, 'producto_id');
+    }
+
 }

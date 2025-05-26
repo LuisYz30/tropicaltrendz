@@ -39,4 +39,5 @@
         </div>
     </div>
 </div>
+@include('partials.reseñas', ['producto' => $producto])
 @endsection

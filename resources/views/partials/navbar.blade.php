@@ -1,62 +1,56 @@
 <!-- resources/views/layouts/navbar.blade.php -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
-    <div class="container">
-        <!-- Botón Hamburguesa -->
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- Logo -->
+        <a href="{{ route('index') }}">
+            <img src="{{ asset('images/LogoEmpresa/logoletrasnav.png') }}" alt="Logo" class="logo-nav">
+        </a>
+
+        <!-- Botón hamburguesa -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Logo de la tienda -->
-       <a href="{{ route('index') }}">
-         <img src="{{ asset('images/LogoEmpresa/logoletrasnav.png') }}" alt="Logo" class="logo-nav">
-       </a>
-        
-        <!-- Menú colapsable -->
+        <!-- Contenedor central con menú y usuario -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-4">
                 <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('mujer') }}">Mujer</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('hombre') }}">Hombre</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('niños') }}">Niños</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
             </ul>
-            
-             <!-- Sección de usuario con Dropdown de Bootstrap -->
-             <div class="d-flex align-items-center ms-3 user-section">
+
+            <!-- Sección de usuario -->
+            <div class="d-flex align-items-center user-section posicion-usuario">
                 @auth
-                    <div class="dropdown">
-                        <!-- Botón que abre el dropdown -->
+                    <div class="dropdown d-flex align-items-center">
                         <button class="btn dropdown-toggle d-flex align-items-center bg-transparent border-0" 
-                                type="button" 
-                                id="dropdownMenuButton" 
-                                data-bs-toggle="dropdown" 
-                                aria-expanded="false">
-                            <div class="user-avatar">
-                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                            </div>
-                            <span class="me-2">{{ Auth::user()->name }}</span>
-                        </button>
-                        
-                        <!-- Menú desplegable -->
+                        type="button" 
+                        id="dropdownMenuButton" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                    <div class="user-avatar me-2">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </div>
+                    <span>{{ Auth::user()->name }}</span>
+                </button>
+                
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
                             @if(Auth::user()->rol === 'admin')
-                            <li>
-                                <a class="dropdown-item" href="{{ route('productos.create') }}">
-                                    <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('admin.informes') }}">
-                                    <i class="fas fa-chart-line me-2"></i> Informes
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                        @endif
-                            {{-- <li>
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                    <i class="fas fa-user-edit me-2"></i> Editar Perfil
-                                </a>
-                            </li> --}}
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('productos.create') }}">
+                                        <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
+                                    </a>
+                                </li>
+                                {{-- <li>
+                                    <a class="dropdown-item" href="{{ route('admin.informes') }}">
+                                        <i class="fas fa-chart-line me-2"></i> Informes
+                                    </a>
+                                </li> --}}
+                                <li><hr class="dropdown-divider"></li>
+                            @endif
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -69,24 +63,24 @@
                     </div>
                 @else
                     <a href='#' id="btn-iniciar" class="btn-azul-oscuro text-decoration-none me-2">Iniciar Sesión</a>
-                    <a href='#' id="btn-registrar"class="btn-azul-medio text-decoration-none me-2">Registrarse</a>
+                    <a href='#' id="btn-registrar" class="btn-azul-medio text-decoration-none me-2">Registrarse</a>
                 @endauth
-            </div>   
+            </div>
         </div>
-        
-        <!-- Carrito (sin cambios) -->
-        <div class="d-flex">
+
+        <!-- Carrito -->
+        <div class="d-flex align-items-center">
             @if (Auth::check())
-            <a href="{{ route('carrito.ver') }}" class="carro position-relative">
+                <a href="{{ route('carrito.ver') }}" class="carro position-relative">
             @else
-            <a href="#" class="carro position-relative abrir-login-modal">
+                <a href="#" class="carro position-relative abrir-login-modal">
             @endif
                 <img src="{{ asset('images/car1.svg') }}" alt="Carrito">
-        
+
                 @php
                     $cantidadCarrito = is_array(session('carrito')) ? count(session('carrito')) : 0;
                 @endphp
-        
+
                 @if($cantidadCarrito > 0)
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         {{ $cantidadCarrito }}
@@ -96,6 +90,7 @@
         </div>
     </div>
 </nav>
+
 
 <!-- MODAL LOGIN -->
 <div class="modal-fade" id="login-modal">

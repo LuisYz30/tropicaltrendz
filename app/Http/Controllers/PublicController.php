@@ -67,7 +67,7 @@ class PublicController extends Controller
 
     public function detalleProducto($id)
     {
-        $producto = Producto::with('tallas')->findOrFail($id);
+        $producto = Producto::with(['tallas', 'reseñas.user'])->findOrFail($id);
         $tallas = $producto->tallas;
 
         return view('categorias.detalle', compact('producto', 'tallas'));
