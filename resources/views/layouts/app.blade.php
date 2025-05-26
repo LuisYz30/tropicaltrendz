@@ -26,8 +26,9 @@
 <body>
 
     {{-- Navbar --}}
+    <nav class="">
     @include('partials.navbar')
-
+    </nav>
     {{-- Contenido principal --}}
     <main class="pt-5 mt-4">
         @yield('content')

@@ -16,7 +16,7 @@ class User extends Authenticatable
         'telefono',
         'email',
         'password',
-        'rol',
+        'is_admin',
     ];
 
     protected $hidden = [
@@ -29,9 +29,20 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
+       /**
+     * Verifica si el usuario es administrador
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
 
+    /**
+     * Relación con facturas (ejemplo - ajustar según tu DB)
+     */
     public function facturas()
     {
         return $this->hasMany(Factura::class);
