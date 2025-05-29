@@ -43,14 +43,22 @@
                 @forelse ($producto->reseñas->chunk(4) as $chunk)
                     <div class="reseña-page">
                         @foreach ($chunk as $reseña)
-                            <div class="reseña-card">
-                                <h5 class="fw-bold mb-1">{{ $reseña->user->name }}</h5>
-                                <div class="reseña-stars mb-1 text-warning">
-                                    {!! str_repeat('★', $reseña->calificacion) !!} {!! str_repeat('☆', 5 - $reseña->calificacion) !!}
-                                </div>
-                                <p class="mb-0">{{ $reseña->comentario }}</p>
-                            </div>
-                        @endforeach
+    <div class="reseña-card position-relative">
+        @if(auth()->check() && auth()->user()->rol === 'admin')
+            <form action="{{ route('reseñas.destroy', $reseña->id) }}" method="POST" class="eliminar-reseña-form">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn-eliminar" aria-label="Eliminar">×</button>
+            </form>
+        @endif
+
+        <h5 class="fw-bold mb-1">{{ $reseña->user->name }}</h5>
+        <div class="reseña-stars mb-1 text-warning">
+            {!! str_repeat('★', $reseña->calificacion) !!} {!! str_repeat('☆', 5 - $reseña->calificacion) !!}
+        </div>
+        <p class="mb-0">{{ $reseña->comentario }}</p>
+    </div>
+@endforeach
                     </div>
                 @empty
                     <p class="text-muted text-center">Este producto aún no tiene reseñas.</p>

@@ -2,37 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
 use App\Models\Categoria;
-use Illuminate\Http\Request;
+use App\Models\Talla;
 
 class ProductoController extends Controller
 {
     public function store(Request $request)
-    {
-        // Validación del formulario
-        $request->validate([
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'precio' => 'required|numeric',
-            'idcategoria' => 'required|exists:categorias,id',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,web|max:2048',  
-        ]);
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'precio' => 'required|numeric',
+        'idcategoria' => 'required|exists:categorias,idcategoria',
+        'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'tallas' => 'required|array|min:1',
+        'tallas.*' => 'exists:tallas,idtalla',
+    ]);
 
-         // Subir la imagen
-    $imagenPath = $request->file('imagen')->store('productos', 'public');
-    
-        // Crear el producto y guardar la ruta de la imagen
-        Producto::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'precio' => $request->precio,
-            'idcategoria' => $request->idcategoria,
-            'imagen' => $imagenPath,  // Guardar la ruta directamente
-        ]);
-    
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente');
+    // Subir imagen
+    $rutaImagen = $request->hasFile('imagen') 
+        ? $request->file('imagen')->store('productos', 'public') 
+        : null;
+
+    $producto = new Producto();
+    $producto->nombre = $request->nombre;
+    $producto->descripcion = $request->descripcion;
+    $producto->precio = $request->precio;
+    $producto->imagen = $rutaImagen;
+    $producto->idcategoria = $request->idcategoria;
+    $producto->save();
+
+    foreach ($request->tallas as $idtalla) {
+        $stock = $request->stock_tallas[$idtalla] ?? 0;
+        if ($stock > 0) {
+            DB::table('producto_tallas')->insert([
+                'idproducto' => $producto->idproducto,
+                'idtalla' => $idtalla,
+                'stock' => $stock,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
+
+    return redirect()->back()->with('success', 'Producto creado correctamente.');
+}
+
+
+    
 
     public function index()
 {
@@ -43,14 +63,18 @@ class ProductoController extends Controller
 public function create()
 {
     $categorias = Categoria::all();
-    return view('admin.productos.create', compact('categorias'));
+    $tallas = Talla::all();
+
+    return view('admin.productos.create', compact('categorias', 'tallas'));
 }
 
 public function edit($id)
 {
     $producto = Producto::findOrFail($id);
     $categorias = Categoria::all();
-    return view('admin.productos.edit', compact('producto', 'categorias'));
+    $tallas = Talla::all(); // 👈 Agrega esta línea
+
+    return view('admin.productos.edit', compact('producto', 'categorias', 'tallas'));
 }
 
 public function update(Request $request, $id)
@@ -61,8 +85,8 @@ public function update(Request $request, $id)
         'nombre' => 'required',
         'descripcion' => 'required',
         'precio' => 'required|numeric',
-        'idcategoria' => 'required|exists:categorias,id',
-        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,web|max:2048',
+        'idcategoria' => 'required|exists:categorias,idcategoria',
+        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
     ]);
 
     $data = $request->only(['nombre', 'descripcion', 'precio', 'idcategoria']);
@@ -73,14 +97,25 @@ public function update(Request $request, $id)
 
     $producto->update($data);
 
-    return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente');
+    $seccion = strtolower($request->input('seccion')); // 'hombre', 'mujer', etc.
+
+    // Redirige directamente a la vista correspondiente
+    return redirect("/{$seccion}")->with('success', 'Producto actualizado correctamente');
 }
 
-public function destroy($id)
+public function destroy($id, Request $request)
 {
     $producto = Producto::findOrFail($id);
     $producto->delete();
 
-    return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente');
+    // Leer parámetro de sección desde la URL (por ejemplo, /admin/productos/5?seccion=mujer)
+    $seccion = $request->query('seccion');
+
+    if ($seccion) {
+        return redirect()->route('productos.index', ['seccion' => $seccion])
+                         ->with('success', 'Producto eliminado correctamente.');
+    }
+
+    return redirect()->back()->with('success', 'Producto eliminado correctamente.');
 }
 }

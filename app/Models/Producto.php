@@ -25,7 +25,7 @@ class Producto extends Model
 
     public function tallas(): BelongsToMany
     {
-    return $this->belongsToMany(Talla::class, 'producto_tallas', 'idproducto', 'idtalla');
+    return $this->belongsToMany(Talla::class, 'producto_tallas', 'idproducto', 'idtalla')->withPivot('stock');
     }
 
         /**

@@ -10,49 +10,48 @@ class CarritoController extends Controller
 {
     public function agregar(Request $request)
     {
-        // Obtener el producto y talla
         $producto = Producto::findOrFail($request->idproducto);
         $talla = Talla::findOrFail($request->talla);
-
         $cantidad = $request->input('cantidad', 1);
 
-        // Obtener el carrito desde la sesión
-        $carrito = session()->get('carrito', []);
+        // Obtener stock desde la tabla pivote
+        $stockDisponible = $producto->tallas()->where('producto_tallas.idtalla', $talla->idtalla)->first()->pivot->stock ?? 0;
 
-        // Crear una clave única combinando el ID del producto y el ID de la talla
-        $clave = $producto->idproducto . '-' . $talla->idtalla;
-
-        // Asignar la subcarpeta según la categoría del producto (por ejemplo, hombre, mujer, etc.)
-        $subcarpeta = strtolower($producto->categoria->nombre); // Asumiendo que hay una relación 'categoria' con nombre
-
-        // Si la categoría no tiene nombre o no está definida, asignamos 'otros'
-        if (empty($subcarpeta)) {
-            $subcarpeta = 'otros';
+        // Verificación del stock
+        if ($cantidad > $stockDisponible) {
+            return redirect()->back()->withErrors(['cantidad' => 'No hay suficiente stock para la talla seleccionada.']);
         }
 
-        // Construir la ruta de la imagen
-        $imagePath = 'images/' . $subcarpeta . '/' . $producto->imagen;
+        $carrito = session()->get('carrito', []);
+        $clave = $producto->idproducto . '-' . $talla->idtalla;
+        $subcarpeta = strtolower($producto->categoria->nombre) ?: 'otros';
+        $imagePath = asset('storage/' . $producto->imagen);
 
-        // Si el producto no está en el carrito, agregarlo
+        // Si no existe en carrito, agregar
         if (!isset($carrito[$clave])) {
             $carrito[$clave] = [
                 'producto' => $producto->nombre,
                 'precio' => $producto->precio,
                 'talla' => $talla->nombre,
                 'cantidad' => $cantidad,
-                'imagen' => $imagePath // La ruta dinámica de la imagen
+                'imagen' => $imagePath
             ];
         } else {
-            // Si el producto ya está en el carrito, incrementar la cantidad
-            $carrito[$clave]['cantidad'] += $cantidad;
+            $nuevaCantidad = $carrito[$clave]['cantidad'] + $cantidad;
+
+            // Evitar exceder stock al sumar más
+            if ($nuevaCantidad > $stockDisponible) {
+                return redirect()->back()->withErrors(['cantidad' => 'No puedes agregar más de lo disponible en stock para esta talla.']);
+            }
+
+            $carrito[$clave]['cantidad'] = $nuevaCantidad;
         }
 
-        // Guardar el carrito en la sesión
         session(['carrito' => $carrito]);
 
-        // Redirigir a la vista del carrito
         return redirect()->route('carrito.ver')->with('success', 'Producto agregado al carrito.');
     }
+
 
     public function ver()
     {

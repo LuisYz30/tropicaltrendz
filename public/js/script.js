@@ -8,20 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("btn-iniciar");
     const botonesAgregarCarrito = document.querySelectorAll(".abrir-login-modal");
     const enlaceLogin = document.getElementById("btn-iniciar-enlace");
-    const enlaceRegistro = document.getElementById("btn-registro-enlace")
+    const enlaceRegistro = document.getElementById("btn-registro-enlace");
 
     botonesAgregarCarrito.forEach((boton) => {
         boton.addEventListener("click", function (e) {
             e.preventDefault();
+            localStorage.setItem("redirectAfterLogin", window.location.href); // 👈 También aquí
             if (loginModal) loginModal.style.display = "flex";
         });
     });
 
-    // Asegurar que los modales existen antes de manipularlos
     if (loginModal) loginModal.style.display = "none";
     if (registerModal) registerModal.style.display = "none";
 
-    // Mostrar modal solo si no se ha visto antes
     if (loginModal && !localStorage.getItem("loginVisto")) {
         setTimeout(() => {
             loginModal.style.display = "flex";
@@ -29,10 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 4000);
     }
 
-    // Eventos para abrir y cerrar modales
     if (loginButton) {
         loginButton.addEventListener("click", function (e) {
             e.preventDefault();
+            if (registerModal) registerModal.style.display = "none";
             if (loginModal) loginModal.style.display = "flex";
         });
     }
@@ -52,15 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    if(loginButton) {
-        loginButton.addEventListener("click", function(e){
-            e.preventDefault();
-            if (registerModal) registerModal.style.display = "none";
-            if (loginModal) loginModal.style.display = "flex";
-        })
-    }
-
     if (closeRegister) {
         closeRegister.addEventListener("click", function () {
             if (registerModal) registerModal.style.display = "none";
@@ -75,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    if(enlaceLogin) {
-        enlaceLogin.addEventListener("click", function(e){
+    if (enlaceLogin) {
+        enlaceLogin.addEventListener("click", function (e) {
             e.preventDefault();
             if (registerModal) registerModal.style.display = "none";
             if (loginModal) loginModal.style.display = "flex";
-        })
+        });
     }
+
 
     // Configurar Toastr
     toastr.options = {

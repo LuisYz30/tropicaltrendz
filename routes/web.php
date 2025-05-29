@@ -52,11 +52,14 @@ Route::get('/nosotros', function () {
 
 Route::middleware(['auth'])->group(function () {
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
-Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
 Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
 Route::delete('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 });
+Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
 
 //reseñas
 Route::post('/reseñas', [ReseñaController::class, 'store'])->name('reseñas.store');
 Route::get('/reseñas/{seccion}', [ReseñaController::class, 'index'])->name('reseñas.index');
+
+Route::delete('/admin/reseñas/{id}', [ReseñaController::class, 'destroy'])->name('reseñas.destroy')->middleware('auth');
+
