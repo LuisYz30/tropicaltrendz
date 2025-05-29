@@ -13,8 +13,6 @@
                 <h5 class="text-foot">Informacion</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-light text-decoration-none">FAQ</a></li>
-                    <li><a href="#" class="text-light text-decoration-none">Envios y devoluciones</a></li>
-                    <li><a href="#" class="text-light text-decoration-none">Politica de tienda</a></li>
                     <li><a href="#" class="text-light text-decoration-none">Metodos de pago</a></li>
                 </ul>
             </div>
@@ -30,9 +28,7 @@
                 <p>Email: <a href="tropitrendz@gmail.com" class="text-light">tropitrendz@gmail.com</a></p>
                 <div>
                     <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-light"><i class="fab fa-pinterest"></i></a>
                 </div>
             </div>
         </div>

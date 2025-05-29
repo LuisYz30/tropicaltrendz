@@ -15,8 +15,7 @@ class Talla extends Model
 
     public $timestamps = false;
     public function productos()
-    {
-        return $this->belongsToMany(Producto::class, 'producto_talla', 'idtalla', 'idproducto')
-                    ->withPivot('stock');
-    }
+{
+    return $this->belongsToMany(Producto::class, 'producto_tallas', 'idtalla', 'idproducto')->withPivot('stock');
+}
 }

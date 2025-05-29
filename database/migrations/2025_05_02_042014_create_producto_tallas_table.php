@@ -15,6 +15,7 @@ return new class extends Migration
             $table->idproducto_tallas();
             $table->unsignedBigInteger('idproducto');
             $table->unsignedBigInteger('idtalla');
+            $table->unsignedInteger('stock');
             $table->foreign('idproducto')->references('idproducto')->on('productos')->onDelete('cascade');
             $table->foreign('idtalla')->references('idtalla')->on('tallas')->onDelete('cascade');
             $table->timestamps();

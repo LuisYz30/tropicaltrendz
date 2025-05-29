@@ -8,20 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("btn-iniciar");
     const botonesAgregarCarrito = document.querySelectorAll(".abrir-login-modal");
     const enlaceLogin = document.getElementById("btn-iniciar-enlace");
-    const enlaceRegistro = document.getElementById("btn-registro-enlace")
+    const enlaceRegistro = document.getElementById("btn-registro-enlace");
 
     botonesAgregarCarrito.forEach((boton) => {
         boton.addEventListener("click", function (e) {
             e.preventDefault();
+            localStorage.setItem("redirectAfterLogin", window.location.href); // 👈 También aquí
             if (loginModal) loginModal.style.display = "flex";
         });
     });
 
-    // Asegurar que los modales existen antes de manipularlos
     if (loginModal) loginModal.style.display = "none";
     if (registerModal) registerModal.style.display = "none";
 
-    // Mostrar modal solo si no se ha visto antes
     if (loginModal && !localStorage.getItem("loginVisto")) {
         setTimeout(() => {
             loginModal.style.display = "flex";
@@ -29,10 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 4000);
     }
 
-    // Eventos para abrir y cerrar modales
     if (loginButton) {
         loginButton.addEventListener("click", function (e) {
             e.preventDefault();
+            if (registerModal) registerModal.style.display = "none";
             if (loginModal) loginModal.style.display = "flex";
         });
     }
@@ -52,15 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    if(loginButton) {
-        loginButton.addEventListener("click", function(e){
-            e.preventDefault();
-            if (registerModal) registerModal.style.display = "none";
-            if (loginModal) loginModal.style.display = "flex";
-        })
-    }
-
     if (closeRegister) {
         closeRegister.addEventListener("click", function () {
             if (registerModal) registerModal.style.display = "none";
@@ -75,14 +65,24 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    if(enlaceLogin) {
-        enlaceLogin.addEventListener("click", function(e){
+    if (enlaceLogin) {
+        enlaceLogin.addEventListener("click", function (e) {
             e.preventDefault();
             if (registerModal) registerModal.style.display = "none";
             if (loginModal) loginModal.style.display = "flex";
-        })
+        });
     }
+
+    //transicion navbar cuando se hace scroll
+    window.addEventListener('scroll', function () {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 10) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
 
     // Configurar Toastr
     toastr.options = {
@@ -172,61 +172,3 @@ var swiper = new Swiper(".mySwiper", {
         }
     }
 });
-
-
-
-//Seccion de reseñas
-document.getElementById("formReseña").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita el refresco de la página
-
-    // Obtener valores del formulario
-    let nombre = document.getElementById("nombre").value;
-    let calificacion = document.getElementById("calificacion").value;
-    let comentario = document.getElementById("comentario").value;
-
-    // Convertir calificación en estrellas
-    let estrellas = "★".repeat(calificacion) + "☆".repeat(5 - calificacion);
-
-    // Crear un nuevo div para la reseña
-    let nuevaReseña = document.createElement("div");
-    nuevaReseña.classList.add("col-md-4");
-    nuevaReseña.innerHTML = `
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">${nombre}</h5>
-                <p class="text-warning mb-1">${estrellas}</p>
-                <p class="card-text">${comentario}</p>
-            </div>
-        </div>
-    `;
-
-    // Agregar la reseña al contenedor de reseñas
-    document.getElementById("listaReseñas").appendChild(nuevaReseña);
-
-    // Limpiar el formulario
-    document.getElementById("formReseña").reset();
-});
-
-//filtro por precio
-function updatePrice() {
-    let priceRange = document.getElementById("priceRange");
-    let priceValue = document.getElementById("priceValue");
-    priceValue.textContent = priceRange.value + " COP";
-}
-
-document.getElementById("priceRange").addEventListener("input", function() {
-    let maxPrice = this.value;
-    document.getElementById("priceValue").textContent = maxPrice + " COP";
-
-    document.querySelectorAll(".product").forEach(function(product) {
-        let productPrice = parseInt(product.getAttribute("data-price"));
-        if (productPrice > maxPrice) {
-            product.style.display = "none";
-        } else {
-            product.style.display = "block";
-        }
-    });
-});
-
-
-

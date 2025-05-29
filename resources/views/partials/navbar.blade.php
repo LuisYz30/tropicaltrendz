@@ -37,29 +37,34 @@
                     <span>{{ Auth::user()->name }}</span>
                 </button>
                 
-                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
-                            @if(Auth::user()->rol === 'admin')
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('productos.create') }}">
-                                        <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.informes') }}">
-                                        <i class="fas fa-chart-line me-2"></i> Informes
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                            @endif
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">
-                                        <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
+                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
+                    @if(Auth::user()->rol === 'admin')
+                        <li>
+                            <a class="dropdown-item" href="{{ route('productos.index') }}">
+                                <i class="fas fa-list me-2"></i> Ver Productos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('productos.create') }}">
+                                <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
+                            </a>
+                        </li>
+                        {{-- <li>
+                            <a class="dropdown-item" href="{{ route('admin.informes') }}">
+                                <i class="fas fa-chart-line me-2"></i> Informes
+                            </a>
+                        </li> --}}
+                        <li><hr class="dropdown-divider"></li>
+                    @endif
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+                </ul>
                     </div>
                 @else
                     <a href='#' id="btn-iniciar" class="btn-azul-oscuro text-decoration-none me-2">Iniciar Sesión</a>
@@ -70,11 +75,7 @@
 
         <!-- Carrito -->
         <div class="d-flex align-items-center">
-            @if (Auth::check())
                 <a href="{{ route('carrito.ver') }}" class="carro position-relative">
-            @else
-                <a href="#" class="carro position-relative abrir-login-modal">
-            @endif
                 <img src="{{ asset('images/car1.svg') }}" alt="Carrito">
 
                 @php
@@ -107,8 +108,9 @@
                 <h1>Iniciar Sesión</h1>
                 <p class="form-subtitle">Accede a tu cuenta y vive el verano todo el año🩱</p>
                 <form method="POST" action="{{ route('login') }}">
-
                     @csrf
+                    <input type="hidden" name="redirectAfterLogin" id="redirectAfterLogin">
+                
                     <div class="username">
                         <input type="email" name="email" required>
                         <label>Correo electrónico</label>

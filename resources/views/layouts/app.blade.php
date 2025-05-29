@@ -22,19 +22,19 @@
     <link rel="stylesheet" href="{{ asset('css/filtro.css')}}">
     <link rel="stylesheet" href="{{ asset('css/avatar-usuario.css')}}">
     <link rel="stylesheet" href="{{ asset('css/reseñas.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/formulario-productos.css')}}">
 
     {{-- Favicon opcional --}}
     <link rel="icon" href="{{ asset('Imagenes/logo.ico') }}" type="image/x-icon">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     {{-- Navbar --}}
     <nav class="">
     @include('partials.navbar')
     </nav>
     {{-- Contenido principal --}}
-    <main class="pt-5 mt-4">
-        @include('partials.alert')
+    <main class="@yield('main-class', 'pt-5 mt-4') flex-grow-1">
         @yield('content')
     </main>
 
@@ -50,5 +50,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
+    <script src="{{ asset('js/detalle.js')}}"></script>
+    <script src="{{ asset('js/login-redirect.js') }}"></script>
 </body>
 </html>
