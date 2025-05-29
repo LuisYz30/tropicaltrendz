@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@section('main-class', '')
 <div class="container-fluid p-0 main-container">
     <!-- Sección Acerca de -->
     <section class="row g-0 min-vh-100 align-items-stretch section-container">

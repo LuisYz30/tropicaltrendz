@@ -53,8 +53,8 @@
             @if($producto->imagen)
                 <img src="{{ asset('storage/' . $producto->imagen) }}" width="100" alt="Imagen actual"><br><br>
             @endif
-            <label>Nueva Imagen (opcional)</label>
-            <input type="file" name="imagen" class="form-control" accept="image/*">
+            <label>Actualizar Imagen (opcional)</label>
+            <input type="file" name="imagen" class="form-control" accept="storage/*">
         </div>
 
         <div class="form-group">

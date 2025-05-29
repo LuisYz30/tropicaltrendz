@@ -65,8 +65,8 @@
             </div>
         </div>
         
-        <button type="submit" class="btn btn-primary boton-guardar">Guardar producto</button>
-        <a href="{{ url()->previous() }}" class="btn btn-primary boton-cancelar">Cancelar</a>
+        <button type="submit" class="boton-guardar">Guardar producto</button>
+        <a href="{{ url()->previous() }}" class="boton-cancelar">Cancelar</a>
     </form>
 </div>
 @endsection

@@ -73,6 +73,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    //transicion navbar cuando se hace scroll
+    window.addEventListener('scroll', function () {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 10) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
 
     // Configurar Toastr
     toastr.options = {
@@ -162,61 +172,3 @@ var swiper = new Swiper(".mySwiper", {
         }
     }
 });
-
-
-
-//Seccion de reseñas
-document.getElementById("formReseña").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita el refresco de la página
-
-    // Obtener valores del formulario
-    let nombre = document.getElementById("nombre").value;
-    let calificacion = document.getElementById("calificacion").value;
-    let comentario = document.getElementById("comentario").value;
-
-    // Convertir calificación en estrellas
-    let estrellas = "★".repeat(calificacion) + "☆".repeat(5 - calificacion);
-
-    // Crear un nuevo div para la reseña
-    let nuevaReseña = document.createElement("div");
-    nuevaReseña.classList.add("col-md-4");
-    nuevaReseña.innerHTML = `
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">${nombre}</h5>
-                <p class="text-warning mb-1">${estrellas}</p>
-                <p class="card-text">${comentario}</p>
-            </div>
-        </div>
-    `;
-
-    // Agregar la reseña al contenedor de reseñas
-    document.getElementById("listaReseñas").appendChild(nuevaReseña);
-
-    // Limpiar el formulario
-    document.getElementById("formReseña").reset();
-});
-
-//filtro por precio
-function updatePrice() {
-    let priceRange = document.getElementById("priceRange");
-    let priceValue = document.getElementById("priceValue");
-    priceValue.textContent = priceRange.value + " COP";
-}
-
-document.getElementById("priceRange").addEventListener("input", function() {
-    let maxPrice = this.value;
-    document.getElementById("priceValue").textContent = maxPrice + " COP";
-
-    document.querySelectorAll(".product").forEach(function(product) {
-        let productPrice = parseInt(product.getAttribute("data-price"));
-        if (productPrice > maxPrice) {
-            product.style.display = "none";
-        } else {
-            product.style.display = "block";
-        }
-    });
-});
-
-
-

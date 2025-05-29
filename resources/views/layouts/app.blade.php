@@ -24,14 +24,14 @@
     {{-- Favicon opcional --}}
     <link rel="icon" href="{{ asset('Imagenes/logo.ico') }}" type="image/x-icon">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     {{-- Navbar --}}
     <nav class="">
     @include('partials.navbar')
     </nav>
     {{-- Contenido principal --}}
-    <main class="pt-5 mt-4">
+    <main class="@yield('main-class', 'pt-5 mt-4') flex-grow-1">
         @yield('content')
     </main>
 

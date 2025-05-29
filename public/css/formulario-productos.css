@@ -130,19 +130,20 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .boton-guardar {
-    background-color: var(--azulmedio);
-    color: var(--azuloscuro);
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.boton-guardar:hover {
     background-color: var(--azuloscuro);
     color: var(--celeste);
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.boton-guardar:hover {
+    background-color: var(--azulmedio);
+    color: var(--azuloscuro);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -175,6 +176,7 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    text-decoration: none;
 }
 .boton-cancelar:hover {
     background-color: var(--azuloscuro);

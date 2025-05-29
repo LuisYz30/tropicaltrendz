@@ -5,7 +5,7 @@
     <div class="text-center mt-9 mb-5">
         <h1 class="fw-bold text-uppercase display-3">TRAJES DE BAÑO PARA NIÑOS</h1>
     </div>
-
+    <div class="row-wrapper">
     <div class="row gx-5">
         <!-- Filtro -->
         <div class="col-md-3 mb-4">
@@ -40,7 +40,7 @@
                 @forelse($productos as $producto)
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 product-card">
-                            <img src="{{ asset('images/niños/' . $producto->imagen) }}">
+                            <img src="{{ asset('storage/' . $producto->imagen) }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $producto->nombre }}</h5>
                                 <p class="card-text">{{ $producto->descripcion }}</p>
