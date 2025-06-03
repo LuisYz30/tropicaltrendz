@@ -50,7 +50,7 @@
                                 @if(auth()->user()->rol == 'admin')
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary boton-editar">Editar</a>
-                                        <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST" onsubmit="return confirm('¿Seguro de eliminar este producto?')">
+                                        <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST" class="form-eliminar d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-primary boton-eliminar">Eliminar</button>
