@@ -11,19 +11,17 @@
     margin-right: 10px;
     text-transform: uppercase;
 }
-
+.user-section span{
+    font-size: 18px;
+    color: var(--azuloscuro);
+    font-weight: bold;
+}
 .user-section .btn-outline-danger {
     padding: -20px;
-    font-size: 15px;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
+    font-size: 20px;
 }
 
 .posicion-usuario {
-    margin-left: 20px;
+    margin-left: 80px;
     margin-top: -4px;  
 }

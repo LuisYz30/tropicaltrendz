@@ -94,6 +94,111 @@
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+:root {
+    --celeste: #cadcfc;
+    --azulmedio: #8ab6f9;
+    --azuloscuro: #00126b;
+    --blanco: #ffffff;
+}
+
+.producto-form {
+    background: linear-gradient(to bottom right, var(--celeste), var(--azulmedio));
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    margin: auto;
+    color: var(--azuloscuro);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.producto-form h1 {
+    font-weight: bold;
+    color: var(--azuloscuro);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.alert-danger {
+    background-color: #ffe0e0;
+    border-left: 6px solid crimson;
+    border-radius: 10px;
+    padding: 15px;
+    color: #5a0000;
+}
+
+.formulario-producto label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: var(--azuloscuro);
+}
+
+.formulario-producto input[type="text"],
+.formulario-producto input[type="number"],
+.formulario-producto textarea,
+.formulario-producto select,
+.formulario-producto input[type="file"] {
+    border: 2px solid var(--azuloscuro);
+    border-radius: 12px;
+    padding: 12px;
+    width: 100%;
+    background-color: var(--blanco);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.formulario-producto input:focus,
+.formulario-producto textarea:focus,
+.formulario-producto select:focus {
+    border-color: var(--azulmedio);
+    outline: none;
+}
+
+.tallas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.talla-item {
+    background-color: var(--blanco);
+    border: 2px dashed var(--azulmedio);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.talla-item:hover {
+    transform: scale(1.05);
+}
+
+.talla-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--azuloscuro);
+}
+
+.talla-label input[type="checkbox"] {
+    accent-color: var(--azuloscuro);
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.stock-input {
+    margin-top: 8px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--azulmedio);
+}
+
 .boton-eliminar {
     background-color: #f9bebe; /* rojo claro pastel */
     color: #5a0000; /* rojo oscuro */
@@ -183,4 +288,3 @@
     color: var(--celeste);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-

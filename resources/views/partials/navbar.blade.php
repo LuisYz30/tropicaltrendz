@@ -54,7 +54,6 @@
                                 <i class="fas fa-chart-line me-2"></i> Informes
                             </a>
                         </li> --}}
-                        <li><hr class="dropdown-divider"></li>
                     @endif
                     <li>
                         <form method="POST" action="{{ route('logout') }}">

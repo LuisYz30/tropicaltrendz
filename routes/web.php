@@ -6,9 +6,10 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ReseñaController;
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+
+
+Route::get('/', [PublicController::class, 'index'])->name('index');
+
 
 //Autenticacion
 

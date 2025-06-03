@@ -20,8 +20,7 @@
 }
 
 body{
-     
-    background-color:var(--celeste);
+    background:var(--celeste);
     font-family: 'Poppins', sans-serif;
     color: var(--texto-oscuro);
 }
@@ -160,7 +159,7 @@ body{
 
 .navbar.scrolled {
     background-color: var(--celeste); /* cambia aquí si prefieres otro */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 .navbar:hover{
     background-color: var(--celeste) ;
@@ -186,6 +185,47 @@ body{
     padding: 4px;              
   }
 
+/* Estilo general del MENU dropdown */
+.dropdown-menu {
+  background-color: var(--azuloscuro);
+  border: none;
+  border-radius: 12px;
+  padding:2px 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Ítems del menú */
+.dropdown-menu .dropdown-item {
+  color: var(--celeste);
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover en ítems */
+.dropdown-menu .dropdown-item:hover {
+  background-color: var(--azulmedio);
+  color: var(--azuloscuro);
+  border-radius: 8px;
+}
+
+/* Íconos */
+.dropdown-menu i {
+  color: var(--celeste);
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+/* Hover en íconos */
+.dropdown-menu .dropdown-item:hover i {
+  color: var(--azuloscuro);
+}
+
+/* Separador */
+.dropdown-menu .dropdown-divider {
+  border-color: var(--azulmedio);
+  margin: 8px 0;
+}
 
 /*|||||| Personalización del carrito de compras ||||||*/
 
@@ -245,6 +285,7 @@ body{
     z-index: 1;
     transition: opacity 1s linear;
     opacity: 1; 
+    margin-bottom: 70px;
 }
 
 /* Contenido superpuesto al video */
@@ -258,41 +299,118 @@ body{
 
 /*|||||| Diseño del carrusel ||||||*/
 
-.carrusel h1{
+.carrusel-fondo {
+    background-color: var(--azulmedio);
+    padding: 35px 30px 0px 30px;
+    border-radius: 25px;
+    position: relative;
+    overflow: visible;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bloque-carrusel{
+    margin-top: 70px;
+}
+.carrusel-temporada h1{
     font-family: 'oswald', sans-serif;
     font-weight: 700;
-    font-size: 70px;
+    font-size: 60px;
     color: var(--azuloscuro);
 }
-.img-acuarela{
-    position: absolute;
-    width: 100%;
-    height: 600px;
-    opacity: 0.8; /* Ajusta la opacidad según sea necesario */
-    z-index: -1;
-}
+
 .swiper {
-    width: 80%;
-    padding-top: 80px;
-    padding-bottom: 40px;
- }
-.swiper-slide {
+    height: 620px;
+    width: 85%;
+    padding: 50px 9px;
+}
+
+.swiper-slide { 
+    height: 480px;
+    border-radius: 15px;
+    background-color: #00126b;
+    transition: transform 0.3s;
+}
+
+.swiper-slide.swiper-slide-active {
+    transform: scale(1.2);
+    box-shadow: 0 7px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: var(--azuloscuro);
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-    width: 200px;
-    margin: 0;
-}
-.swiper-slide.swiper-slide-active {
-    transform: scale(1.2);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    top: 52%;
+    transform: translateY(-10%);
     z-index: 10;
-    margin: 0;
 }
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Posicionarlas al borde de los slides laterales */
+.swiper-button-prev {
+    left: 0;
+    margin-left: 0px; /* ajusta según necesidad */
+}
+
+.swiper-button-next {
+    right: 0;
+    margin-right: 0px;
+}
+
+
+/*Cards del carrusel*/
+.carrusel-card {
+    border: 2px solid var(--azuloscuro);
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #F2F0EB;
+    padding: 5px 35px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.carrusel-card img {
+    height: 250px;
+    width: auto;
+    object-fit: contain;
+    border-color: 1px solid var(--azuloscuro);
+}
+
+.carrusel-card h5 {
+    font-size: 18px;
+    color:var(--azuloscuro);
+    font-family: 'oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.carrusel-card p {
+  font-size: 13px;
+  margin-bottom: 15px;
+  color: #111111;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+
 /* Cards de productos */    
 .product-card {
     border: 3px solid var(--azulmedio);
@@ -304,11 +422,12 @@ body{
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 
 .product-card:hover {
-    transform: translateY(-5px);
+    transform:scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
 }
 
@@ -340,44 +459,6 @@ body{
   margin-bottom: 15px;
   color: #111111;
 }
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: var(--azuloscuro);
-  top: 55%;
-  transform: translateX(-5%);
-  z-index: 10;
-}
-
-
-/*|||||| Seccion ofertas ||||||*/
-
-.ofertas{
-    padding: 40px;
-    color: var(--azuloscuro);
-    text-align: center;
-    font-size: 70px;
-    font-weight: 600;
-}
-.ofert-card {
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    background: #fff;
-    transition: all 0.3s;
-    padding: 4% 0;
-    border: 2px solid var(--azulmedio);
-  }
-.ofert-card:hover {
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
-    transform:scale(1.05)
-  }
-.ofert-img {
-    padding: 5px;
-    height: 250px;
-    object-fit: contain;
-    padding: 0;
-  }
 .card-body{
     display: flex;
     flex-direction: column;
@@ -391,11 +472,6 @@ body{
 .card-body p{
     color:#111111;
   }
-.precio{
-    color: var(--azuloscuro);
-}
-
-
 /*|||||| Seccion de iconos ||||||*/
 
 .icon-card {
@@ -436,14 +512,6 @@ body{
     font-size: 30px;
     color: var(--azuloscuro);
 }
-
-.card{
-    background-color: white;
-}
-.card-title{
-    color: var(--azuloscuro);
-}
-
 
 .stars{
     color:#c2c214;
@@ -739,6 +807,14 @@ font-size: 14px;
 /* Parte responsiva*/
 @media (max-width:991px) {
 
+    .swiper{
+        width: 87%;
+    }
+    .swiper-slide.swiper-slide-active {
+        transform: scale(1.2); /* No hacer zoom en pantallas pequeñas */
+    }
+
+
   .formulario {
     flex-direction: column;
     max-width: 480px;
@@ -773,7 +849,7 @@ font-size: 14px;
         width: 85%;
     }
     .swiper-slide.swiper-slide-active {
-        transform: scale(1); /* No hacer zoom en pantallas pequeñas */
+        transform:none; /* No hacer zoom en pantallas pequeñas */
     }
     .product-card img {
         width: 80%; /* Imagen que nunca se pase del card */

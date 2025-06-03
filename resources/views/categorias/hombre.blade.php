@@ -38,35 +38,12 @@
         <div class="col-md-9">
             <div class="row g-4">
                 @forelse($productos as $producto)
-                    <div class="col-md-3 mb-4">
-                        <div class="card h-100 product-card">
-                            <img src="{{ asset('storage/' . $producto->imagen) }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $producto->nombre }}</h5>
-                                <p class="card-text">{{ $producto->descripcion }}</p>
-                                <p class="card-text text-primary fw-bold">{{ $producto->precio_formateado }}</p>
-                                <a href="{{ route('producto.detalle', $producto->idproducto) }}" class="ver-producto">Ver producto</a>
-                                <a href="{{ route('producto.detalle', $producto->idproducto) }}" class="btn btn-outline-primary ver-producto">Ver producto</a>
-                                @auth
-                                @if(auth()->user()->rol == 'admin')
-                                    <div class="d-flex gap-2">
-                                        <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary boton-editar">Editar</a>
-                                        <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST" onsubmit="return confirm('¿Seguro de eliminar este producto?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-primary boton-eliminar">Eliminar</button>
-                                        </form>
-                                    </div>
-                                @endif
-                            @endauth
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
-                        <p class="fs-4 fw-semibold text-center text-muted">No hay productos disponibles.</p>
-                    </div>
-                @endforelse
+            @include('components.cards', ['producto' => $producto])
+        @empty
+            <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+                <p class="fs-4 fw-semibold text-center text-muted">No hay productos disponibles.</p>
+            </div>
+        @endforelse
             </div>
         </div>
     </div>

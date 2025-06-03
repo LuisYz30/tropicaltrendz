@@ -52,5 +52,6 @@
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
+    <script src="{{ asset('js/swiper.js') }}"></script>
 </body>
 </html>
