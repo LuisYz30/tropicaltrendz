@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ReseñaController;
+use App\Http\Controllers\PagoController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -71,3 +72,8 @@ Route::get('/reseñas/{seccion}', [ReseñaController::class, 'index'])->name('re
 
 Route::delete('/admin/reseñas/{id}', [ReseñaController::class, 'destroy'])->name('reseñas.destroy')->middleware('auth');
 
+//Pasarela de pago
+Route::get('/pago', [PagoController::class, 'pagar'])->name('pago.iniciar');
+Route::get('/pago/exito', [PagoController::class, 'exito'])->name('pago.exito');
+Route::get('/pago/fallo', [PagoController::class, 'fallo'])->name('pago.fallo');
+Route::get('/pago/pendiente', [PagoController::class, 'pendiente'])->name('pago.pendiente');
