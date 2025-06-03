@@ -11,9 +11,15 @@
     {{-- Font Awesome para iconos --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
+<<<<<<< HEAD
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
    
+=======
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+>>>>>>> 5f2a665a8f28e07812297250927c34a9b9408c89
     {{-- Estilos personalizados --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nosotros.css') }}">
@@ -44,14 +50,43 @@
     </footer>
 
     
-    {{-- Bootstrap JS --}}
+    {{-- Bootstrap JS y scripts --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+=======
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+>>>>>>> 5f2a665a8f28e07812297250927c34a9b9408c89
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
+<<<<<<< HEAD
     <script src="{{ asset('js/swiper.js') }}"></script>
+=======
+    <script src="{{ asset('js/alertas.js')}}"></script>
+    
+    <!-- Mostrar notificaciones desde sesión -->
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
+>>>>>>> 5f2a665a8f28e07812297250927c34a9b9408c89
 </body>
 </html>

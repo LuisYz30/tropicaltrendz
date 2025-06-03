@@ -51,6 +51,14 @@ Route::get('/nosotros', function () {
     return view('categorias.nosotros');
 })->name('nosotros');
 
+// FAQ y metodos de pago 
+Route::get('/FAQ', function () {
+    return view('footer.FAQ');
+})->name('FAQ');
+Route::get('/Metodos de pago', function () {
+    return view('footer.metodospago');
+})->name('metodospago');
+
 Route::middleware(['auth'])->group(function () {
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
