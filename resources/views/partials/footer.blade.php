@@ -12,8 +12,8 @@
             <div class="col-md-3">
                 <h5 class="text-foot">Informacion</h5>
                 <ul class="list-unstyled">
-                    <link rel="stylesheet" href="{{ asset('css/FAQ.css')}}" class="text-light text-decoration-none">FAQ</a></li>
-                    <link rel="stylesheet" href="{{ asset('css/metodos_de_pago.css')}}" class="text-light text-decoration-none">Metodos de pago</a></li>
+                    <li><a href="{{ route('FAQ')}}" class="text-light text-decoration-none">FAQ</a></li>
+                    <li><a href="{{ route('metodospago')}}" class="text-light text-decoration-none">Metodos de pago</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
