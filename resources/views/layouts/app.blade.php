@@ -11,6 +11,9 @@
     {{-- Font Awesome para iconos --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+   
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
@@ -39,18 +42,26 @@
     </main>
 
     {{-- Footer --}}
+    <footer>
     @include('partials.footer')
+    </footer>
 
     
     {{-- Bootstrap JS y scripts --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ asset('js/swiper.js') }}"></script>
     <script src="{{ asset('js/alertas.js')}}"></script>
     
     <!-- Mostrar notificaciones desde sesión -->
@@ -71,5 +82,20 @@
             toastr.warning("{{ session('warning') }}");
         @endif
     </script>
+    @if ($errors->any())
+    <script>
+        $(document).ready(function() {
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+
+            // Abrir automáticamente el modal de registro si hubo errores ahí
+            $('#registroModal').modal('show');
+
+            // O si el error fue al iniciar sesión, abre ese modal
+            $('#loginModal').modal('show');
+        });
+    </script>
+@endif
 </body>
 </html>

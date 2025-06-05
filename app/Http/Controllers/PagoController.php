@@ -2,72 +2,82 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use MercadoPago\MercadoPagoConfig;
-use MercadoPago\Client\Preference\PreferenceClient;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use MercadoPago\Resources\Payment;
+use MercadoPago\MercadoPagoConfig;
 
 class PagoController extends Controller
 {
     public function pagar()
-{
-    try {
-        // Configurar el token de acceso
-        MercadoPagoConfig::setAccessToken('APP_USR-8709899275358984-042910-09d66948345146a7d26d0b78795db0be-513783823');
+    {
+        MercadoPagoConfig::setAccessToken(env('APP_USR-8709899275358984-042910-09d66948345146a7d26d0b78795db0be-513783823'));
 
         $carrito = session('carrito', []);
         if (empty($carrito)) {
             return redirect()->route('carrito.ver')->with('error', 'El carrito está vacío.');
         }
 
-        // Construir el array de items para la preferencia
         $items = [];
         foreach ($carrito as $producto) {
             $items[] = [
-                "title" => $producto['producto'] . ' (Talla: ' . $producto['talla'] . ')',
+                "title" => $producto['producto'] . ' (Talla: ' . $producto['talla_nombre'] . ')',
                 "quantity" => intval($producto['cantidad']),
                 "unit_price" => floatval($producto['precio']),
                 "currency_id" => "COP"
             ];
         }
 
-        // Datos para la preferencia
         $preferenceData = [
             "items" => $items,
             "back_urls" => [
-                "success" => route('pago.exito'),   // **Muy importante que esta ruta exista y esté bien definida**
+                "success" => route('pago.exito'),
                 "failure" => route('pago.fallo'),
                 "pending" => route('pago.pendiente'),
             ],
-            
         ];
 
-        // Log para verificar URLs
-        Log::info('URL pago.exito generada: ' . route('pago.exito'));
-
-        // Crear preferencia usando PreferenceClient
-        $client = new PreferenceClient();
+        $client = new \MercadoPago\Client\Preference\PreferenceClient();
         $preference = $client->create($preferenceData);
 
-        // Redirigir al init_point
         return redirect($preference->init_point);
+    }
 
-    } catch (\MercadoPago\Exceptions\MPApiException $e) {
-        $response = $e->getApiResponse();
-        $errorMessage = $response ? json_encode($response->getContent(), JSON_PRETTY_PRINT) : $e->getMessage();
-        Log::error('Error al crear preferencia de MercadoPago (MPApiException): ' . $errorMessage);
-        return redirect()->route('carrito.ver')->with('error', 'Ocurrió un error al procesar el pago.');
+    public function exito(Request $request)
+{
+    $paymentId = $request->query('payment_id');
+    if (!$paymentId) {
+        return redirect()->route('carrito.ver')->with('error', 'No se recibió el ID del pago.');
+    }
+
+    MercadoPagoConfig::setAccessToken(env('APP_USR-8709899275358984-042910-09d66948345146a7d26d0b78795db0be-513783823'));
+
+    try {
+        $paymentClient = new \MercadoPago\Client\payment\PaymentClient();
+        $payment = $paymentClient->get($paymentId);
+
+        if ($payment && $payment->status === 'approved') {
+            $carrito = session('carrito', []);
+
+            foreach ($carrito as $item) {
+                DB::table('producto_tallas')
+                    ->where('idproducto', $item['idproducto'])
+                    ->where('idtalla', $item['idtalla'])
+                    ->decrement('stock', $item['cantidad']);
+            }
+
+            session()->forget('carrito');
+
+            return view('pagos.exito')->with('message', 'Pago aprobado y stock actualizado.');
+        } else {
+            return redirect()->route('carrito.ver')->with('error', 'El pago no fue aprobado.');
+        }
     } catch (\Exception $e) {
-        Log::error('Error general al crear preferencia de MercadoPago: ' . $e->getMessage());
-        return redirect()->route('carrito.ver')->with('error', 'Ocurrió un error inesperado al procesar el pago.');
+        Log::error('Error verificando pago o actualizando stock: ' . $e->getMessage());
+        return redirect()->route('carrito.ver')->with('error', 'Error procesando el pago.');
     }
 }
-
-    public function exito()
-    {
-        return view('pagos.exito');
-    }
-
     public function fallo()
     {
         return view('pagos.fallo');
