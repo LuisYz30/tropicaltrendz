@@ -13,12 +13,14 @@
     </div>
 </div>
 
-<div class="container py-5 bloque-carrusel" id="seccion-carrusel">
-    <div class="carrusel-temporada text-center mb-2">
+
+<div id="seccion-carrusel">
+<div class="container py-5 bloque-carrusel" >
+    <div class="carrusel-temporada text-center" data-aos="fade-up">
     <h1>COLECCIÓN DE VERANO</h1>
     </div>
-<div class="carrusel-fondo">
-<div class="swiper mySwiper">
+<div class="carrusel-fondo"  data-aos="fade-up">
+<div class="swiper mySwiper"  data-aos="fade-up">
     <div class="swiper-wrapper">
          @forelse($productos as $producto)
         <div class="swiper-slide">
@@ -36,4 +38,4 @@
 </div>
 </div>
 </div>
-
+</div>

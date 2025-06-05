@@ -1,9 +1,9 @@
 
     <div class="carrusel-card">
-        <img src="{{ asset('storage/' . $producto->imagen) }}" class="mt-2">
+        <img src="{{ asset('storage/' . $producto->imagen) }}" class="mt-2 mb-2">
             <h5>{{ $producto->nombre }}</h5>
             <p>{{ $producto->descripcion }}</p>
-            <p class="card-text text-primary fw-bold">{{ $producto->precio_formateado }}</p>
+            <p class="text-primary fw-bold fs-6">{{ $producto->precio_formateado }}</p>
             <a href="{{ route('producto.detalle', $producto->idproducto) }}" class="ver-producto">Ver producto</a>
 
             @auth

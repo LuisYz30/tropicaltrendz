@@ -11,15 +11,18 @@
     {{-- Font Awesome para iconos --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-<<<<<<< HEAD
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-   
-=======
+
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
->>>>>>> 5f2a665a8f28e07812297250927c34a9b9408c89
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
     {{-- Estilos personalizados --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nosotros.css') }}">
@@ -49,26 +52,28 @@
     @include('partials.footer')
     </footer>
 
-    
-    {{-- Bootstrap JS y scripts --}}
+    {{-- jQuery --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
+    
+    {{-- Toastr JS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    {{--Sweet Alert--}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-=======
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
->>>>>>> 5f2a665a8f28e07812297250927c34a9b9408c89
+    
+    {{-- Scripts personalizados --}}
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
-<<<<<<< HEAD
     <script src="{{ asset('js/swiper.js') }}"></script>
-=======
-    <script src="{{ asset('js/alertas.js')}}"></script>
-    
+
     <!-- Mostrar notificaciones desde sesión -->
     <script>
         @if (session('success'))
@@ -87,6 +92,13 @@
             toastr.warning("{{ session('warning') }}");
         @endif
     </script>
->>>>>>> 5f2a665a8f28e07812297250927c34a9b9408c89
+
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    </body>
+
 </body>
 </html>
