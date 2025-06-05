@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ReseñaController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -18,6 +21,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 // Cerrar sesión
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 
 //Rutas de admin para CRUD
@@ -62,4 +66,26 @@ Route::post('/reseñas', [ReseñaController::class, 'store'])->name('reseñas.st
 Route::get('/reseñas/{seccion}', [ReseñaController::class, 'index'])->name('reseñas.index');
 
 Route::delete('/admin/reseñas/{id}', [ReseñaController::class, 'destroy'])->name('reseñas.destroy')->middleware('auth');
+// FAQ y metodos de pago 
+Route::get('/FAQ', function () {
+    return view('footer.FAQ');
+})->name('FAQ');
+Route::get('/Metodos de pago', function () {
+    return view('footer.metodospago');
+})->name('metodospago');
+// Recuperar contraseña
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Mostrar formulario para enviar enlace de recuperación
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+// Enviar el correo con el link
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Mostrar formulario para establecer nueva contraseña
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// Actualizar contraseña
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
