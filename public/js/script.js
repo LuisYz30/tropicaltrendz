@@ -114,11 +114,11 @@ window.addEventListener('scroll', function() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     // Definimos a partir de qué punto empieza el desvanecimiento
-    var fadeStart = 0;
+    var fadeStart = 100;
     
     // Definimos hasta qué punto el video se desvanece completamente
     // Aquí usamos el 50% de la altura visible de la pantalla
-    var fadeUntil = window.innerHeight * 0.5;
+    var fadeUntil = window.innerHeight * 0.8;
 
     // Inicializamos la opacidad en 1 (totalmente visible)
     var opacity = 1;

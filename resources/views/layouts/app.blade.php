@@ -13,10 +13,23 @@
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<<<<<<< HEAD
    
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
+=======
+
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+>>>>>>> fc2516d7994bee699e95b8da82194ec360a46f93
     {{-- Estilos personalizados --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nosotros.css') }}">
@@ -46,24 +59,43 @@
     @include('partials.footer')
     </footer>
 
-    
-    {{-- Bootstrap JS y scripts --}}
+    {{-- jQuery --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+=======
+    
+    {{-- Toastr JS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    {{--Sweet Alert--}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    {{-- Scripts personalizados --}}
+>>>>>>> fc2516d7994bee699e95b8da82194ec360a46f93
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
+<<<<<<< HEAD
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/swiper.js') }}"></script>
     <script src="{{ asset('js/alertas.js')}}"></script>
     
+=======
+    <script src="{{ asset('js/swiper.js') }}"></script>
+
+>>>>>>> fc2516d7994bee699e95b8da82194ec360a46f93
     <!-- Mostrar notificaciones desde sesión -->
     <script>
         @if (session('success'))
@@ -82,6 +114,7 @@
             toastr.warning("{{ session('warning') }}");
         @endif
     </script>
+<<<<<<< HEAD
     @if ($errors->any())
     <script>
         $(document).ready(function() {
@@ -97,5 +130,15 @@
         });
     </script>
 @endif
+=======
+
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    </body>
+
+>>>>>>> fc2516d7994bee699e95b8da82194ec360a46f93
 </body>
 </html>

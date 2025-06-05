@@ -12,7 +12,7 @@
             <p>Ya sea que estés planeando tus vacaciones soñadas o simplemente buscando ese bikini o enterizo perfecto para desconectarte del mundo, en Tropical Trendz encontrarás ese look que habla por ti.</p>
         </div>
         <div class="col-lg-7 col-md-12 image-column overflow-hidden position-relative">
-            <img src="images/Nosotros/surfer.jpg" alt="Modelo con tabla de surf" class="w-100 h-100 object-fit-cover">
+            <img src="images/LogoEmpresa/LogoTT.jpeg" alt="Modelo con tabla de surf" class="w-60 h-60 object-fit-cover">
         </div>
     </section>
     
@@ -48,11 +48,9 @@
             <p>Queremos inspirar una comunidad que se ame, se exprese y se sienta orgullosa de quién es, luciendo trajes de baño que hablan su mismo idioma: el del color, la vibra y la autenticidad.</p>
         </div>
         <div class="col-lg-7 col-md-12 image-column overflow-hidden position-relative">
-            <img src="images/Nosotros/beach-yoga.jpg" alt="Modelo en bikini azul" class="w-100 h-100 object-fit-cover">
+            <img src="images/Nosotros/surfer.jpg" alt="Modelo con tabla de surf" class="w-100 h-100 object-fit-cover">
         </div>
     </section>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
