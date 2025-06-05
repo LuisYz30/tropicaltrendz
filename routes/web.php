@@ -6,12 +6,18 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ReseñaController;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
+=======
+use App\Http\Controllers\PagoController;
+
+Route::get('/', [PublicController::class, 'index'])->name('index');;
+>>>>>>> c09f8ebaaa61b9b6cafb7406ec5baea7b2ca9fdd
 
 //Autenticacion
 
@@ -54,6 +60,14 @@ Route::get('/nosotros', function () {
     return view('categorias.nosotros');
 })->name('nosotros');
 
+// FAQ y metodos de pago 
+Route::get('/FAQ', function () {
+    return view('footer.FAQ');
+})->name('FAQ');
+Route::get('/Metodos de pago', function () {
+    return view('footer.metodospago');
+})->name('metodospago');
+
 Route::middleware(['auth'])->group(function () {
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::delete('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
@@ -75,6 +89,7 @@ Route::get('/Metodos de pago', function () {
 })->name('metodospago');
 // Recuperar contraseña
 
+<<<<<<< HEAD
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Mostrar formulario para enviar enlace de recuperación
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -89,3 +104,10 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+=======
+//Pasarela de pago
+Route::get('/pago', [PagoController::class, 'pagar'])->name('pago.iniciar');
+Route::get('/pago/exito', [PagoController::class, 'exito'])->name('pago.exito');
+Route::get('/pago/fallo', [PagoController::class, 'fallo'])->name('pago.fallo');
+Route::get('/pago/pendiente', [PagoController::class, 'pendiente'])->name('pago.pendiente');
+>>>>>>> c09f8ebaaa61b9b6cafb7406ec5baea7b2ca9fdd

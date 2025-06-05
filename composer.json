@@ -9,7 +9,11 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+<<<<<<< HEAD
         "laravel/ui": "^4.6",
+=======
+        "mercadopago/dx-php": "3.5",
+>>>>>>> c09f8ebaaa61b9b6cafb7406ec5baea7b2ca9fdd
         "spatie/laravel-permission": "^6.17"
     },
     "require-dev": {

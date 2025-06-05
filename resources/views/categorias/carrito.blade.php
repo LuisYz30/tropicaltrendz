@@ -58,12 +58,14 @@
         </div>
 
         <div class="d-flex justify-content-between mt-4">
-            <form action="{{ route('carrito.vaciar') }}" method="POST">
+            <form action="{{ route('carrito.vaciar') }}" method="POST" class="form-vaciar-carrito">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-primary boton-vaciar" type="submit">Vaciar carrito</button>
             </form>
-            <a href="{{ route('index') }}" class="btn btn-primary boton-seguir">Seguir comprando</a>
+            <form action="{{ route('pago.iniciar') }}" method="GET">
+            <button class="btn btn-primary boton-compra">Realizar compra</button>
+            </form>
         </div>
     @else
         <p>Tu carrito está vacío.</p>

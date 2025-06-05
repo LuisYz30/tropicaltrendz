@@ -18,14 +18,17 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $redirect = $request->input('redirectAfterLogin');
             
+            // Mensaje flash de éxito
+            session()->flash('success', 'Inicio de sesión exitoso.');
+
             if ($redirect && strpos($redirect, '/') === 0) {
                 return redirect($redirect); // Redirige a la URL anterior
             }
 
-            // Si no hay redirección guardada, va al index por defecto
             return redirect()->route('index');
         }
 
+        // Error de autenticación
         return back()->withErrors(['email' => 'Credenciales incorrectas'])->withInput();
     }
 
@@ -45,6 +48,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
+        // Crear usuario
         $user = User::create([
             'name' => $request->name,
             'telefono' => $request->telefono,
@@ -52,15 +56,21 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('index');
+        // Iniciar sesión automáticamente
+        Auth::login($user);
+
+        // Mensaje flash de éxito
+        return redirect()->route('index')->with('success', 'Registro exitoso. ¡Bienvenido a Tropical Trendz!');
     }
 
+    // Cerrar sesión
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('index');
+        // Mensaje flash de cierre de sesión
+        return redirect()->route('index')->with('success', 'Sesión cerrada correctamente.');
     }
 }
