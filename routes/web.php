@@ -6,9 +6,18 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ReseñaController;
+<<<<<<< HEAD
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+=======
 use App\Http\Controllers\PagoController;
 
 Route::get('/', [PublicController::class, 'index'])->name('index');;
+>>>>>>> c09f8ebaaa61b9b6cafb7406ec5baea7b2ca9fdd
 
 //Autenticacion
 
@@ -21,8 +30,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
+<<<<<<< HEAD
 Route::middleware(['auth', 'admin'])->get('/admin/productos/informes/detalles/{factura}', [ProductoController::class, 'detallesFactura']);
 
+=======
+>>>>>>> badc0098707f2602a765801f169459a541850d9a
 //Rutas de admin para CRUD
     Route::get('/admin/productos', [ProductoController::class, 'index'])->name('productos.index');
     Route::get('/admin/productos/create', [ProductoController::class, 'create'])->name('productos.create');
@@ -74,9 +86,34 @@ Route::post('/reseñas', [ReseñaController::class, 'store'])->name('reseñas.st
 Route::get('/reseñas/{seccion}', [ReseñaController::class, 'index'])->name('reseñas.index');
 
 Route::delete('/admin/reseñas/{id}', [ReseñaController::class, 'destroy'])->name('reseñas.destroy')->middleware('auth');
+// FAQ y metodos de pago 
+Route::get('/FAQ', function () {
+    return view('footer.FAQ');
+})->name('FAQ');
+Route::get('/Metodos de pago', function () {
+    return view('footer.metodospago');
+})->name('metodospago');
+// Recuperar contraseña
 
+<<<<<<< HEAD
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Mostrar formulario para enviar enlace de recuperación
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+// Enviar el correo con el link
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Mostrar formulario para establecer nueva contraseña
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// Actualizar contraseña
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+=======
 //Pasarela de pago
 Route::get('/pago', [PagoController::class, 'pagar'])->name('pago.iniciar');
 Route::get('/pago/exito', [PagoController::class, 'exito'])->name('pago.exito');
 Route::get('/pago/fallo', [PagoController::class, 'fallo'])->name('pago.fallo');
 Route::get('/pago/pendiente', [PagoController::class, 'pendiente'])->name('pago.pendiente');
+>>>>>>> c09f8ebaaa61b9b6cafb7406ec5baea7b2ca9fdd

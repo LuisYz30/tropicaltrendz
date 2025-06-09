@@ -119,7 +119,10 @@
                         <input type="password" name="password" required>
                         <label>Contraseña</label>
                     </div>
-                    <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
+                   <div class="recordar">
+                      <a href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
+                      </div>
+
                     <button type="submit" class="btn-ingresar">Ingresar</button>
                 </form>
                 <div class="google-login">
