@@ -49,11 +49,11 @@
                                 <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
                             </a>
                         </li>
-                        {{-- <li>
-                            <a class="dropdown-item" href="{{ route('admin.informes') }}">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('productos.informes') }}">
                                 <i class="fas fa-chart-line me-2"></i> Informes
                             </a>
-                        </li> --}}
+                        </li>
                         <li><hr class="dropdown-divider"></li>
                     @endif
                     <li>

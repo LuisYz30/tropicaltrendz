@@ -20,6 +20,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+
+Route::middleware(['auth', 'admin'])->get('/admin/productos/informes/detalles/{factura}', [ProductoController::class, 'detallesFactura']);
+
 //Rutas de admin para CRUD
     Route::get('/admin/productos', [ProductoController::class, 'index'])->name('productos.index');
     Route::get('/admin/productos/create', [ProductoController::class, 'create'])->name('productos.create');
@@ -27,6 +30,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/admin/productos/{id}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+    Route::get('/admin/informes', [ProductoController::class, 'informes'])->name('productos.informes');
 
 // Rutas Para los modulos
 

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use MercadoPago\Resources\Payment;
 use MercadoPago\MercadoPagoConfig;
+use App\Models\Factura;
+use App\Models\DetalleFactura;
+use Carbon\Carbon;
 
 class PagoController extends Controller
 {
@@ -59,8 +62,31 @@ class PagoController extends Controller
 
         if ($payment && $payment->status === 'approved') {
             $carrito = session('carrito', []);
+            $totalCompra = 0;
 
+            // Calcular total
             foreach ($carrito as $item) {
+                $totalCompra += $item['precio'] * $item['cantidad'];
+            }
+
+            // Guardar factura
+            $factura = Factura::create([
+                'user_id' => auth()->id(),
+                'fecha' => Carbon::now(),
+                'metodo_pago_id' => 1, // Si tienes método MercadoPago en metodo_pagos, asigna su id
+                'total' => $totalCompra,
+            ]);
+
+            // Guardar detalle factura y actualizar stock
+            foreach ($carrito as $item) {
+                DetalleFactura::create([
+                    'factura_id' => $factura->id,
+                    'idproducto' => $item['idproducto'],
+                    'idtalla' => $item['idtalla'],
+                    'cantidad' => $item['cantidad'],
+                    'precio_unitario' => $item['precio'],
+                ]);
+
                 DB::table('producto_tallas')
                     ->where('idproducto', $item['idproducto'])
                     ->where('idtalla', $item['idtalla'])
