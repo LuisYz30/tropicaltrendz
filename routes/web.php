@@ -16,6 +16,13 @@ use App\Http\Controllers\PagoController;
 
 Route::get('/', [PublicController::class, 'index'])->name('index');;
 
+// Redirección si alguien entra a /login o /register con GET
+Route::get('/login', function () {
+    return redirect()->route('index');
+});
+Route::get('/register', function () {
+    return redirect()->route('index');
+});
 //Autenticacion
 
 // Procesar inicio de sesión
@@ -27,7 +34,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
-Route::middleware(['auth', 'admin'])->get('/admin/productos/informes/detalles/{factura}', [ProductoController::class, 'detallesFactura']);
+Route::get('/informes/detalles/{facturaId}', [ProductoController::class, 'detallesFactura']);
+
 
 //Rutas de admin para CRUD
     Route::get('/admin/productos', [ProductoController::class, 'index'])->name('productos.index');

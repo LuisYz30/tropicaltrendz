@@ -66,76 +66,24 @@
         </div>
     </div>
 </div>
-@endsection
 
-@section('scripts')
-<script>
-    // Botones
-    const btnHistorial = document.getElementById('btnHistorial');
-    const btnGrafico = document.getElementById('btnGrafico');
-
-    // Secciones
-    const historialSection = document.getElementById('historialSection');
-    const graficoSection = document.getElementById('graficoSection');
-
-    btnHistorial.addEventListener('click', () => {
-        historialSection.style.display = 'block';
-        graficoSection.style.display = 'none';
-    });
-
-    btnGrafico.addEventListener('click', () => {
-        historialSection.style.display = 'none';
-        graficoSection.style.display = 'block';
-        ventasChart.resize();
-    });
-
-    // Modal detalles
-    var modal = document.getElementById('modalDetalles');
-    modal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var facturaId = button.getAttribute('data-factura-id');
-        var modalBody = modal.querySelector('#detallesCompra');
-
-        fetch('/admin/informes/detalles/' + facturaId)
-            .then(response => response.json())
-            .then(data => {
-                let html = '<table class="table">';
-                html += '<thead><tr><th>Producto</th><th>Talla</th><th>Precio Unitario</th><th>Cantidad</th></tr></thead><tbody>';
-                data.forEach(item => {
-                    html += `<tr>
-                                <td>${item.nombre}</td>
-                                <td>${item.talla}</td>
-                                <td>$${item.precio_unitario.toFixed(0)}</td>
-                                <td>${item.cantidad}</td>
-                            </tr>`;
-                });
-                html += '</tbody></table>';
-                modalBody.innerHTML = html;
-            })
-            .catch(error => {
-                modalBody.innerHTML = '<p>Error cargando detalles.</p>';
-            });
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('ventasChart').getContext('2d');
-    const ventasChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($ventasPorProducto->pluck('nombre')) !!},
-            datasets: [{
-                label: 'Productos más vendidos',
-                data: {!! json_encode($ventasPorProducto->pluck('total_vendido')) !!},
-                backgroundColor: 'rgba(54, 162, 235, 0.7)'
-            }]
-        },
-        options: {
-            scales: {
-                y: { beginAtZero: true }
-            }
+const ventasChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {!! json_encode($ventasPorProducto->pluck('nombre')->toArray()) !!},
+        datasets: [{
+            label: 'Productos más vendidos',
+            data: {!! json_encode($ventasPorProducto->pluck('total_vendido')->toArray()) !!},
+            backgroundColor: 'rgba(54, 162, 235, 0.7)'
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true }
         }
-    });
+    }
+});
 </script>
 @endsection

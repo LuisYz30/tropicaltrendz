@@ -136,16 +136,22 @@ public function informes()
         ->take(5)
         ->get();
 
-    
     return view('admin.productos.informes', compact('compras', 'ventasPorProducto'));
 }
 public function detallesFactura($facturaId)
 {
     $detalles = DB::table('detalle_facturas')
-        ->join('productos', 'detalle_facturas.idproducto', '=', 'productos.id')
-        ->join('tallas', 'detalle_facturas.idtalla', '=', 'tallas.id')
+        ->join('productos', 'detalle_facturas.idproducto', '=', 'productos.idproducto')
+        ->join('tallas', 'detalle_facturas.idtalla', '=', 'tallas.idtalla')
+        ->join('categorias', 'productos.idcategoria', '=', 'categorias.idcategoria')
         ->where('detalle_facturas.factura_id', $facturaId)
-        ->select('productos.nombre', 'tallas.nombre as talla', 'detalle_facturas.precio_unitario', 'detalle_facturas.cantidad')
+        ->select(
+            'productos.nombre',
+            'categorias.nombre as categoria',
+            'tallas.nombre as talla',
+            'detalle_facturas.precio_unitario',
+            'detalle_facturas.cantidad'
+        )
         ->get();
 
     return response()->json($detalles);

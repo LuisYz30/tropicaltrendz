@@ -6,23 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetalleFactura extends Model
 {
-    protected $table = 'detalle_factura';
-
-    protected $primaryKey = 'id_detalle';
+    protected $table = 'detalle_facturas'; // asegúrate que la tabla se llame así en la BD
+    protected $primaryKey = 'id'; // clave primaria
 
     protected $fillable = [
-        'idfactura', //llave foranea
-        'idproducto', //llave foranea
+        'factura_id',      // llave foránea hacia facturas
+        'idproducto',
+        'idtalla',
         'cantidad',
         'precio_unitario',
-        'subtotal',
     ];
 
     public $timestamps = false;
 
     public function factura()
     {
-        return $this->belongsTo(Factura::class, 'idfactura');
+        return $this->belongsTo(Factura::class, 'factura_id');
     }
 
     public function producto()
@@ -30,6 +29,7 @@ class DetalleFactura extends Model
         return $this->belongsTo(Producto::class, 'idproducto');
     }
 
+    // Esta función te calcula el subtotal automáticamente
     public function getSubtotalAttribute()
     {
         return $this->cantidad * $this->precio_unitario;
