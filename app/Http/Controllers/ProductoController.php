@@ -136,25 +136,26 @@ public function informes()
         ->take(5)
         ->get();
 
-    return view('admin.productos.informes', compact('compras', 'ventasPorProducto'));
+    $inventario = Producto::with(['categoria', 'tallas'])->paginate(10);
+    $categorias = Categoria::all();
+
+    return view('admin.productos.informes', compact('compras', 'ventasPorProducto', 'inventario', 'categorias'));
 }
 public function detallesFactura($facturaId)
 {
     $detalles = DB::table('detalle_facturas')
-        ->join('productos', 'detalle_facturas.idproducto', '=', 'productos.idproducto')
-        ->join('tallas', 'detalle_facturas.idtalla', '=', 'tallas.idtalla')
-        ->join('categorias', 'productos.idcategoria', '=', 'categorias.idcategoria')
-        ->where('detalle_facturas.factura_id', $facturaId)
-        ->select(
-            'productos.nombre',
-            'categorias.nombre as categoria',
-            'tallas.nombre as talla',
-            'detalle_facturas.precio_unitario',
-            'detalle_facturas.cantidad'
-        )
-        ->get();
-
+    ->join('tallas', 'detalle_facturas.idtalla', '=', 'tallas.idtalla')
+    ->where('detalle_facturas.factura_id', $facturaId)
+    ->select(
+        'detalle_facturas.nombre_producto as producto',
+        'detalle_facturas.categoria as categoria',
+        'tallas.nombre as talla',
+        'detalle_facturas.precio_unitario',
+        'detalle_facturas.cantidad'
+    )
+    ->get();
     return response()->json($detalles);
 }
+
 
 }

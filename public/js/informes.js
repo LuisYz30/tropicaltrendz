@@ -52,3 +52,34 @@
             });
     });
 });
+
+//inventario
+document.getElementById('btnHistorial').addEventListener('click', () => {
+        toggleSection('historialSection');
+    });
+    document.getElementById('btnGrafico').addEventListener('click', () => {
+        toggleSection('graficoSection');
+    });
+    document.getElementById('btnInventario').addEventListener('click', () => {
+        toggleSection('inventarioSection');
+    });
+
+    function toggleSection(sectionId) {
+        document.getElementById('historialSection').style.display = 'none';
+        document.getElementById('graficoSection').style.display = 'none';
+        document.getElementById('inventarioSection').style.display = 'none';
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function filtrarInventario() {
+        const categoriaId = document.getElementById('filtroCategoria').value;
+        const filas = document.querySelectorAll('#inventarioTableBody tr');
+
+        filas.forEach(fila => {
+            if (!categoriaId || fila.dataset.categoria === categoriaId) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+    }

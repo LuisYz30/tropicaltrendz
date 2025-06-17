@@ -12,6 +12,7 @@ class DetalleFactura extends Model
     protected $fillable = [
         'factura_id',      // llave foránea hacia facturas
         'idproducto',
+        'nombre_producto',
         'idtalla',
         'cantidad',
         'precio_unitario',

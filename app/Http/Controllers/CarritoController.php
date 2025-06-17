@@ -29,25 +29,25 @@ class CarritoController extends Controller
 
     // Si no existe en carrito, agregar
     if (!isset($carrito[$clave])) {
-        $carrito[$clave] = [
-            'idproducto' => $producto->idproducto,
-            'idtalla' => $talla->idtalla,
-            'producto' => $producto->nombre,
-            'precio' => $producto->precio,
-            'talla' => $talla->nombre,
-            'cantidad' => $cantidad,
-            'imagen' => $imagePath
-        ];
-    } else {
-        $nuevaCantidad = $carrito[$clave]['cantidad'] + $cantidad;
+    $carrito[$clave] = [
+        'idproducto' => $producto->idproducto,
+        'idtalla' => $talla->idtalla,
+        'producto' => $producto->nombre,
+        'precio' => $producto->precio,
+        'talla' => $talla->nombre,
+        'cantidad' => $cantidad,
+        'imagen' => $imagePath,
+        'categoria' => $producto->categoria->nombre
+    ];
+} else {
+    $nuevaCantidad = $carrito[$clave]['cantidad'] + $cantidad;
 
-        // Evitar exceder stock al sumar más
-        if ($nuevaCantidad > $stockDisponible) {
-            return redirect()->back()->withErrors(['cantidad' => 'No puedes agregar más de lo disponible en stock para esta talla.']);
-        }
-
-        $carrito[$clave]['cantidad'] = $nuevaCantidad;
+    if ($nuevaCantidad > $stockDisponible) {
+        return redirect()->back()->withErrors(['cantidad' => 'No puedes agregar más de lo disponible en stock para esta talla.']);
     }
+
+    $carrito[$clave]['cantidad'] = $nuevaCantidad;
+}
 
     session(['carrito' => $carrito]);
 

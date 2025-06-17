@@ -101,9 +101,15 @@ class PagoController extends Controller
                 Log::info('Factura creada ID: ' . $factura->id);
 
                 foreach ($carrito as $item) {
+                    $nombreProducto = DB::table('productos')
+                        ->where('idproducto', $item['idproducto'])
+                        ->value('nombre');
+
                     DetalleFactura::create([
                         'factura_id' => $factura->id,
                         'idproducto' => $item['idproducto'],
+                        'nombre_producto' => $nombreProducto,
+                        'categoria' => $item['categoria'] ?? 'N/A',
                         'idtalla' => $item['idtalla'],
                         'cantidad' => $item['cantidad'],
                         'precio_unitario' => $item['precio'],

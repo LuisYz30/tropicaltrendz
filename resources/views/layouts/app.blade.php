@@ -87,6 +87,7 @@
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
     <script src="{{ asset('js/informes.js')}}"></script>
+    <script src="{{ asset('js/tallas.js')}}"></script>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
