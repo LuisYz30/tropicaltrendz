@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container carrito-contenedor {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-5' : 'my-5 py-5 text-center' }}">
-    <h2 class="mb-4">Carrito de Compras</h2>
+<div class="container carrito-contenedor {{ session('carrito') && count(session('carrito')) > 0 ? 'mt-5 pt-4' : 'my-5 py-4 text-center' }}">
+    <h1 class="mb-3">Carrito de Compras</h1>
 
     @if(session('carrito') && count(session('carrito')) > 0)
         <div class="table-responsive">

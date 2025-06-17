@@ -40,11 +40,6 @@
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
                     @if(Auth::user()->rol === 'admin')
                         <li>
-                            <a class="dropdown-item" href="{{ route('productos.index') }}">
-                                <i class="fas fa-list me-2"></i> Ver Productos
-                            </a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="{{ route('productos.create') }}">
                                 <i class="fas fa-plus-circle me-2"></i> Nuevo Producto
                             </a>
@@ -54,7 +49,14 @@
                                 <i class="fas fa-chart-line me-2"></i> Informes
                             </a>
                         </li> --}}
+                        @elseif(Auth::user()->rol === 'cliente')
+                        <li>
+                            <a class="dropdown-item" href="{{ route('cliente.edit') }}">
+                                <i class="fas fa-user-cog me-2"></i> Editar Perfil
+                            </a>
+                        </li>
                     @endif
+                    
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -98,7 +100,7 @@
         <button class="close-modal" id="close-login">&times;</button>
         <div class="form-container">
             <div class="form-image">
-               <img src="{{asset('images/img-login/fondo-login.png')}}" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">
+               <img src="{{asset('images/img-login/fondo-login.png')}}" alt="Imagen" style="width:100%; height:100%;">
             </div>
             <div class="form-content-login">
                 <div class="logo-login">
@@ -110,17 +112,19 @@
                     @csrf
                     <input type="hidden" name="redirectAfterLogin" id="redirectAfterLogin">
                 
-                    <div class="username">
-                        <input type="email" name="email" required>
-                        <label>Correo electrónico</label>
-                    </div>
-                    <div class="username">
-                        <input type="password" name="password" required>
-                        <label>Contraseña</label>
-                    </div>
-                    <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
-                    <button type="submit" class="btn-ingresar">Ingresar</button>
-                </form>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+                </div>
+
+                <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
+                <button type="submit" class="btn-ingresar">Ingresar</button>
+                    </form>
                 <div class="google-login">
                   <img src="{{asset('images/google.svg')}}"  alt="Google">
                 </div>
@@ -143,22 +147,26 @@
                 <form method="POST" action="{{ route('register') }}">
 
                     @csrf
-                    <div class="username">
-                        <input type="text" name="name" required>
-                        <label>Nombre</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" name="name" class="form-control" placeholder="Nombre" required>
                     </div>
-                    <div class="username">
-                        <input type="tel" name="telefono" required>
-                        <label>Teléfono</label>
+
+                   <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                        <input type="tel" name="telefono" class="form-control" placeholder="Teléfono" required>
                     </div>
-                    <div class="username">
-                        <input type="email" name="email" required>
-                        <label>Correo electrónico</label>
+
+                   <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                        <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
                     </div>
-                    <div class="username">
-                        <input type="password" name="password" required>
-                        <label>Contraseña</label>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                     </div>
+
                     <button type="submit" class="btn-registrarse">Registrarse</button>
                 </form>
                 <div class="google-login">
@@ -169,7 +177,7 @@
                 </div>
             </div>
             <div class="form-image">
-                <img src="{{asset('images/img-login/Fondo-login2.png')}}" alt="Imagen" style="width:100%; height:100%; object-fit:cover;">
+                <img src="{{asset('images/img-login/Fondo-login2.png')}}" alt="Imagen" style="width:100%; height:100%;">
             </div>
         </div>
     </div>

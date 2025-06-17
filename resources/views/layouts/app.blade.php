@@ -7,21 +7,25 @@
 
     {{-- Bootstrap CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     {{-- Font Awesome para iconos --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <!-- Mejora rendimiento: establece conexión previa con Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Carga la fuente específica -->
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Lilita+One&display=swap" rel="stylesheet">
+    <!-- Iconos bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 
     {{-- Estilos personalizados --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -33,9 +37,9 @@
     <link rel="stylesheet" href="{{ asset('css/reseñas.css')}}">
     <link rel="stylesheet" href="{{ asset('css/formulario-productos.css')}}">
 
-    {{-- Favicon opcional --}}
-    <link rel="icon" href="{{ asset('Imagenes/logo.ico') }}" type="image/x-icon">
 </head>
+
+
 <body class="d-flex flex-column min-vh-100">
 
     {{-- Navbar --}}
@@ -54,19 +58,15 @@
 
     {{-- jQuery --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     {{-- Toastr JS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
     {{--Sweet Alert--}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
+
     {{-- Scripts personalizados --}}
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
@@ -98,7 +98,6 @@
     <script>
         AOS.init();
     </script>
-    </body>
 
-</body>
+    </body>
 </html>

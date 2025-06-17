@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ReseñaController;
+use App\Http\Controllers\PerfilController;
 
 
 Route::get('/', [PublicController::class, 'index'])->name('index');
@@ -29,21 +30,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
+
 // Rutas Para los modulos
 
-// Hombre
 Route::get('/hombre', [PublicController::class, 'hombre'])->name('hombre');
-
-// Mujer
 Route::get('/mujer', [PublicController::class, 'mujer'])->name('mujer');
-
-// Niños
 Route::get('/niños', [PublicController::class, 'niños'])->name('niños');
 
-// Ofertas
 Route::get('/ofertas', [PublicController::class, 'ofertas'])->name('ofertas');
-
-// Detalle del producto
 Route::get('/producto/{id}', [PublicController::class, 'detalleProducto'])->name('producto.detalle');
 
 //Nosotros
@@ -71,4 +65,10 @@ Route::post('/reseñas', [ReseñaController::class, 'store'])->name('reseñas.st
 Route::get('/reseñas/{seccion}', [ReseñaController::class, 'index'])->name('reseñas.index');
 
 Route::delete('/admin/reseñas/{id}', [ReseñaController::class, 'destroy'])->name('reseñas.destroy')->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cliente/editPerfil', [PerfilController::class, 'edit'])->name('cliente.edit');
+    Route::post('/perfil/actualizar', [PerfilController::class, 'update'])->name('perfil.update');
+});
+
 

@@ -21,15 +21,19 @@
 
 body{
     background:var(--celeste);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     color: var(--texto-oscuro);
 }
-.row-wrapper {
-    overflow-x: clip; /* NO corta el hover como hidden, pero sí evita el scroll */
-  }
+
+h1, h2 {
+    color: var(--azuloscuro);
+    font-family: 'Lilita One', sans-serif;
+}
+
+
+
 
 /*|||||| PERSONALIZACIÓN DE BOTONES ||||||*/
-
 
 /*Boton azul oscuro*/
 .btn-azul-oscuro {
@@ -37,9 +41,10 @@ body{
     color: var(--celeste); ; 
     font-weight: bold;
     border-radius: 15px;
-    padding: 7px 13px;
+    padding: 7px 13px 10px;
     transition: ease-in-out.5s;
     border:none;
+    font-size: 19px;
 }
 .btn-azul-oscuro:hover {
     box-shadow: inset 0 -100px 0 0 var(--azulmedio);
@@ -56,9 +61,10 @@ body{
     color: var(--azuloscuro);
     font-weight: bold;
     border-radius: 15px;
-    padding: 7px 13px;
+    padding: 7px 13px 10px;
     transition: ease-in-out.5s;
     border:none;
+    font-size: 19px;
 }
 .btn-azul-medio:hover {
     box-shadow: inset 0 -100px 0 0 var(--azuloscuro);
@@ -75,9 +81,10 @@ body{
     color: var(--celeste); ; 
     font-weight: bold;
     border-radius: 15px;
-    padding: 7px 13px;
+    padding: 7px 13px 10px;
     transition: ease-in-out.5s;
     border:none;
+    font-size: 19px;
 }
 .agregar-carrito:hover {
         box-shadow: inset 0 -100px 0 0 var(--azulmedio);
@@ -94,10 +101,11 @@ body{
     color: var(--celeste); ; 
     font-weight: bold;
     border-radius: 15px;
-    padding: 7px 13px;
+    padding: 7px 13px 10px;
     transition: ease-in-out.5s;
     border:none;
-    text-decoration: none
+    text-decoration: none;
+    font-size: 19px;
 }
 .ver-producto:hover {
         box-shadow: inset 0 -100px 0 0 var(--azulmedio);
@@ -114,9 +122,10 @@ body{
     color: var(--celeste); ; 
     font-weight: bold;
     border-radius: 15px;
-    padding: 7px 13px;
+    padding: 7px 13px 10px;
     transition: ease-in-out.5s;
     border:none;
+    font-size: 19px;
 }
 .btn-ingresar:hover {
         box-shadow: inset 0 -100px 0 0 var(--azulmedio);
@@ -133,9 +142,11 @@ body{
     color: var(--celeste); ; 
     font-weight: bold;
     border-radius: 15px;
-    padding: 7px 13px;
+    padding: 7px 13px 10px;
     transition: ease-in-out.5s;
     border:none;
+    margin-top: 22px;
+    font-size: 19px;
 }
 .btn-registrarse:hover {
         box-shadow: inset 0 -100px 0 0 var(--azulmedio);
@@ -145,8 +156,6 @@ body{
 .btn-registrarse:active {
     transform: scale(0.8);
 }
-
-
 
 
 /*|||||| PERSONALIZACIÓN DEL NAVBAR ||||||*/
@@ -170,7 +179,7 @@ body{
     width: auto;  /* Mantiene proporción */
 }
 .navbar-nav .nav-link {
-    font-size: 1rem;
+    font-size: 17px;
     font-weight: 500;
     color: #00246b;
     transition: color 0.3s ease-in-out;
@@ -181,8 +190,9 @@ body{
 
 /*Botón de Menú Hamburguesa*/
 .navbar-toggler {
-    border: 3px solid var(--azuloscuro);    
-    padding: 4px;              
+    border: none;    
+    padding: 4px;   
+    color: var(--azuloscuro);           
   }
 
 /* Estilo general del MENU dropdown */
@@ -229,14 +239,6 @@ body{
 
 /*|||||| Personalización del carrito de compras ||||||*/
 
-/* Fondo del carrito de compras */
-.carrito-offcanvas {
-   
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
 
 /*Boton para abrir el carrito*/
 .carro{
@@ -252,24 +254,6 @@ body{
     transform: scale(1.2);
 }
 
-/*Modificacion del tamaño de la barra lateral*/
-.carrito-offcanvas {
-    --bs-offcanvas-width: 480px;
-  }
-
-/* Imagen de producto más grande y redondeada */
-.carrito-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-/* Tabla más limpia */
-.carrito-tabla th, .carrito-tabla td {
-    vertical-align: middle;
-    text-align: center;
-    font-size: 14px;
-}
 
 /* Estilo para el video de fondo */
 .style-banner{
@@ -300,7 +284,7 @@ body{
 /*|||||| Diseño del carrusel ||||||*/
 
 .carrusel-fondo {
-    background-color: var(--azulmedio);
+    background: linear-gradient(80deg, var(--celeste), var(--azulmedio));
     padding: 30px 30px 0px 30px;
     border-radius: 25px;
     position: relative;
@@ -314,9 +298,8 @@ body{
     margin-top: 40px;
 }
 .carrusel-temporada h1{
-    font-family: 'oswald', sans-serif;
     font-weight: 700;
-    font-size: 60px;
+    font-size: 65px;
     color: var(--azuloscuro);
     margin-bottom: 0;
 }
@@ -381,19 +364,18 @@ body{
     overflow: hidden;
     background-color: #fefbf6;
     padding: 5px 35px;
-    text-align: center;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+    text-align: center;
 }
 .carrusel-card img {
-    height: 250px;
+    height: 240px;
     width: auto;
-    object-fit: contain;
-    border-color: 1px solid var(--azuloscuro);
-    
+    object-fit: contain;    
 }
 
 .carrusel-card h5 {
@@ -401,87 +383,82 @@ body{
     color:var(--azuloscuro);
     font-family: 'oswald', sans-serif;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 .carrusel-card p {
-  font-size: 13px;
-  margin-bottom: 15px;
+  font-size: 15px;
   color: #111111;
   word-wrap: break-word;
   white-space: normal;
+  margin-bottom: 0;
 }
+
 
 
 /* Cards de productos */    
 .product-card {
-    border: 3px solid var(--azulmedio);
+    border: 2px solid var(--azulmedio);
     border-radius: 15px;
     overflow: hidden;
+    background-color: #f8f7f7;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--beige);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
-
 
 .product-card:hover {
     transform:scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
 }
 
-.product-card img {
+.img-producto {
+    height: 240px;
     object-fit: contain;
-    height: 250px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 10px 10px 0 0;
+    padding: 10px;
 }
 
+.product-card h5 {
+    font-size: 19px;
+    color:var(--azuloscuro);
+    font-family: 'oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* card-body que ocupa el resto de espacio y distribuye bien */
 .product-card .card-body {
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-}
-
-.product-card h3 {
-  font-size: 1.2rem;
-  color:var(--azuloscuro);
-  font-family: 'oswald', sans-serif;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 15px  20px;
+    
 }
 
 .product-card p {
-  font-size: 13px;
-  margin-bottom: 15px;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-size: 17px;
   color: #111111;
+  word-wrap: break-word;
+  white-space: normal;
+  margin-bottom: 5px;
 }
-.card-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-.card-body h5{
-    color: var(--azuloscuro);
-  }
-.card-body p{
-    color:#111111;
-  }
+
+
 /*|||||| Seccion de iconos ||||||*/
 
 .icon-card {
-    background-color: #f5f5f5;
+    background-color: #f6f7f2;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     transition: transform 0.3s ease;
     height: 100%;
+    border: 2px solid var(--azulmedio);
   }
   
   .icon-card:hover {
@@ -499,109 +476,108 @@ body{
     font-size: 15px;
     color: #111;
   }
-  
 
-.btn-reseña{
-    background-color: var(--azuloscuro);
-    color: var(--celeste);
+/*|||||| Seccion de galería ||||||*/
+
+.gallery-fondo {
+    background: linear-gradient(135deg, var(--azulmedio), var(--celeste));
+    padding: 20px 20px 0px 20px;
+    border-radius: 20px;
+    position: relative;
+    overflow: visible;
+    margin: 5px auto;
+    max-width: 1800px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.btn-reseña:hover{
-    background-color: var(--azulmedio);
+.gallery-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 100px;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.info-texto {
+    max-width: 550px;
+    color: #00246B;
+}
+
+.info-texto h2 {
+    font-size: 60px;
+    margin-bottom: 20px;
     color: var(--azuloscuro);
-}
-.opinion-title {
-    font-size: 30px;
-    color: var(--azuloscuro);
+    font-weight: bold;
 }
 
-.stars{
-    color:#c2c214;
+.info-texto p {
+    font-family: 'Baloo Bhaijaan 2', sans-serif ;
+    font-size: 19px;
+    line-height: 1.6;
 }
+
+.gallery {
+    --size: 100px;
+    display: grid;
+    grid-template-columns: repeat(6, var(--size));
+    grid-auto-rows: var(--size);
+    margin-bottom: var(--size);
+    place-items: start center;
+    gap: 30px;
+}
+
+.gallery img {
+    object-fit: cover;
+    width: calc(var(--size) * 2.5);
+    height: calc(var(--size) * 2.5);
+    clip-path: path("M112.5,12.5 C125,0 125,0 137.5,12.5 237.5,112.5 237.5,112.5 237.5,112.5 250,125 250,125 237.5,137.5 237.5,137.5 137.5,237.5 137.5,237.5 125,250 125,250 112.5,237.5 112.5,237.5 12.5,137.5 12.5,137.5 0,125 0,125 12.5,112.5Z");
+    transition:clip-path 0.25s, filter 0.75s;
+    grid-column: auto / span 2;
+    border-radius: 5px;
+}
+
+/* efecto: al hacer hover sobre la galería, baja brillo de todas */
+.gallery:hover img {
+  filter: brightness(0.6);
+}
+
+/* pero la imagen bajo el cursor se ve nítida y se agranda */
+.gallery img:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.gallery img:nth-child(5n-1) {
+    grid-column: 2 / span 2;
+}
+
+.gallery img:hover,
+.gallery img:focus {
+    clip-path: path("M0,0 C0,0 250,0 250,0 250,0 250,125 250,125 250,125 250,250 250,250 250,250 125,250 125,250 125,250 125,250 0,250 0,250 0,125 0,125 0,125 0,125 0,125Z");
+    z-index: 1;
+    transition: clip-path 0.25s, filter 0.25s;
+}
+
+.gallery img:focus {
+    outline: 1px dashed black;
+    outline-offset: -5px;
+}
+
+
+/*|||||| Footer ||||||*/
 .foot{
     background-color: var(--azuloscuro);
-}
-.footer{
-    color: #ffffff;
-    padding: 50px 0;
-    font-family: Arial, sans-serif;
-}
-.footer-content{
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-}
-.footer-column {
- flex: 1;
- margin: 0 15px;
 }
 .text-foot{
     color:var(--azulmedio);
 }
-.footer-column h5 {
- color: var(--texto-oscuro);
- font-size: 18px;
- margin-bottom: 10px;   
-} 
-.footer-column u1 {
-    list-style: none;
-    padding: 0;
-}
-.footer-column u1 li {
-    margin-bottom: 8px;
-}
-.footer-column u1 li a{
-color: white;
-text-decoration:none;
-font-size: 14px;
-}
-.footer-column u1 li a :hover {
-    text-decoration: underline;
-}
-.footer-contact p {
-margin: 5px 0;
-font-size: 14px;
-}
-.footer-contact a {
-    color: white;
-    text-decoration: none;
-}
-.footer-contact a:hover {
-    text-decoration: underline;
-}
-.footer-social a {
-    margin-right: 10px;
-    color: white;
-    text-decoration: none;
-}
-.footer-social a:hover {
-    color: #ff3b3f
-}
-.footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 12px;
-    color: gray;
-}
-.link h3 {
-    font-size: 18px;
-    color: #ffffff;
-    font-family: 'oswald', sans-serif;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-}
 
-.link a {
-    font-size: 16px;
-    color: #dcdcdc;
-    display: block;
-    margin-bottom: 10px;
-}
+
+
 
 /* ////////SECCION DE FORMULARIOS///////////*/
-
 
 /*Fondo oscuro semitransparente */
 .modal-fade {
@@ -620,15 +596,15 @@ font-size: 14px;
 
 /*Cuadro blanco del formulario */
 .formulario {
-     display:flex;
-    background-color: white ;
+    display:flex;
+    background-color: white; ;
     width: 900px;
     height: 580px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    margin-top: -20px;
+    margin-top: 50px;
 }
 
 /* Estructura de la imagen y formulario */
@@ -638,9 +614,8 @@ font-size: 14px;
     height: 100%;
 }
 
-/* Imagen a la izquierda */
+/* Imagen del formulario*/
 .form-image {
-    width: 55%;
     display: block;
 }
 
@@ -652,26 +627,28 @@ font-size: 14px;
     padding:15px;
     align-items: center;
     text-align: center;
+    
 }
 .form-content-registro {
     width: 45%;
     display: flex;
     flex-direction: column;
     padding:15px;
-    justify-content: center;
     align-items: center;
     text-align: center;
 }
 /*Título del formulario */
 .formulario h1 {
     margin-top: 15px;
+    margin-bottom: 15px;
     font-size: 42px;
     font-weight:700;
     color: var(--azuloscuro);  
 }
 .formulario h2 {
     margin-top: 45px;
-    font-size: 42px;
+    margin-bottom: 20px;
+    font-size: 50px;
     font-weight:700;
     color: var(--azuloscuro); 
 }
@@ -683,46 +660,35 @@ font-size: 14px;
     margin-bottom: 10px;
 }
 
-/*Inputs */
-.username {
-    position: relative;
-    width: 100%;
-    margin-top: 19px;
+
+ .input-group-text {
+  background-color: var(--azuloscuro);
+  border: none;
+  color: var(--celeste)
 }
 
-.username input {
-    width: 300px;
-    padding: 5px;
-    border: none; 
-    border-radius: 25px;
-    font-size: 16px;
-    background-color: var(--celeste);
+.form-control {
+  border-radius: 0 25px 25px 0;
+  border: none;
+  background-color: var(--celeste);
+  color: #00246B;
 }
 
-/* Estilo del label */
-.username label {
-    position: absolute;
-    left: 12px;
-    top: 7px;
-    color: var(--azuloscuro);
-    font-size: 14px;
-    transition: 0.3s;
+.form-control:focus {
+  box-shadow: none;
+  border: 2px solid var(--azuloscuro);
+  background-color: var(--celeste);
 }
 
-/*Efecto al hacer foco */
-.username input:focus ~ label, 
-.username input:valid ~ label{
-    top: -17px;
-    left: 10px;
-    font-size: 12px;
-    color: var(--azuloscuro);
+.form-control::placeholder {
+  color: var(--azuloscuro);
 }
 
 /* Enlace recordar contraseña */
 .recordar a {
     display: block;
     text-align: right;
-    font-size: 14px;
+    font-size: 16px;
     color: #00246B;
     text-decoration: none;
     margin-top: 10px;
@@ -736,7 +702,7 @@ font-size: 14px;
 /* Enlace registrarse en modal login*/
 .registrarse a {
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 16px;
     color: #00246B;
     text-decoration: none;
 }
@@ -780,7 +746,37 @@ font-size: 14px;
     transform: scale(1.5);
 }
 
+/*||| Sección de Edición de Perfil |||*/
+.edit-modal{
+    margin-top: -70px;
+}
+.perfil-card {
+    background-color: white;
+    border-radius: 15px;
+}
 
+.perfil-header {
+    font-size: 40px;
+    font-family: 'Lilita One', sans-serif;
+}
+
+.perfil-input {
+    border: 2px solid var(--azulmedio);
+    border-radius: 0 10px 10px 0 !important;
+    transition: 0.3s ease;
+}
+
+.input-group-text {
+    background-color: var(--azulmedio);
+    color: white;
+    border-radius: 10px 0 0 10px;
+    border: 2px solid var(--azulmedio);
+}
+
+.perfil-input:focus {
+    border-color: var(--azuloscuro);
+    box-shadow: 0 0 0 0.2rem rgba(0, 18, 107, 0.25);
+}
 
 
 /*ALERTAS*/
@@ -788,34 +784,38 @@ font-size: 14px;
 #toast-container > .toast-success {
     background-color: #28a745; /* Verde */
     color: white;
+    font-size: 17px;
 }
 
 #toast-container > .toast-error {
     background-color: #dc3545; /* Rojo */
     color: white;
+    font-size: 17px;
 }
 
 #toast-container > .toast-warning {
     background-color: #ffc107; /* Amarillo */
     color: black;
+    font-size: 17px;
 }
 
 #toast-container > .toast-info {
     background-color: #17a2b8; /* Azul */
     color: white;
+    font-size: 17px;
 }
 
 
 /* Parte responsiva*/
 @media (max-width:991px) {
 
-    .swiper{
-        width: 87%;
+ .carrusel-card img {
+        width: auto; /* Imagen que nunca se pase del card */
+        height: 220px;
     }
-    .swiper-slide.swiper-slide-active {
-        transform: scale(1.2); /* No hacer zoom en pantallas pequeñas */
-    }
-
+.swiper-slide.swiper-slide-active {
+    transform:none; /* No hacer zoom en pantallas pequeñas */
+}
 
   .formulario {
     flex-direction: column;
@@ -843,13 +843,38 @@ font-size: 14px;
   .logo-formulario {
     margin-top: 0;
   }
+   .gallery {
+    display: none;
+  }
+
+  .gallery-section {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 20px;
+  }
+
+  .info-texto {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .info-texto h2 {
+    font-size: 32px;
+  }
+
+  .info-texto p {
+    font-size: 16px;
+  }
 }
 
 /* Ajustes responsive extra */
 @media (max-width: 768px) {
-    .swiper{
-        width: 85%;
+    
+    .carrusel-card img {
+        width: auto; /* Imagen que nunca se pase del card */
+        height: 220px;
     }
+
     .swiper-slide.swiper-slide-active {
         transform:none; /* No hacer zoom en pantallas pequeñas */
     }
@@ -880,9 +905,18 @@ font-size: 14px;
         width: 100%;
     }
     .form-content-registro h2 {
-        margin-top: 5px;
+        margin-top: 15px;
     }
      .form-content-registro p {
         display: none;
     }
+    .btn-registrarse {
+        margin-top: 10px;
+    }
+    .gallery-section {
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+
 }

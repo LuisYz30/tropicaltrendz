@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container producto-form">
-    <h2>Editar Producto</h2>
+    <h1>Editar Producto</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -27,7 +27,7 @@
 
         <div class="mb-3">
             <label>Descripción</label>
-            <textarea name="descripcion" class="form-control" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
+            <textarea type="text" name="descripcion" class="form-control" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
         </div>
 
         <div class="mb-3">
@@ -53,7 +53,7 @@
             @if($producto->imagen)
                 <img src="{{ asset('storage/' . $producto->imagen) }}" width="100" alt="Imagen actual"><br><br>
             @endif
-            <label>Actualizar Imagen (opcional)</label>
+            <label>Actualizar Imagen</label>
             <input type="file" name="imagen" class="form-control" accept="storage/*">
         </div>
 

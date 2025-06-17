@@ -1,6 +1,6 @@
 
     <div class="carrusel-card">
-        <img src="{{ asset('storage/' . $producto->imagen) }}" class="mt-2 mb-2">
+        <img src="{{ asset('storage/' . $producto->imagen) }}" class="mt-2">
             <h5>{{ $producto->nombre }}</h5>
             <p>{{ $producto->descripcion }}</p>
             <p class="text-primary fw-bold fs-6">{{ $producto->precio_formateado }}</p>
@@ -8,12 +8,12 @@
 
             @auth
             @if(auth()->user()->rol == 'admin')
-                <div class="d-flex gap-2 mt-1 justify-content-center">
-                    <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary boton-editar">Editar</a>
+                <div class="d-flex justify-content-center gap-1">
+                    <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary boton-editar mt-2">Editar</a>
                     <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST" onsubmit="return confirm('¿Seguro de eliminar este producto?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary boton-eliminar">Eliminar</button>
+                        <button type="submit" class="btn btn-primary boton-eliminar mt-2">Eliminar</button>
                     </form>
                 </div>
             @endif

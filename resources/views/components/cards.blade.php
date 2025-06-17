@@ -1,17 +1,16 @@
-
-
-<div class="col-11 col-lg-3 mb-4">
-    <div class="card h-100 product-card">
-        <img src="{{ asset('storage/' . $producto->imagen) }}">
+<div class="col-11 col-sm-6 col-lg-3 mb-4 d-flex producto-item">
+    <div class="card product-card w-100">
+        <img src="{{ asset('storage/' . $producto->imagen) }}" class="img-producto" alt="{{ $producto->nombre }}">
+        
         <div class="card-body">
-            <h5 class="card-title">{{ $producto->nombre }}</h5>
-            <p class="card-text">{{ $producto->descripcion }}</p>
-            <p class="card-text text-primary fw-bold">{{ $producto->precio_formateado }}</p>
-            <a href="{{ route('producto.detalle', $producto->idproducto) }}" class="ver-producto">Ver producto</a>
+            <h5>{{ $producto->nombre }}</h5>
+            <p>{{ $producto->descripcion }}</p>
+            <p class="text-primary fw-bold fs-5">{{ $producto->precio_formateado }}</p>
+            <a href="{{ route('producto.detalle', $producto->idproducto) }}" class="ver-producto mt-1">Ver producto</a>
 
-            @auth
+           @auth
             @if(auth()->user()->rol == 'admin')
-                <div class="d-flex gap-2 mt-2">
+                <div class="d-flex gap-2 justify-content-center">
                     <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary boton-editar">Editar</a>
                     <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST" onsubmit="return confirm('¿Seguro de eliminar este producto?')">
                         @csrf

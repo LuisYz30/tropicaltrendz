@@ -1,99 +1,4 @@
-/* Estilos específicos para los formularios de productos */
 
-.producto-form {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-.formulario-producto .form-group,
-.formulario-producto .mb-3 {
-    margin-bottom: 1.2rem;
-}
-
-.formulario-producto label {
-    font-weight: bold;
-    color: #333;
-}
-
-.formulario-producto input[type="text"],
-.formulario-producto input[type="number"],
-.formulario-producto textarea,
-.formulario-producto select,
-.formulario-producto input[type="file"] {
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    width: 100%;
-}
-
-.formulario-producto input[type="file"] {
-    padding: 6px;
-}
-
-.formulario-producto .row > .col-md-6 {
-    margin-bottom: 10px;
-}
-
-.formulario-producto .btn {
-    padding: 10px 20px;
-    border-radius: 8px;
-}
-
-.formulario-producto .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.formulario-producto .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-.alert-danger {
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 0.95rem;
-}
-.tallas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    margin-top: 0.5rem;
-}
-
-.talla-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.talla-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.talla-label input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-
-.stock-input {
-    margin-top: 8px;
-    width: 100%;
-    padding: 6px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
 :root {
     --celeste: #cadcfc;
     --azulmedio: #8ab6f9;
@@ -102,7 +7,7 @@
 }
 
 .producto-form {
-    background: linear-gradient(to bottom right, var(--celeste), var(--azulmedio));
+    background:#fffdf7;
     border-radius: 16px;
     padding: 40px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -117,15 +22,8 @@
     color: var(--azuloscuro);
     text-align: center;
     margin-bottom: 30px;
-    font-size: 2rem;
-}
-
-.alert-danger {
-    background-color: #ffe0e0;
-    border-left: 6px solid crimson;
-    border-radius: 10px;
-    padding: 15px;
-    color: #5a0000;
+    font-size: 50px;
+    font-family: 'Lilita One', sans-serif;
 }
 
 .formulario-producto label {
@@ -133,6 +31,7 @@
     margin-bottom: 8px;
     display: block;
     color: var(--azuloscuro);
+    font-size: 17px;
 }
 
 .formulario-producto input[type="text"],
@@ -145,7 +44,7 @@
     padding: 12px;
     width: 100%;
     background-color: var(--blanco);
-    font-size: 1rem;
+    font-size: 17px;
     transition: border-color 0.3s ease;
 }
 
@@ -154,6 +53,7 @@
 .formulario-producto select:focus {
     border-color: var(--azulmedio);
     outline: none;
+    background-color: white;
 }
 
 .tallas-grid {

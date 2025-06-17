@@ -5,6 +5,13 @@
     --fondo: #f9f9f9;
     --blanco: #ffffff;
 }
+
+.carrito-contenedor h1 {
+    color: var(--azuloscuro);
+    font-family: 'Lilita One', sans-serif;
+    font-size: 60px;
+}
+
 .carrito-contenedor {
     background-color: var(--fondo);
     padding: 30px;
