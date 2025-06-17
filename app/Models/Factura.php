@@ -6,38 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
 class Factura extends Model
 {
+    protected $table = 'facturas';
+    protected $primaryKey = 'id';
 
-    protected $primaryKey = 'idfactura';
-
-    
-    protected $fillable=[
+    protected $fillable = [
         'fecha',
-        'descripcion',
-        'idcliente', //llave foranea
+        'user_id',
+        'metodo_pago_id',
+        'total',
+    ];
+
+    protected $casts = [
+        'fecha' => 'datetime',
     ];
 
     public function cliente(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'idcliente');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function detallefactura(): HasMany
+    public function detalles(): HasMany
     {
-        return $this->hasMany(DetalleFactura::class, 'idfactura');
+        return $this->hasMany(DetalleFactura::class, 'factura_id');
     }
 
     public function getFechaFormateadaAttribute(): string
     {
         return $this->fecha->format('d/m/Y');
-    }
-
-    public function getTotalAttribute(): float
-    {
-        return $this->detalles->sum(function($detalle) {
-            return $detalle->cantidad * $detalle->precio_unitario;
-        });
     }
 }

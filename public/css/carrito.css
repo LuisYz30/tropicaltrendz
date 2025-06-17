@@ -91,3 +91,20 @@
     color: var(--azuloscuro);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.boton-compra{
+    background-color: var(--azuloscuro);
+    color: var(--celeste);
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.boton-compra:hover{
+    background-color: var(--azulmedio);
+    color: var(--azuloscuro);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

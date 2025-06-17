@@ -118,4 +118,44 @@ public function destroy($id, Request $request)
 
     return redirect()->back()->with('success', 'Producto eliminado correctamente.');
 }
+
+public function informes()
+{
+    $compras = DB::table('facturas')
+        ->join('users', 'facturas.user_id', '=', 'users.id')
+        ->join('metodo_pagos', 'facturas.metodo_pago_id', '=', 'metodo_pagos.id')
+        ->select('facturas.id', 'users.name', 'users.telefono', 'facturas.fecha', 'facturas.total', 'metodo_pagos.nombre as metodo_pago')
+        ->orderBy('facturas.fecha', 'desc')
+        ->paginate(10);
+
+    $ventasPorProducto = DB::table('detalle_facturas')
+        ->join('productos', 'detalle_facturas.idproducto', '=', 'productos.idproducto')
+        ->select('productos.nombre', DB::raw('SUM(detalle_facturas.cantidad) as total_vendido'))
+        ->groupBy('productos.nombre')
+        ->orderBy('total_vendido', 'desc')
+        ->take(5)
+        ->get();
+
+    $inventario = Producto::with(['categoria', 'tallas'])->paginate(10);
+    $categorias = Categoria::all();
+
+    return view('admin.productos.informes', compact('compras', 'ventasPorProducto', 'inventario', 'categorias'));
+}
+public function detallesFactura($facturaId)
+{
+    $detalles = DB::table('detalle_facturas')
+    ->join('tallas', 'detalle_facturas.idtalla', '=', 'tallas.idtalla')
+    ->where('detalle_facturas.factura_id', $facturaId)
+    ->select(
+        'detalle_facturas.nombre_producto as producto',
+        'detalle_facturas.categoria as categoria',
+        'tallas.nombre as talla',
+        'detalle_facturas.precio_unitario',
+        'detalle_facturas.cantidad'
+    )
+    ->get();
+    return response()->json($detalles);
+}
+
+
 }

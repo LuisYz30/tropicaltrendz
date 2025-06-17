@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const stock = parseInt(selectedOption.dataset.stock);
 
         if (parseInt(this.value) > stock) {
-            alert(`Solo hay ${stock} unidad${stock === 1 ? '' : 'es'} disponibles para esta talla.`);
+            toastr.warning(`Solo hay ${stock} unidad${stock === 1 ? '' : 'es'} disponibles para esta talla.`);
             this.value = stock;
         }
     });

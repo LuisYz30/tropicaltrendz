@@ -9,20 +9,18 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
 
-    public function index()
-    {
-        // Buscar la categoría "Temporada"
+   public function index()
+{
+    // Buscar la categoría "Temporada"
     $categoria = Categoria::where('nombre', 'Temporada')->first();
 
-    // Si existe, traer productos; si no, enviar colección vacía
-     $query = Producto::where('idcategoria', $categoria->idcategoria);
+    // Si la categoría existe, trae los productos relacionados; si no, envía colección vacía
+    $productos = $categoria
+        ? Producto::where('idcategoria', $categoria->idcategoria)->get()
+        : collect(); // colección vacía
 
-     $productos = $query->get();
-
-
-    // Pasar ambos a la vista
     return view('index', compact('productos'));
-    }
+}
     public function hombre(Request $request)
     {
         $categoria = Categoria::where('nombre', 'Hombre')->firstOrFail();

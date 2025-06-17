@@ -52,21 +52,29 @@
 
         <div class="form-group">
             <label class="form-label">Tallas y stock por talla:</label>
-            <div class="tallas-grid">
+                <div class="tallas-grid" id="tallas-container">
                 @foreach ($tallas as $talla)
-                    <div class="talla-item">
-                        <label class="talla-label">
-                            <input type="checkbox" name="tallas[]" value="{{ $talla->idtalla }}" id="talla-{{ $talla->idtalla }}">
-                            {{ $talla->nombre }}
-                        </label>
-                        <input type="number" name="stock_tallas[{{ $talla->idtalla }}]" class="stock-input" min="0" value="0" required>
-                    </div>
-                @endforeach
-            </div>
+                <div class="talla-item talla-adulto">
+                <label class="talla-label">
+                    <input type="checkbox" name="tallas[]" value="{{ $talla->idtalla }}" id="talla-{{ $talla->idtalla }}">
+                    {{ $talla->nombre }}
+                </label>
+                <input type="number" name="stock_tallas[{{ $talla->idtalla }}]" class="stock-input" min="0" value="0" required>
+                </div>
+            @endforeach
         </div>
+    </div>
+
         
         <button type="submit" class="boton-guardar">Guardar producto</button>
         <a href="{{ url()->previous() }}" class="boton-cancelar">Cancelar</a>
     </form>
 </div>
+<script>
+    window.tallasDB = {
+        @foreach ($tallas as $talla)
+            "{{ $talla->nombre }}" : {{ $talla->idtalla }},
+        @endforeach
+    };
+</script>
 @endsection

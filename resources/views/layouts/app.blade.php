@@ -11,21 +11,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-    <!-- Mejora rendimiento: establece conexión previa con Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Carga la fuente específica -->
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Lilita+One&display=swap" rel="stylesheet">
-    <!-- Iconos bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
 
     {{-- Estilos personalizados --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -60,6 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     {{-- Toastr JS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     {{--Sweet Alert--}}
@@ -68,11 +62,21 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     {{-- Scripts personalizados --}}
+
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
+    <script src="{{ asset('js/informes.js')}}"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/swiper.js') }}"></script>
+    <script src="{{ asset('js/alertas.js')}}"></script>
+    
+
+    <script src="{{ asset('js/swiper.js') }}"></script>
+
 
     <!-- Mostrar notificaciones desde sesión -->
     <script>
@@ -93,11 +97,28 @@
         @endif
     </script>
 
+    @if ($errors->any())
+    <script>
+        $(document).ready(function() {
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+
+            // Abrir automáticamente el modal de registro si hubo errores ahí
+            $('#registroModal').modal('show');
+
+            // O si el error fue al iniciar sesión, abre ese modal
+            $('#loginModal').modal('show');
+        });
+    </script>
+@endif
+
+
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
 
-    </body>
+</body>
 </html>

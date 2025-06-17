@@ -9,48 +9,51 @@ use App\Models\Talla;
 class CarritoController extends Controller
 {
     public function agregar(Request $request)
-    {
-        $producto = Producto::findOrFail($request->idproducto);
-        $talla = Talla::findOrFail($request->talla);
-        $cantidad = $request->input('cantidad', 1);
+{
+    $producto = Producto::findOrFail($request->idproducto);
+    $talla = Talla::findOrFail($request->talla);
+    $cantidad = $request->input('cantidad', 1);
 
-        // Obtener stock desde la tabla pivote
-        $stockDisponible = $producto->tallas()->where('producto_tallas.idtalla', $talla->idtalla)->first()->pivot->stock ?? 0;
+    // Obtener stock desde la tabla pivote
+    $stockDisponible = $producto->tallas()->where('producto_tallas.idtalla', $talla->idtalla)->first()->pivot->stock ?? 0;
 
-        // Verificación del stock
-        if ($cantidad > $stockDisponible) {
-            return redirect()->back()->withErrors(['cantidad' => 'No hay suficiente stock para la talla seleccionada.']);
-        }
-
-        $carrito = session()->get('carrito', []);
-        $clave = $producto->idproducto . '-' . $talla->idtalla;
-        $subcarpeta = strtolower($producto->categoria->nombre) ?: 'otros';
-        $imagePath = asset('storage/' . $producto->imagen);
-
-        // Si no existe en carrito, agregar
-        if (!isset($carrito[$clave])) {
-            $carrito[$clave] = [
-                'producto' => $producto->nombre,
-                'precio' => $producto->precio,
-                'talla' => $talla->nombre,
-                'cantidad' => $cantidad,
-                'imagen' => $imagePath
-            ];
-        } else {
-            $nuevaCantidad = $carrito[$clave]['cantidad'] + $cantidad;
-
-            // Evitar exceder stock al sumar más
-            if ($nuevaCantidad > $stockDisponible) {
-                return redirect()->back()->withErrors(['cantidad' => 'No puedes agregar más de lo disponible en stock para esta talla.']);
-            }
-
-            $carrito[$clave]['cantidad'] = $nuevaCantidad;
-        }
-
-        session(['carrito' => $carrito]);
-
-        return redirect()->route('carrito.ver')->with('success', 'Producto agregado al carrito.');
+    // Verificación del stock
+    if ($cantidad > $stockDisponible) {
+        return redirect()->back()->withErrors(['cantidad' => 'No hay suficiente stock para la talla seleccionada.']);
     }
+
+    $carrito = session()->get('carrito', []);
+    $clave = $producto->idproducto . '-' . $talla->idtalla;
+    $subcarpeta = strtolower($producto->categoria->nombre) ?: 'otros';
+    $imagePath = asset('storage/' . $producto->imagen);
+
+    // Si no existe en carrito, agregar
+    if (!isset($carrito[$clave])) {
+    $carrito[$clave] = [
+        'idproducto' => $producto->idproducto,
+        'idtalla' => $talla->idtalla,
+        'producto' => $producto->nombre,
+        'precio' => $producto->precio,
+        'talla' => $talla->nombre,
+        'cantidad' => $cantidad,
+        'imagen' => $imagePath,
+        'categoria' => $producto->categoria->nombre
+    ];
+} else {
+    $nuevaCantidad = $carrito[$clave]['cantidad'] + $cantidad;
+
+    if ($nuevaCantidad > $stockDisponible) {
+        return redirect()->back()->withErrors(['cantidad' => 'No puedes agregar más de lo disponible en stock para esta talla.']);
+    }
+
+    $carrito[$clave]['cantidad'] = $nuevaCantidad;
+}
+
+    session(['carrito' => $carrito]);
+
+    return redirect()->route('carrito.ver')->with('success', 'Producto agregado al carrito.');
+}
+
 
 
     public function ver()

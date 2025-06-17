@@ -6,6 +6,9 @@
     --blanco: #ffffff;
 }
 
+body {
+    background-color: var(--fondo);
+}
 
 .detalle-body {
     color: var(--azuloscuro);
