@@ -7,8 +7,10 @@
 
     {{-- Bootstrap CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    {{-- Font Awesome para iconos --}}
+    {{--iconos --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
@@ -29,12 +31,19 @@
     <link rel="stylesheet" href="{{ asset('css/avatar-usuario.css')}}">
     <link rel="stylesheet" href="{{ asset('css/reseñas.css')}}">
     <link rel="stylesheet" href="{{ asset('css/formulario-productos.css')}}">
-
+    <link rel="stylesheet" href="{{ asset('css/metodos_de_pago.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/FAQ.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/informes.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/exito.css') }}" >
+    
 </head>
 
 
 <body class="d-flex flex-column min-vh-100">
 
+    <div id="loader-overlay">
+    <div class="loader"></div>
+    </div>
     {{-- Navbar --}}
     <nav class="">
     @include('partials.navbar')
@@ -61,21 +70,24 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    {{-- Scripts personalizados --}}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Lilita+One&display=swap" rel="stylesheet">
+    
+    {{-- Scripts personalizados --}}
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/carrusel_reseñas.js')}}"></script>
     <script src="{{ asset('js/detalle.js')}}"></script>
     <script src="{{ asset('js/login-redirect.js') }}"></script>
     <script src="{{ asset('js/informes.js')}}"></script>
+    <script src="{{ asset('js/informes.js')}}"></script>
+
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/swiper.js') }}"></script>
     <script src="{{ asset('js/alertas.js')}}"></script>
-    
-
-    <script src="{{ asset('js/swiper.js') }}"></script>
 
 
     <!-- Mostrar notificaciones desde sesión -->
@@ -112,7 +124,13 @@
         });
     </script>
 @endif
-
+@if (session('status'))
+<script>
+    $(document).ready(function () {
+        toastr.success("{{ session('status') }}");
+    });
+</script>
+@endif
 
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

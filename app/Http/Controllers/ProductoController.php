@@ -56,8 +56,7 @@ class ProductoController extends Controller
 
     public function index()
 {
-    $productos = Producto::with('categoria')->get();
-    return view('admin.productos.index', compact('productos'));
+   
 }
 
 public function create()
@@ -87,8 +86,11 @@ public function update(Request $request, $id)
         'precio' => 'required|numeric',
         'idcategoria' => 'required|exists:categorias,idcategoria',
         'imagen' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        'tallas' => 'required|array|min:1',
+        'tallas.*' => 'exists:tallas,idtalla',
     ]);
 
+    // Actualiza los campos básicos
     $data = $request->only(['nombre', 'descripcion', 'precio', 'idcategoria']);
 
     if ($request->hasFile('imagen')) {
@@ -97,10 +99,22 @@ public function update(Request $request, $id)
 
     $producto->update($data);
 
-    $seccion = strtolower($request->input('seccion')); // 'hombre', 'mujer', etc.
+    // ✅ ACTUALIZA TALLAS Y STOCK EN TABLA PIVOTE
+    $producto->tallas()->sync([]); // Limpia relaciones anteriores
 
-    // Redirige directamente a la vista correspondiente
-    return redirect("/{$seccion}")->with('success', 'Producto actualizado correctamente');
+    $syncData = [];
+    foreach ($request->tallas as $idtalla) {
+        $stock = $request->stock_tallas[$idtalla] ?? 0;
+        if ($stock > 0) {
+            $syncData[$idtalla] = ['stock' => $stock];
+        }
+    }
+
+    $producto->tallas()->sync($syncData); // Asigna las nuevas tallas y stock
+
+    // Redirección
+    $seccion = strtolower($request->input('seccion'));
+    return redirect()->route("index")->with('success', 'Producto actualizado correctamente');
 }
 
 public function destroy($id, Request $request)
@@ -121,22 +135,33 @@ public function destroy($id, Request $request)
 
 public function informes()
 {
+    $categoriaFiltro = request('categoria');
+
     $compras = DB::table('facturas')
         ->join('users', 'facturas.user_id', '=', 'users.id')
         ->join('metodo_pagos', 'facturas.metodo_pago_id', '=', 'metodo_pagos.id')
         ->select('facturas.id', 'users.name', 'users.telefono', 'facturas.fecha', 'facturas.total', 'metodo_pagos.nombre as metodo_pago')
         ->orderBy('facturas.fecha', 'desc')
-        ->paginate(10);
+        ->paginate(10, ['*'], 'compras_page')
+        ->withQueryString();
 
-    $ventasPorProducto = DB::table('detalle_facturas')
-        ->join('productos', 'detalle_facturas.idproducto', '=', 'productos.idproducto')
-        ->select('productos.nombre', DB::raw('SUM(detalle_facturas.cantidad) as total_vendido'))
-        ->groupBy('productos.nombre')
-        ->orderBy('total_vendido', 'desc')
+        $ventasPorProducto = DB::table('detalle_facturas')
+        ->select('nombre_producto', DB::raw('SUM(cantidad) as total_vendido'))
+        ->groupBy('nombre_producto')
+        ->orderByDesc('total_vendido')
         ->take(5)
         ->get();
 
-    $inventario = Producto::with(['categoria', 'tallas'])->paginate(10);
+
+    // Aquí filtramos inventario si se seleccionó una categoría
+    $inventarioQuery = Producto::with(['categoria', 'tallas']);
+    if ($categoriaFiltro) {
+        $inventarioQuery->where('idcategoria', $categoriaFiltro);
+    }
+    $inventario = $inventarioQuery
+        ->paginate(10, ['*'], 'inventario_page')
+        ->withQueryString();
+
     $categorias = Categoria::all();
 
     return view('admin.productos.informes', compact('compras', 'ventasPorProducto', 'inventario', 'categorias'));

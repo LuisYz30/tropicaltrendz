@@ -172,3 +172,11 @@ var swiper = new Swiper(".mySwiper", {
         }
     }
 });
+
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader-overlay');
+        if (loader) {
+            loader.style.display = 'none';
+        }
+    });
+

@@ -3,10 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Factura;
-use Illuminate\Http\Request;
+use App\Models\DetalleFactura;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FacturaController extends Controller
 {
+
+public function generarPDF($id)
+{
+    $factura = Factura::with('user')->findOrFail($id);
+    $detalles = DetalleFactura::where('factura_id', $id)->get();
+
+    $pdf = Pdf::loadView('facturas.pdf', compact('factura', 'detalles'));
+    return $pdf->download("Factura_Tropical.pdf");
+}
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -23,13 +36,6 @@ class FacturaController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -47,14 +53,7 @@ class FacturaController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Factura $factura)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      */

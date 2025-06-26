@@ -6,21 +6,18 @@
     --blanco: #ffffff;
 }
 
-body {
-    background-color: var(--fondo);
-}
 
 .detalle-body {
     color: var(--azuloscuro);
-    font-family: Arial, sans-serif;
-    margin: 40px auto;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    margin: 30px auto;
     max-width: 1200px;
     padding: 0 20px;
 }
 
 .detalle-body h1 {
     color: var(--azuloscuro);
-    font-size: 2.2rem;
+    font-size: 50px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -55,7 +52,6 @@ body {
     background-color: var(--blanco);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .info-detalle p {

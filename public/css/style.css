@@ -30,7 +30,47 @@ h1, h2 {
     font-family: 'Lilita One', sans-serif;
 }
 
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white; /* puedes poner rgba(255,255,255,0.9) si quieres ver el fondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
+.loader {
+  --r1: 154%;
+  --r2: 68.5%;
+  width: 60px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(var(--r1) var(--r2) at top, #0000 79.5%, #269af2 80%),
+    radial-gradient(var(--r1) var(--r2) at bottom, #269af2 79.5%, #0000 80%),
+    radial-gradient(var(--r1) var(--r2) at top, #0000 79.5%, #269af2 80%),
+    #ccc;
+  background-size: 50.5% 220%;
+  background-position: -100% 0%, 0% 0%, 100% 0%;
+  background-repeat: no-repeat;
+  animation: l9 2s infinite linear;
+}
+
+@keyframes l9 {
+  33% {
+    background-position: 0% 33%, 100% 33%, 200% 33%;
+  }
+  66% {
+    background-position: -100% 66%, 0% 66%, 100% 66%;
+  }
+  100% {
+    background-position: 0% 100%, 100% 100%, 200% 100%;
+  }
+}
 
 
 /*|||||| PERSONALIZACIÓN DE BOTONES ||||||*/
@@ -274,11 +314,31 @@ h1, h2 {
 
 /* Contenido superpuesto al video */
 .banner-content {
-    
-    top: 50%; 
-    left: 0;
-    right: 0;
+    top: 40%;
+    left: 5%;
     z-index: 2;
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 500px;
+    text-align: center;
+  
+}
+
+.banner-content h1{
+  -webkit-text-stroke: 1px #00126b; /* grosor y color del borde */
+}
+
+.banner-content p{
+  font-family: 'Baloo Bhaijaan 2' sans-serif;
+}
+.brand-name {
+    font-size: 70px;
+    color: white;
+}
+.logo-banner {
+    max-width: 80%; /* puedes ajustar este valor */
+    height: auto;
+    margin-bottom: 10px;
 }
 
 /*|||||| Diseño del carrusel ||||||*/

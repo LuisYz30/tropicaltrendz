@@ -7,8 +7,7 @@
         <source src="{{asset('images/Video/video_baner.mp4')}}" type="video/mp4">
     </video>
     <div class="banner-content position-absolute d-flex flex-column align-items-center align-items-md-start text-center text-md-start p-3">
-        <h1 class="brand-name fs-sm-1 ">TROPICAL TRENDZ</h1>
-        <p class="collection-subtitle  fs-md-3">COLECCIÓN VERANO 2025</p>
+        <h1 class="brand-name fs-sm-1  ">TROPICAL TRENDZ</h1> 
         <a href="#" id="scroll-to-carrusel"  class="btn-azul-oscuro text-decoration-none mt-3 ">COMPRAR AHORA</a>
     </div>
 </div>
@@ -94,7 +93,7 @@
         <img src="{{ asset('images/Niños/fñ2.webp') }}" alt="Traje de baño niño 2">
     </div>
 
-    <div class="info-texto">
+    <div class="info-texto" data-aos="zoom-out-up">
         <h2>Descubre la Esencia del Verano</h2>
         <p >En <strong>Tropical Trendz</strong> te traemos los trajes de baño más vibrantes, frescos y únicos para que vivas tu verano con estilo. Disfruta de diseños modernos para toda la familia, hechos para destacar bajo el sol. ¡Sumérgete en la moda tropical!</p>
     </div>

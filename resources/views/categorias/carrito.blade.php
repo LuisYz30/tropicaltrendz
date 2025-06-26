@@ -30,7 +30,7 @@
                         @endphp
                         <tr>
                             <td>
-                                <img src="{{ asset($item['imagen']) }}" alt="Imagen del producto" width="70">
+                                <img src="{{ asset($item['imagen']) }}" alt="Imagen del producto" width="130">
                             </td>
                             <td>{{ $item['producto'] }}</td>
                             <td>${{ number_format($item['precio'], 0, ',', '.') }}</td>
@@ -57,14 +57,14 @@
             </table>
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
+        <div class="d-flex justify-content-center gap-4 mt-1">
             <form action="{{ route('carrito.vaciar') }}" method="POST" class="form-vaciar-carrito">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-primary boton-vaciar" type="submit">Vaciar carrito</button>
             </form>
             <form action="{{ route('pago.iniciar') }}" method="GET">
-            <button class="btn btn-primary boton-compra">Realizar compra</button>
+            <button class="btn-azul-oscuro boton-compra" value="Pagar ahora con PayU" >Realizar compra</button>
             </form>
         </div>
     @else

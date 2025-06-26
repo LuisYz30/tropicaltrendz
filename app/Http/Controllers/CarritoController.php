@@ -10,7 +10,7 @@ class CarritoController extends Controller
 {
     public function agregar(Request $request)
 {
-    $producto = Producto::findOrFail($request->idproducto);
+    $producto = Producto::with('categoria')->findOrFail($request->idproducto);
     $talla = Talla::findOrFail($request->talla);
     $cantidad = $request->input('cantidad', 1);
 

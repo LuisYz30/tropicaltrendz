@@ -6,13 +6,13 @@
 
 @section('content')
 <div class="detalle-body">
-    <h1 class="titulo-producto">{{ $producto->nombre }}</h1>
+    <h1 class="titulo-producto mt-4">{{ $producto->nombre }}</h1>
     <div class="contenedor-detalle">
         <div class="imagen-detalle">
             <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
         </div>
         <div class="info-detalle">
-            <p class="descripcion">{{ $producto->descripcion }}</p>
+            <p class="descripcion fs-5">{{ $producto->descripcion }}</p>
             <p class="precio">{{ $producto->precioFormateado }}</p>
 
             <form method="POST" action="{{ route('carrito.agregar') }}" @guest onsubmit="event.preventDefault();" @endguest>

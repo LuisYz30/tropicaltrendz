@@ -24,12 +24,16 @@
             </div>
             <div class="col-md-3">
                 <h5 class="text-foot">Servicio al cliente</h5>
-                <p>Teléfono: +57 312 575 2981</p>
-                <p>Email: <a href="tropitrendz@gmail.com" class="text-light">tropitrendz@gmail.com</a></p>
-                <div>
-                    <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                </div>
+                <a href="https://wa.me/573223290696?text=%C2%A1Hola%2C%20equipo%20de%20Tropical%20Trendz%21%20%F0%9F%8C%B4%0ANecesito%20su%20ayuda%20con%20una%20consulta.%20%0A%C2%BFPodr%C3%ADan%20orientarme%2C%20por%20favor%3F" 
+                target="_blank" 
+                class="text-light text-decoration-underline">
+                +57 322 329 0696
+                </a>
+                <a href="https://mail.google.com/mail/?view=cm&to=tropitrendz2025@gmail.com" 
+                target="_blank" 
+                class="text-light text-decoration-underline">
+                tropitrendz2025@gmail.com
+                </a>
             </div>
         </div>
     </div>

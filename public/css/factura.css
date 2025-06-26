@@ -1,0 +1,84 @@
+        :root {
+
+    --celeste: #cadcfc;
+    --azulmedio: #8ab6f9;
+    --azuloscuro: #00126b;
+    --textooscuro: #0c0c0c;
+}
+
+        
+        body {
+            font-family: 'Baloo Bhaijaan 2', sans-serif;
+            margin: 0 40px;
+            color: #333;
+            height: 100%;
+        }
+
+        .main-content {
+        flex: 1;
+        margin-bottom: 300px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            float: left;
+            width: 200px;
+        }
+
+        .factura-info {
+            float: right;
+            text-align: right;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .contacto {
+            background-color: var(--azuloscuro);
+            color: var(--celeste);
+            padding: 10px;
+            margin: 20px 0 10px;
+            font-weight: bold;
+        }
+        .contacto-info {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        table thead {
+            background-color: var(--azuloscuro);
+            color: var(--celeste);
+            font-weight: bold;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 300px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: center;
+            margin-top: auto;
+        }

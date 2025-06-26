@@ -10,6 +10,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\FacturaController;
 
 Route::get('/', [PublicController::class, 'index'])->name('index');;
 
@@ -35,6 +36,7 @@ Route::get('/informes/detalles/{facturaId}', [ProductoController::class, 'detall
 
 
 //Rutas de admin para CRUD
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin/productos', [ProductoController::class, 'index'])->name('productos.index');
     Route::get('/admin/productos/create', [ProductoController::class, 'create'])->name('productos.create');
     Route::post('/admin/productos', [ProductoController::class, 'store'])->name('productos.store');
@@ -42,7 +44,7 @@ Route::get('/informes/detalles/{facturaId}', [ProductoController::class, 'detall
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
     Route::get('/admin/informes', [ProductoController::class, 'informes'])->name('productos.informes');
-
+});
 
 // Rutas Para los modulos
 
@@ -108,10 +110,13 @@ Route::get('/pago', [PagoController::class, 'pagar'])->name('pago.iniciar');
 Route::get('/pago/exito', [PagoController::class, 'exito'])->name('pago.exito');
 Route::get('/pago/fallo', [PagoController::class, 'fallo'])->name('pago.fallo');
 Route::get('/pago/pendiente', [PagoController::class, 'pendiente'])->name('pago.pendiente');
+Route::post('/pago/confirmacion', [PagoController::class, 'confirmacion'])->name('pago.confirmacion');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/cliente/editPerfil', [PerfilController::class, 'edit'])->name('cliente.edit');
     Route::post('/perfil/actualizar', [PerfilController::class, 'update'])->name('perfil.update');
 });
 
+Route::get('/factura/{id}/pdf', [FacturaController::class, 'generarPDF'])->name('factura.pdf');
 

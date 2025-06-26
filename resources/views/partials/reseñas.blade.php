@@ -1,9 +1,9 @@
 <div class="reseñas-container py-5 px-3">
-    <h2 class="text-center fw-bold mb-4">Reseñas de Nuestros Clientes</h2>
+    <h2 class="text-center fs-1 mb-4">Reseñas de Nuestros Clientes</h2>
 
     {{-- Formulario --}}
     @if(auth()->check())
-        <h3 class="text-center mb-3">Déjanos tu opinión</h3>
+        <h2 class="text-center mb-3">Déjanos tu opinión</h2>
         <form action="{{ route('reseñas.store') }}" method="POST" class="reseña-form mx-auto">
             @csrf
             <input type="hidden" name="producto_id" value="{{ $producto->idproducto }}">
@@ -21,11 +21,11 @@
 
             <div class="mb-3">
                 <label for="comentario" class="form-label">Tu Opinión</label>
-                <textarea class="form-control reseña-textarea" name="comentario" id="comentario" rows="3" required></textarea>
+                <textarea class="form-control reseña-textarea mb-4" name="comentario" id="comentario" rows="3" required></textarea>
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn reseña-btn">Enviar Reseña</button>
+                <button type="submit" class="btn-azul-oscuro">Enviar Reseña</button>
             </div>
         </form>
     @else
@@ -33,7 +33,7 @@
     @endif
 
     {{-- Opiniones --}}
-    <h3 class="text-center mt-5">Opiniones de los clientes</h3>
+    <h2 class="text-center mt-4">Opiniones de los clientes</h2>
 
     <div class="reseña-carousel-wrapper">
         <button class="carousel-btn left" id="prevBtn" style="display: none;">&#9664;</button>
@@ -48,7 +48,7 @@
             <form action="{{ route('reseñas.destroy', $reseña->id) }}" method="POST" class="eliminar-reseña-form">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn-eliminar" aria-label="Eliminar">×</button>
+                <button type="submit" class="btn-eliminar" aria-label="Eliminar">X</button>
             </form>
         @endif
 
@@ -58,10 +58,10 @@
         </div>
         <p class="mb-0">{{ $reseña->comentario }}</p>
     </div>
-@endforeach
+        @endforeach
                     </div>
                 @empty
-                    <p class="text-muted text-center">Este producto aún no tiene reseñas.</p>
+                    <p class="text-muted sin-reseña">Este producto aún no tiene reseñas.</p>
                 @endforelse
             </div>
         </div>

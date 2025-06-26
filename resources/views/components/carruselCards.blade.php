@@ -10,7 +10,7 @@
             @if(auth()->user()->rol == 'admin')
                 <div class="d-flex justify-content-center gap-1">
                     <a href="{{ route('productos.edit', $producto->idproducto) }}" class="btn btn-primary boton-editar mt-2">Editar</a>
-                    <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST" onsubmit="return confirm('¿Seguro de eliminar este producto?')">
+                    <form action="{{ route('productos.destroy', $producto->idproducto) }}" method="POST"  class="form-eliminar">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-primary boton-eliminar mt-2">Eliminar</button>

@@ -34,7 +34,11 @@
                     <div class="user-avatar me-2">
                         {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                     </div>
-                    <span>{{ Auth::user()->name }}</span>
+                    <span>{{ Auth::user()->name }}
+                        @if(Auth::user()->rol === 'admin')
+                            (Admin)
+                        @endif
+                    </span>
                 </button>
                 
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
@@ -48,7 +52,7 @@
                             <a class="dropdown-item" href="{{ route('productos.informes') }}">
                                 <i class="fas fa-chart-line me-2"></i> Informes
                             </a>
-                        </li> --}}
+                        </li>
                         @elseif(Auth::user()->rol === 'cliente')
                         <li>
                             <a class="dropdown-item" href="{{ route('cliente.edit') }}">
@@ -122,13 +126,10 @@
                     <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                 </div>
 
-                <div class="recordar"><a href="#">¿Olvidó su contraseña?</a></div>
+                <div class="recordar mb-3"><a href="{{ route('password.request')}}">¿Olvidó su contraseña?</a></div>
                 <button type="submit" class="btn-ingresar">Ingresar</button>
                     </form>
-                <div class="google-login">
-                  <img src="{{asset('images/google.svg')}}"  alt="Google">
-                </div>
-                <div class="registrarse">
+                <div class="registrarse mt-4">
                     <a href="#" id="btn-registro-enlace">¿No tienes cuenta? Regístrate</a>
                 </div>
             </div>
@@ -177,7 +178,7 @@
                 </div>
             </div>
             <div class="form-image">
-                <img src="{{asset('images/img-login/Fondo-login2.png')}}" alt="Imagen" style="width:100%; height:100%;">
+                <img src="{{asset('images/img-login/Fondo-registro.png')}}" alt="Imagen" style="width:100%; height:100%;">
             </div>
         </div>
     </div>

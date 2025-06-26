@@ -35,6 +35,14 @@ class PublicController extends Controller
             $query->where('precio', '<=', $request->precio_max);
         }
     
+          if ($request->filled('orden')) {
+            if ($request->orden == 'asc') {
+                $query->orderBy('precio', 'asc');
+            } elseif ($request->orden == 'desc') {
+                $query->orderBy('precio', 'desc');
+            }
+        }
+
         $productos = $query->get();
     
         return view('categorias.hombre', compact('productos', 'request'));
@@ -54,6 +62,14 @@ class PublicController extends Controller
             $query->where('precio', '<=', $request->precio_max);
         }
     
+          if ($request->filled('orden')) {
+            if ($request->orden == 'asc') {
+                $query->orderBy('precio', 'asc');
+            } elseif ($request->orden == 'desc') {
+                $query->orderBy('precio', 'desc');
+            }
+        }
+
         $productos = $query->get();
     
         return view('categorias.mujer', compact('productos', 'request'));
@@ -73,6 +89,14 @@ class PublicController extends Controller
             $query->where('precio', '<=', $request->precio_max);
         }
     
+          if ($request->filled('orden')) {
+            if ($request->orden == 'asc') {
+                $query->orderBy('precio', 'asc');
+            } elseif ($request->orden == 'desc') {
+                $query->orderBy('precio', 'desc');
+            }
+        }
+        
         $productos = $query->get();
     
         return view('categorias.niños', compact('productos', 'request'));

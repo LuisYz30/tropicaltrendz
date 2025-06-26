@@ -78,11 +78,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
-    'locale' => env('APP_LOCALE', 'es'),
-=======
     'locale' => 'es',
->>>>>>> c09f8ebaaa61b9b6cafb7406ec5baea7b2ca9fdd
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'es'),
 

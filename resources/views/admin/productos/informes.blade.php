@@ -3,18 +3,19 @@
 @section('content')
 <div class="d-flex">
     <!-- Menú lateral -->
-    <div class="flex-column p-2 bg-light" style="width: 150px; height: 100vh;">
-        <button id="btnHistorial" class="btn btn-outline-primary mb-2 w-100">Ventas realizadas</button>
-        <button id="btnGrafico" class="btn btn-outline-primary mb-2 w-100">Gráfico</button>
-        <button id="btnInventario" class="btn btn-outline-primary w-100">Inventario</button>
+    <div class="informes-sidebar d-flex flex-column p-3">
+        <h1 class="text-center mb-4">Panel</h1>
+        <button id="btnHistorial" class="informes-boton btn mb-3" onclick="window.location.href='?seccion=ventas'">Ventas realizadas</button>
+        <button id="btnGrafico" class="informes-boton btn mb-3">Gráfico</button>
+        <button id="btnInventario" class="informes-boton btn" onclick="window.location.href='?seccion=inventario'">Inventario</button>
     </div>
 
     <!-- Contenido principal -->
-    <div class="flex-grow-1 p-3">
+    <div class="flex-grow-1 p-4">
         <!-- Historial -->
         <div id="historialSection">
-            <h2>Ventas realizadas</h2>
-            <table class="table">
+            <h1 class="informes-titulo mb-3">Ventas realizadas</h1>
+            <table class="table informes-tabla table-bordered">
                 <thead>
                     <tr>
                         <th>Cliente</th>
@@ -34,7 +35,7 @@
                             <td>${{ number_format($compra->total, 0, ',', '.') }}</td>
                             <td>{{ $compra->metodo_pago }}</td>
                             <td>
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetalles" data-factura-id="{{ $compra->id }}">
+                                <button class="btn-verdetalle" data-bs-toggle="modal" data-bs-target="#modalDetalles" data-factura-id="{{ $compra->id }}">
                                     Ver detalles
                                 </button>
                             </td>
@@ -42,7 +43,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $compras->links() }}
+            {{ $compras->links('pagination::bootstrap-5') }}
 
             <!-- Modal de detalles -->
             <div class="modal fade" id="modalDetalles" tabindex="-1" aria-labelledby="modalDetallesLabel" aria-hidden="true">
@@ -61,26 +62,33 @@
         </div>
 
         <!-- Gráfico -->
-        <div id="graficoSection" style="display:none;">
-            <h2>Productos más vendidos</h2>
-            <canvas id="ventasChart" width="400" height="200"></canvas>
-        </div>
+<div id="graficoSection" style="display:none;">
+    <h3 class="informes-titulo">Productos más vendidos</h3>
+    <div style="width: 1250px; height: 400px;">
+        <canvas id="ventasChart"></canvas>
+    </div>
+</div>
 
         <!-- Inventario -->
         <div id="inventarioSection" style="display:none;">
-            <h2>Inventario</h2>
+            <h3 class="informes-titulo">Inventario</h3>
 
             <div class="mb-3">
-                <label for="filtroCategoria" class="form-label">Filtrar por categoría</label>
-                <select id="filtroCategoria" class="form-select" onchange="filtrarInventario()">
-                    <option value="">Todas</option>
-                    @foreach($categorias as $categoria)
-                        <option value="{{ $categoria->idcategoria }}">{{ $categoria->nombre }}</option>
-                    @endforeach
-                </select>
+                <form method="GET" id="formFiltroInventario">
+                    <input type="hidden" name="seccion" value="inventario">
+                    <label for="filtroCategoria" class="form-label">Filtrar por categoría</label>
+                    <select id="filtroCategoria" name="categoria" class="form-select" onchange="document.getElementById('formFiltroInventario').submit()">
+                        <option value="">Todas</option>
+                        @foreach($categorias as $categoria)
+                            <option value="{{ $categoria->idcategoria }}" {{ request('categoria') == $categoria->idcategoria ? 'selected' : '' }}>
+                                {{ $categoria->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
             </div>
 
-            <table class="table">
+            <table class="table informes-tabla table-bordered">
                 <thead>
                     <tr>
                         <th>Producto</th>
@@ -90,29 +98,30 @@
                 </thead>
                 <tbody id="inventarioTableBody">
                     @foreach ($inventario as $item)
-                        <tr data-categoria="{{ $item->idcategoria }}">
+                        <tr>
                             <td>{{ $item->nombre }}</td>
                             <td>{{ $item->categoria->nombre }}</td>
                             <td>
-                                @foreach ($item->tallas as $talla)
-                                    {{ $talla->nombre }}: {{ $talla->pivot->stock }}<br>
-                                @endforeach
+                                {{ $item->tallas->map(fn($t) => $t->nombre . ': ' . $t->pivot->stock)->implode(' , ') }}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
-            </table>{{ $inventario->links() }}
+            </table>
+
+            {{ $inventario->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Gráfico de ventas
     const ctx = document.getElementById('ventasChart').getContext('2d');
     const ventasChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($ventasPorProducto->pluck('nombre')->toArray()) !!},
+            labels: {!! json_encode($ventasPorProducto->pluck('nombre_producto')->toArray()) !!},
             datasets: [{
                 label: 'Productos más vendidos',
                 data: {!! json_encode($ventasPorProducto->pluck('total_vendido')->toArray()) !!},
@@ -120,6 +129,8 @@
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 y: { beginAtZero: true }
             }

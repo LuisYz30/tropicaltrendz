@@ -16,9 +16,11 @@
     @endif
 
     <form class="formulario-producto" action="{{ route('productos.update', $producto->idproducto) }}" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="seccion" value="{{ $producto->categoria->nombre }}">    
-    @csrf
+        @csrf
         @method('PUT')
+
+        {{-- Campo oculto que se actualiza dinámicamente --}}
+        <input type="hidden" name="seccion" id="seccion" value="{{ strtolower($producto->categoria->nombre) }}">
 
         <div class="mb-3">
             <label>Nombre</label>
@@ -27,7 +29,7 @@
 
         <div class="mb-3">
             <label>Descripción</label>
-            <textarea type="text" name="descripcion" class="form-control" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
+            <textarea name="descripcion" class="form-control" required>{{ old('descripcion', $producto->descripcion) }}</textarea>
         </div>
 
         <div class="mb-3">
@@ -37,7 +39,7 @@
 
         <div class="mb-3">
             <label>Categoría</label>
-            <select name="idcategoria" class="form-control" required>
+            <select name="idcategoria" class="form-control" id="idcategoria" required>
                 <option value="">Seleccione una categoría</option>
                 @foreach($categorias as $categoria)
                     <option value="{{ $categoria->idcategoria }}" 
@@ -54,38 +56,38 @@
                 <img src="{{ asset('storage/' . $producto->imagen) }}" width="100" alt="Imagen actual"><br><br>
             @endif
             <label>Actualizar Imagen</label>
-            <input type="file" name="imagen" class="form-control" accept="storage/*">
+            <input type="file" name="imagen" class="form-control" accept="image/*">
         </div>
 
+        {{-- Tallas cargadas dinámicamente por JS --}}
         <div class="form-group">
             <label class="form-label">Tallas y stock por talla:</label>
-            <div class="tallas-grid">
-                @php
-                    $productoTallas = $producto->tallas->keyBy('idtalla');
-                @endphp
-                @foreach ($tallas as $talla)
-                    @php
-                        $checked = old('tallas') 
-                            ? in_array($talla->idtalla, old('tallas')) 
-                            : $productoTallas->has($talla->idtalla);
-        
-                        $stockValue = old('stock_tallas.' . $talla->idtalla)
-                            ?? ($productoTallas->has($talla->idtalla) ? $productoTallas[$talla->idtalla]->pivot->stock : 0);
-                    @endphp
-                    <div class="talla-item">
-                        <label class="talla-label">
-                            <input type="checkbox" name="tallas[]" value="{{ $talla->idtalla }}" id="talla-{{ $talla->idtalla }}" {{ $checked ? 'checked' : '' }}>
-                            {{ $talla->nombre }}
-                        </label>
-                        <input type="number" name="stock_tallas[{{ $talla->idtalla }}]" class="stock-input" min="0" value="{{ $stockValue }}" required>
-                    </div>
-                @endforeach
+            <div id="tallas-container" class="tallas-grid">
+                {{-- Este contenedor se llena dinámicamente con JS --}}
             </div>
         </div>
-        
 
         <button class="boton-actualizar">Actualizar</button>
         <a href="{{ url()->previous() }}" class="boton-cancelar">Cancelar</a>
     </form>
 </div>
+
+{{-- Script para actualizar el campo oculto "seccion" --}}
+<script>
+    const categoriaSelect = document.getElementById('idcategoria');
+    const seccionInput = document.getElementById('seccion');
+
+    categoriaSelect.addEventListener('change', function () {
+        const selectedText = this.options[this.selectedIndex].text;
+        seccionInput.value = selectedText.toLowerCase();
+    });
+</script>
+
+{{-- Variables necesarias para que tallas.js funcione --}}
+<script>
+    window.tallasDB = @json($tallas->pluck('idtalla', 'nombre'));
+    window.productoTallas = @json($producto->tallas->pluck('pivot.stock', 'idtalla'));
+    window.categoriaInicial = "{{ $producto->categoria->nombre }}";
+</script>
+<script src="{{ asset('js/tallas.js') }}"></script>
 @endsection

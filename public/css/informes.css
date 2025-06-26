@@ -1,0 +1,147 @@
+:root {
+    --celeste: #cadcfc;
+    --azulmedio: #8ab6f9;
+    --azuloscuro: #00126b;
+    --textooscuro: #0c0c0c;
+}
+
+/* Panel lateral */
+.informes-sidebar {
+    background-color: var(--celeste);
+    color: black;
+    height: 100%;
+    padding-top: 1rem;
+    margin-top: 30px;
+    width: 170px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    min-height: 110vh;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.informes-sidebar button {
+    color: var(--azuloscuro); /* texto claro */
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    padding: 10px 15px;
+    width: 100%;
+    font-weight: 600;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.informes-sidebar button:hover,
+.informes-sidebar button.active {
+    background-color: var(--azulmedio);
+    color: white;
+    border-left: 4px solid var(--azuloscuro);
+}
+
+.informes-section {
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+/* Títulos de sección */
+.informes-section h2 {
+    font-weight: bold;
+    border-left: 5px solid var(--azulmedio);
+    padding-left: 10px;
+    margin-bottom: 1.5rem;
+}
+
+/* Tablas */
+.informes-section table {
+    border: 1px solid var(--azulmedio);
+}
+
+.informes-section table thead {
+    background-color: var(--azulmedio);
+    color: white;
+}
+
+.informes-section table tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+/* Filtro de inventario */
+#filtroCategoria {
+    box-shadow: none;
+}
+
+/* Modal personalizado */
+#modalDetalles .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+#modalDetalles .modal-header {
+    color: var(--celeste);
+    background-color: var(--azuloscuro);
+    border-radius: 10px 10px 0 0;
+}
+
+#modalDetalles .modal-body {
+    padding: 1.5rem;
+}
+
+#modalDetalles .modal-body table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#modalDetalles .modal-body th,
+#modalDetalles .modal-body td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+
+#modalDetalles .modal-body tbody tr:hover {
+    background-color: #eef5ff;
+}
+
+.page-item.active .page-link {
+    background-color: var(--azuloscuro);
+    border-color: var(--azuloscuro);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.page-link {
+    color: var(--azuloscuro);
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.page-link:hover {
+    background-color: var(--azulmedio);
+    color: white;
+}
+
+.btn-verdetalle {
+    background-color: var(--azuloscuro);
+    color: var(--celeste);
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 6px 14px 8px;
+    transition: ease-in-out 0.3s;
+    border: none;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.btn-verdetalle:hover {
+    box-shadow: inset 0 -100px 0 0 var(--azulmedio);
+    border-color: var(--azulmedio);
+    color: var(--azuloscuro);
+}
+
+.btn-verdetalle:active {
+    transform: scale(0.95);
+}
